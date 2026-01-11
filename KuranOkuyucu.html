@@ -519,17 +519,20 @@
     <div id="ebcedDetailModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="toggleEbcedDetailModal()">&times;</span>
-            </tr>
-            <tr>
-                <td>7. Ayet</td>
-                <td>6009</td>
-            </tr>
-            <tr style="font-weight: bold; color: var(--accent); background: rgba(39, 174, 96, 0.1);">
-                <td>TOPLAM</td>
-                <td>10,143</td>
-            </tr>
-            </tbody>
-            </table>
+            <h3 id="ebcedModalTitle" style="margin-top: 0; color: var(--primary);">Surenin Ebced Dökümü</h3>
+            <div style="max-height: 400px; overflow-y: auto;">
+                <table class="ebced-table">
+                    <thead>
+                        <tr>
+                            <th>Ayet</th>
+                            <th>Ebced Değeri</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ebcedDetailBody">
+                        <!-- JS ile doldurulacak -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -586,7 +589,8 @@
             insights.push({ key: "Kuran'daki Toplam Sure Sayısı", val: "114 (19 x 6)" });
 
             // surah_stats.js'den verileri çek (Eğer mevcutsa)
-            const stats = (window.SURAH_STATS && window.SURAH_STATS[surahNum]) ? window.SURAH_STATS[surahNum] : null;
+            const globalStats = (typeof SURAH_STATS !== 'undefined') ? SURAH_STATS : (window.SURAH_STATS || null);
+            const stats = (globalStats && globalStats[surahNum]) ? globalStats[surahNum] : null;
 
             if (stats) {
                 insights.push({ key: "Ayet Sayısı", val: stats.verses.length });
@@ -757,8 +761,9 @@
                 return;
             }
 
-            if (surahNum && window.SURAH_STATS && window.SURAH_STATS[surahNum]) {
-                const stats = window.SURAH_STATS[surahNum];
+            const globalStats = (typeof SURAH_STATS !== 'undefined') ? SURAH_STATS : (window.SURAH_STATS || null);
+            if (surahNum && globalStats && globalStats[surahNum]) {
+                const stats = globalStats[surahNum];
                 const sName = surahNames[surahNum - 1];
                 title.textContent = `${sName} Suresi Ebced Dökümü`;
                 body.innerHTML = '';
@@ -810,6 +815,9 @@
             }
         });
     </script>
+    <script src="surah_stats.js"></script>
+    <script src="quran_word_by_word.js"></script>
+    <script src="word_tooltip.js"></script>
 </body>
 
 </html>
