@@ -79,16 +79,15 @@ function createWordTooltip(arabicWord, transcription, turkish, currentIndex) {
 
 // Process Arabic text and add tooltips for a single verse
 function processVerseWithTooltips(arabicText, surahNumber, verseNumber, startCounter) {
-    // Özel durum: Eğer Besmele ise ve verilerde yoksa genel bir veri kullan
-    const isBasmalaHeader = arabicText.includes("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ");
+    // Kur'an durak işaretleri (bunlar kelime listesinde bulunmaz, pas geçilmeli)
+    const QURAN_SYMBOLS = /[\u06D6-\u06DC\u06DF-\u06E8\u06EA-\u06ED]/;
 
     let words = getVerseWords(surahNumber, verseNumber);
     let counter = startCounter;
 
     // Eğer veri yoksa veya Besmele başlığı ise manuel eşleme dene
     if (!words || words.length === 0) {
-        if (isBasmalaHeader) {
-            // Standart Besmele mealleri
+        if (arabicText.includes("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ")) {
             const basmalaWords = [
                 { arabic: "بِسْمِ", transcription: "bi-smi", turkish: "adıyla" },
                 { arabic: "ٱللَّهِ", transcription: "llāhi", turkish: "Allah'ın" },
@@ -109,23 +108,31 @@ function processVerseWithTooltips(arabicText, surahNumber, verseNumber, startCou
 
     const arabicWords = arabicText.trim().split(/\s+/);
     let result = '';
+    let dataIndex = 0; // Veri listesindeki gerçek kelime endeksi
 
     for (let i = 0; i < arabicWords.length; i++) {
         const arabicWord = arabicWords[i];
-        const wordData = words[i] || null;
 
-        if (wordData) {
-            result += createWordTooltip(
-                arabicWord,
-                wordData.transcription,
-                wordData.turkish,
-                counter
-            );
+        // Eğer kelime sadece bir Kur'an sembolü ise tooltip ekleme ve veri endeksini artırma
+        if (arabicWord.length <= 2 && QURAN_SYMBOLS.test(arabicWord)) {
+            result += `<span class="arabic-symbol">${arabicWord}</span>`;
         } else {
-            result += `<span class="arabic-word">${arabicWord}<span class="word-index">${counter}</span></span>`;
-        }
+            const wordData = words[dataIndex] || null;
 
-        counter++;
+            if (wordData) {
+                result += createWordTooltip(
+                    arabicWord,
+                    wordData.transcription,
+                    wordData.turkish,
+                    counter
+                );
+            } else {
+                result += `<span class="arabic-word">${arabicWord}<span class="word-index">${counter}</span></span>`;
+            }
+
+            dataIndex++; // Sadece gerçek kelime bulduğumuzda veri endeksini artır
+            counter++;   // Sadece gerçek kelime bulduğumuzda kelime sayısını artır
+        }
 
         if (i < arabicWords.length - 1) {
             result += ' ';
