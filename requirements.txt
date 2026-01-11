@@ -1,0 +1,16 @@
+# PDF Processing
+pypdf
+pdfplumber
+Pillow
+pytesseract
+pdf2image
+
+# Google Cloud APIs
+google-cloud-vision>=3.4.0
+google-cloud-translate>=3.11.0
+
+# Translation alternatives (offline/free)
+deep-translator>=1.11.4
+
+# Data processing
+PyMuPDF>=1.26.0

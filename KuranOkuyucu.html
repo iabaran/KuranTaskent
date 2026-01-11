@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kuran Okuyucu</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --primary: #2c3e50;
+            --accent: #27ae60;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --border-color: #eee;
+            --panel-border: #f1c40f;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --arabic-color: #000000;
+        }
+
+        body.night-mode {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --primary: #ecf0f1;
+            --accent: #2ecc71;
+            --text-main: #e0e0e0;
+            --text-secondary: #aaaaaa;
+            --border-color: #333333;
+            --panel-border: #d4af37;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            --arabic-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+        }
+
+        .controls {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+        }
+
+        select {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            border-radius: 8px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        select:focus {
+            border-color: var(--accent);
+        }
+
+        #contentArea {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .verse-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border-right: 5px solid var(--accent);
+            transition: transform 0.2s;
+        }
+
+        .arabic-line {
+            font-size: 32px;
+            direction: rtl;
+            text-align: right;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: var(--arabic-color);
+        }
+
+        .turkish-line {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        .verse-number {
+            font-weight: bold;
+            color: var(--accent);
+            margin-right: 10px;
+        }
+
+        #loadingSpinner {
+            display: none;
+            margin: 20px auto;
+            border: 5px solid var(--border-color);
+            border-top: 5px solid var(--accent);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e74c3c;
+        }
+
+        .basmala-header {
+            font-size: 32px;
+            margin: 20px 0 10px 0;
+            text-align: center;
+            color: var(--primary);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            width: 100%;
+            direction: rtl;
+        }
+
+        .basmala-turkish {
+            font-size: 18px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            font-style: italic;
+        }
+
+        /* 19 Miracle Analysis Panel */
+        #analysisContainer {
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 30px;
+        }
+
+        .analysis-panel {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            border-left: 5px solid var(--panel-border);
+            /* Gold for miracle highlights */
+            box-shadow: var(--shadow);
+            display: none;
+            color: var(--text-main);
+        }
+
+        .analysis-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .insight-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .insight-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .insight-item:last-child {
+            border-bottom: none;
+        }
+
+        .miracle-badge {
+            background: var(--panel-border);
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        body.night-mode .miracle-badge {
+            color: #fff;
+        }
+
+        /* Tooltip Styles */
+        .arabic-word {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            margin: 0 2px;
+        }
+
+        .arabic-word:hover {
+            background-color: rgba(39, 174, 96, 0.1);
+        }
+
+        /* Kelime Sayacı Sayıları */
+        .word-index {
+            display: none;
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 0 5px;
+            border-radius: 10px;
+            line-height: 14px;
+            min-width: 14px;
+            text-align: center;
+            font-family: 'Segoe UI', sans-serif;
+            pointer-events: none;
+            opacity: 0.8;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        body.show-word-counts .word-index {
+            display: block;
+        }
+
+        body.night-mode .word-index {
+            background: #27ae60;
+            color: #fff;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 10% auto;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: var(--text-main);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .ebced-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .ebced-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            text-align: center;
+        }
+
+        .ebced-letter {
+            font-size: 20px;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .ebced-value {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .word-tooltip {
+            visibility: hidden;
+            width: 140px;
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 10px;
+            position: absolute;
+            z-index: 100;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -70px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-family: 'Segoe UI', sans-serif;
+            pointer-events: none;
+            direction: ltr;
+        }
+
+        .word-tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #2c3e50 transparent transparent transparent;
+        }
+
+        .arabic-word:hover .word-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tooltip-transcription {
+            font-size: 13px;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 4px;
+        }
+
+        .tooltip-turkish {
+            font-size: 12px;
+            color: #ecf0f1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">
+            <span id="themeIcon">🌙</span>
+            <span id="themeText">Gece Modu</span>
+        </button>
+        <h1>Kuran-ı Kerim Okuyucu</h1>
+    </div>
+
+    <div class="controls">
+        <div style="display: flex; flex-direction: column; width: 100%; gap: 15px;">
+            <select id="surahSelect" onchange="loadSurah()">
+                <option value="" disabled selected>Sure Seçiniz...</option>
+            </select>
+
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <label
+                    style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; color: var(--text-secondary);">
+                    <input type="checkbox" id="countToggle" onchange="toggleWordCounts()"
+                        style="cursor: pointer; width: 18px; height: 18px; accent-color: var(--accent);">
+                    🔢 Kelime Sayılarını Göster
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div id="analysisContainer">
+        <div id="miraclePanel" class="analysis-panel">
+            <div class="analysis-title">✨ 19 Mucizesi Analiz Paneli</div>
+            <ul id="insightList" class="insight-list">
+                <!-- Veriler JS ile dolacak -->
+            </ul>
+            <div id="tooltipStatus"
+                style="font-size: 11px; margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 8px; color: #7f8c8d; font-family: sans-serif;">
+                🔍 Kelime Mealleri: Bekleniyor...
+            </div>
+            <div id="ebcedInfo"
+                style="font-size: 11px; margin-top: 8px; font-style: italic; color: var(--text-secondary); line-height: 1.4; border-top: 1px dashed var(--border-color); padding-top: 8px; display: flex; flex-direction: column; gap: 5px;">
+                <div>
+                    <strong>Ebced Hesabı:</strong> Arap alfabesindeki her harfin sayısal bir değere sahip olduğu
+                    sistemdir. Kelimeyi oluşturan harflerin değerleri toplanarak o kelimenin matematiksel karşılığı
+                    bulunur.
+                </div>
+                <button onclick="toggleEbcedModal()"
+                    style="background: none; border: 1px solid var(--accent); color: var(--accent); padding: 2px 8px; border-radius: 10px; cursor: pointer; font-size: 10px; width: fit-content; align-self: flex-end;">
+                    📊 Harf Değerlerini Gör
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ebced Modal -->
+    <div id="ebcedModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="toggleEbcedModal()">&times;</span>
+            <h3 style="margin-top: 0; color: var(--primary);">Ebced Değerleri Tablosu</h3>
+            <p style="font-size: 14px; color: var(--text-secondary);">Standart Ebced (Cemel) sistemindeki harf
+                karşılıkları:</p>
+
+            <table class="ebced-table">
+                <tr>
+                    <td><span class="ebced-letter">ا</span><br><span class="ebced-value">1</span></td>
+                    <td><span class="ebced-letter">ب</span><br><span class="ebced-value">2</span></td>
+                    <td><span class="ebced-letter">ج</span><br><span class="ebced-value">3</span></td>
+                    <td><span class="ebced-letter">د</span><br><span class="ebced-value">4</span></td>
+                    <td><span class="ebced-letter">ه</span><br><span class="ebced-value">5</span></td>
+                    <td><span class="ebced-letter">و</span><br><span class="ebced-value">6</span></td>
+                    <td><span class="ebced-letter">ز</span><br><span class="ebced-value">7</span></td>
+                </tr>
+                <tr>
+                    <td><span class="ebced-letter">ح</span><br><span class="ebced-value">8</span></td>
+                    <td><span class="ebced-letter">ط</span><br><span class="ebced-value">9</span></td>
+                    <td><span class="ebced-letter">ي</span><br><span class="ebced-value">10</span></td>
+                    <td><span class="ebced-letter">ك</span><br><span class="ebced-value">20</span></td>
+                    <td><span class="ebced-letter">ل</span><br><span class="ebced-value">30</span></td>
+                    <td><span class="ebced-letter">م</span><br><span class="ebced-value">40</span></td>
+                    <td><span class="ebced-letter">ن</span><br><span class="ebced-value">50</span></td>
+                </tr>
+                <tr>
+                    <td><span class="ebced-letter">س</span><br><span class="ebced-value">60</span></td>
+                    <td><span class="ebced-letter">ع</span><br><span class="ebced-value">70</span></td>
+                    <td><span class="ebced-letter">ف</span><br><span class="ebced-value">80</span></td>
+                    <td><span class="ebced-letter">ص</span><br><span class="ebced-value">90</span></td>
+                    <td><span class="ebced-letter">ق</span><br><span class="ebced-value">100</span></td>
+                    <td><span class="ebced-letter">ر</span><br><span class="ebced-value">200</span></td>
+                    <td><span class="ebced-letter">ش</span><br><span class="ebced-value">300</span></td>
+                </tr>
+                <tr>
+                    <td><span class="ebced-letter">ت</span><br><span class="ebced-value">400</span></td>
+                    <td><span class="ebced-letter">ث</span><br><span class="ebced-value">500</span></td>
+                    <td><span class="ebced-letter">خ</span><br><span class="ebced-value">600</span></td>
+                    <td><span class="ebced-letter">ذ</span><br><span class="ebced-value">700</span></td>
+                    <td><span class="ebced-letter">ض</span><br><span class="ebced-value">800</span></td>
+                    <td><span class="ebced-letter">ظ</span><br><span class="ebced-value">900</span></td>
+                    <td><span class="ebced-letter">غ</span><br><span class="ebced-value">1000</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="loadingSpinner"></div>
+    <div id="contentArea"></div>
+
+    <script src="quran_word_by_word.js"></script>
+    <script src="word_tooltip.js"></script>
+    <script>
+        const surahNames = [
+            "Fâtiha", "Bakara", "Âl-i İmrân", "Nisâ", "Mâide", "En'âm", "A'râf", "Enfâl", "Tevbe", "Yûnus", "Hûd", "Yûsuf", "Ra'd", "İbrâhîm", "Hicr", "Nahl", "İsrâ", "Kehf", "Meryem", "Tâhâ", "Enbiyâ", "Hac", "Mü'minûn", "Nûr", "Furkân", "Şuarâ", "Neml", "Kasas", "Ankebût", "Rûm", "Lokmân", "Secde", "Ahzâb", "Sebe'", "Fâtır", "Yâsîn", "Sâffât", "Sâd", "Zümer", "Mü'min", "Fussilet", "Şûrâ", "Zuhruf", "Duhân", "Câsiye", "Ahkaf", "Muhammed", "Fetih", "Hucurât", "Kâf", "Zâriyât", "Tûr", "Necm", "Kamer", "Rahmân", "Vâkıa", "Hadîd", "Mücâdele", "Haşr", "Mümtehine", "Saf", "Cuma", "Münâfikûn", "Tegâbün", "Talâk", "Tahrîm", "Mülk", "Kalem", "Hâkka", "Meâric", "Nûh", "Cin", "Müzzemmil", "Müddessir", "Kıyâme", "İnsân", "Mürselât", "Nebe'", "Nâziât", "Abese", "Tekvîr", "İnfitâr", "Mutaffifîn", "İnşikâk", "Burûc", "Târık", "A'lâ", "Gâşiye", "Fecr", "Beled", "Şems", "Leyl", "Duhâ", "İnşirâh", "Tîn", "Alak", "Kadir", "Beyyine", "Zilzâl", "Âdiyât", "Kāria", "Tekâsür", "Asr", "Hümeze", "Fîl", "Kureyş", "Mâûn", "Kevser", "Kâfirûn", "Nasr", "Tebbet", "İhlâs", "Felak", "Nâs"
+        ];
+
+        const surahVerseCount = {
+            1: 7, 2: 286, 3: 200, 4: 176, 5: 120, 6: 165, 7: 206, 8: 75, 9: 129, 10: 109, 11: 123, 12: 111, 13: 43, 14: 52, 15: 99, 16: 128, 17: 111, 18: 110, 19: 98, 20: 135, 21: 112, 22: 78, 23: 118, 24: 64, 25: 77, 26: 227, 27: 93, 28: 88, 29: 69, 30: 60, 31: 34, 32: 30, 33: 73, 34: 54, 35: 45, 36: 83, 37: 182, 38: 88, 39: 75, 40: 85, 41: 54, 42: 53, 43: 89, 44: 59, 45: 37, 46: 35, 47: 38, 48: 29, 49: 18, 50: 45, 51: 60, 52: 49, 53: 62, 54: 55, 55: 78, 56: 96, 57: 29, 58: 22, 59: 24, 60: 13, 61: 14, 62: 11, 63: 11, 64: 18, 65: 12, 66: 12, 67: 30, 68: 52, 69: 52, 70: 44, 71: 28, 72: 28, 73: 20, 74: 56, 75: 40, 76: 31, 77: 50, 78: 40, 79: 46, 80: 42, 81: 29, 82: 19, 83: 36, 84: 25, 85: 22, 86: 17, 87: 19, 88: 26, 89: 30, 90: 20, 91: 15, 92: 21, 93: 11, 94: 8, 95: 8, 96: 19, 97: 5, 98: 8, 99: 8, 100: 11, 101: 11, 102: 8, 103: 3, 104: 9, 105: 5, 106: 4, 107: 7, 108: 3, 109: 6, 110: 3, 111: 5, 112: 4, 113: 5, 114: 6
+        };
+
+        const select = document.getElementById('surahSelect');
+        surahNames.forEach((name, index) => {
+            const option = document.createElement('option');
+            option.value = index + 1;
+            option.textContent = `${index + 1}. ${name}`;
+            select.appendChild(option);
+        });
+
+        async function fetchAyah(surah, ayah) {
+            // alquran.cloud API'sini kullanıyoruz (Türkçe için çok daha stabil)
+            const url = `https://api.alquran.cloud/v1/ayah/${surah}:${ayah}/editions/quran-uthmani,tr.diyanet`;
+
+            try {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error("API hatası");
+                const json = await res.json();
+
+                return {
+                    arabic: json.data[0].text,
+                    turkish: json.data[1].text
+                };
+            } catch (err) {
+                console.error("Fetch hatası:", err);
+                return null;
+            }
+        }
+
+        function showMiracleInsights(surahNum) {
+            const panel = document.getElementById('miraclePanel');
+            const list = document.getElementById('insightList');
+            list.innerHTML = '';
+
+            const insights = [];
+
+            // Genel Gerçekler
+            insights.push({ key: "Kuran'daki Toplam Sure Sayısı", val: "114 (19 x 6)" });
+
+            if (surahNum === 1) {
+                insights.push({ key: "Ayet Sayısı", val: "7" });
+                insights.push({ key: "Kelime Sayısı", val: "29" });
+                insights.push({ key: "Harf Sayısı", val: "139" });
+                insights.push({ key: "'Fatiha' İsmi Ebcedi", val: "494", tag: "19 x 26" });
+            } else if (surahNum === 2) {
+                insights.push({ key: "Ayet Sayısı", val: "286" });
+                insights.push({ key: "Kelime Sayısı", val: "6118 (Dijital)" });
+                insights.push({ key: "Harf Sayısı", val: "25860 (Dijital)" });
+                insights.push({ key: "Alif-Lam-Mim (الم) Ebcedi", val: "71" });
+            } else if (surahNum === 42 || surahNum === 50) {
+                insights.push({ key: "Başlangıç Harfi 'Kaf' Toplamı (42+50)", val: "114 (19 x 6)" });
+            }
+
+            if (insights.length > 0) {
+                insights.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'insight-item';
+                    li.innerHTML = `<span>${item.key}</span> <span>${item.val} ${item.tag ? `<span class="miracle-badge">${item.tag}</span>` : ''}</span>`;
+                    list.appendChild(li);
+                });
+                panel.style.display = 'block';
+            } else {
+                panel.style.display = 'none';
+            }
+        }
+
+        async function loadSurah() {
+            const surahNum = parseInt(select.value);
+            const content = document.getElementById('contentArea');
+            const spinner = document.getElementById('loadingSpinner');
+
+            // Analiz panelini güncelle
+            showMiracleInsights(surahNum);
+
+            content.innerHTML = '';
+            spinner.style.display = 'block';
+
+            try {
+                const count = surahVerseCount[surahNum];
+                const basmalaStr = "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ";
+
+                for (let i = 1; i <= count; i++) {
+                    const data = await fetchAyah(surahNum, i);
+                    if (!data) continue;
+
+                    let arabicDisplay = data.arabic;
+
+                    // 1. Ayet işlemi: Eğer metin Besmele ile başlıyorsa ve bu Fatiha/Tevbe değilse
+                    if (i === 1 && surahNum !== 1 && surahNum !== 9) {
+                        if (arabicDisplay.includes(basmalaStr)) {
+                            const bHeader = document.createElement('div');
+                            bHeader.className = 'basmala-header';
+                            bHeader.textContent = basmalaStr;
+                            content.appendChild(bHeader);
+
+                            const bTurkish = document.createElement('div');
+                            bTurkish.className = 'basmala-turkish';
+                            bTurkish.textContent = "Rahman ve Rahim olan Allah'ın adıyla";
+                            content.appendChild(bTurkish);
+
+                            // Ayet metninden Besmele'yi temizle
+                            arabicDisplay = arabicDisplay.replace(basmalaStr, "").trim();
+                        }
+                    }
+
+                    const card = document.createElement('div');
+                    card.className = 'verse-card';
+                    card.innerHTML = `
+                        <div class="arabic-line" data-ayah="${i}">${arabicDisplay}</div>
+                        <div class="turkish-line">
+                            <span class="verse-number">${surahNum}:${i}</span>
+                            ${data.turkish}
+                        </div>
+                    `;
+                    content.appendChild(card);
+                }
+
+                // Tüm ayetler yüklendikten sonra tooltip'leri bir kez başlat
+                if (window.initWordTooltips) await initWordTooltips();
+
+            } catch (err) {
+                content.innerHTML = `<div class="error-msg">Sure yüklenirken bir hata oluştu: ${err.message}</div>`;
+            } finally {
+                spinner.style.display = 'none';
+            }
+        }
+
+        // Tema değiştirme
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+
+            if (body.classList.contains('night-mode')) {
+                body.classList.remove('night-mode');
+                icon.textContent = '🌙';
+                text.textContent = 'Gece Modu';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.add('night-mode');
+                icon.textContent = '☀️';
+                text.textContent = 'Gündüz Modu';
+                localStorage.setItem('theme', 'night');
+            }
+        }
+
+        // Kelime sayılarını aç/kapat
+        function toggleWordCounts() {
+            const body = document.body;
+            const isChecked = document.getElementById('countToggle').checked;
+
+            if (isChecked) {
+                body.classList.add('show-word-counts');
+                localStorage.setItem('showWordCounts', 'true');
+            } else {
+                body.classList.remove('show-word-counts');
+                localStorage.setItem('showWordCounts', 'false');
+            }
+        }
+
+        // Ebced Modalını aç/kapat
+        function toggleEbcedModal() {
+            const modal = document.getElementById('ebcedModal');
+            if (modal.style.display === 'block') {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'block';
+            }
+        }
+
+        // Modal dışına tıklayınca kapat
+        window.onclick = function (event) {
+            const modal = document.getElementById('ebcedModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Sayfa yüklendiğinde ayarları hatırla
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'night') {
+                document.body.classList.add('night-mode');
+                const icon = document.getElementById('themeIcon');
+                const text = document.getElementById('themeText');
+                if (icon) icon.textContent = '☀️';
+                if (text) text.textContent = 'Gündüz Modu';
+            }
+
+            const savedCount = localStorage.getItem('showWordCounts');
+            if (savedCount === 'true') {
+                document.getElementById('countToggle').checked = true;
+                document.body.classList.add('show-word-counts');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+# Google Credentials - ASLA GIT'E COMMIT ETMEYIN!
+google-credentials.json
+*.json
+
+# Environment files
+.env
+.env.local
+
+# Output files
+output/
+results/
+extracted_text.txt
+ocr_test_sonuc.txt
+test_bolge.png
+ocr_test_sample.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large files and binaries
+*.pdf
+*.dll
+*.exe
+*.js
+!quran_word_by_word.js
+!word_tooltip.js

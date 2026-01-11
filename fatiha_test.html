@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatiha - Kelime Kelime Test</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+
+        .ayah {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .ayah-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .arabic {
+            font-family: 'Amiri', 'Traditional Arabic', serif;
+            font-size: 28px;
+            line-height: 2;
+            text-align: right;
+            direction: rtl;
+            color: #2c3e50;
+            margin: 15px 0;
+        }
+
+        .word {
+            position: relative;
+            display: inline-block;
+            padding: 2px 6px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .word:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .tooltip {
+            visibility: hidden;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e50;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            white-space: nowrap;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            margin-bottom: 8px;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #2c3e50;
+        }
+
+        .word:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .transliteration {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 4px;
+            font-style: italic;
+        }
+
+        .translation {
+            font-size: 13px;
+            color: #ecf0f1;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .error {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🕌 Fatiha Suresi - Kelime Kelime Test</h1>
+        <div id="content" class="loading">Yükleniyor...</div>
+    </div>
+
+    <script>
+        async function loadFatiha() {
+            const contentDiv = document.getElementById('content');
+
+            try {
+                // JSON'u yükle
+                const response = await fetch('words_001.json');
+                if (!response.ok) throw new Error('Dosya yüklenemedi');
+
+                const data = await response.json();
+                const surah = data.surah;
+
+                // HTML oluştur
+                let html = '';
+
+                for (const verse of surah.verses) {
+                    html += `<div class="ayah">`;
+                    html += `<div class="ayah-number">Ayet ${verse.verse_number}</div>`;
+                    html += `<div class="arabic">`;
+
+                    // Her kelime için
+                    for (const word of verse.words) {
+                        html += `<span class="word">`;
+                        html += word.text_uthmani || word.text || '';
+
+                        // Tooltip
+                        if (word.transliteration || word.translation) {
+                            html += `<span class="tooltip">`;
+                            if (word.transliteration) {
+                                html += `<div class="transliteration">${word.transliteration}</div>`;
+                            }
+                            if (word.translation) {
+                                html += `<div class="translation">${word.translation}</div>`;
+                            }
+                            html += `</span>`;
+                        }
+
+                        html += `</span> `;
+                    }
+
+                    html += `</div></div>`;
+                }
+
+                contentDiv.innerHTML = html;
+                contentDiv.classList.remove('loading');
+
+            } catch (error) {
+                contentDiv.innerHTML = `
+                    <div class="error">
+                        <strong>Hata:</strong> ${error.message}<br>
+                        <small>words_001.json dosyası bulunamadı veya okunamadı.</small>
+                    </div>
+                `;
+                contentDiv.classList.remove('loading');
+            }
+        }
+
+        // Sayfa yüklendiğinde çalıştır
+        loadFatiha();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuran Tooltip Demo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Roboto:wght@300;400&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .verse {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .verse-number {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 28px;
+            line-height: 1.8;
+            text-align: right;
+            direction: rtl;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .translation {
+            color: #34495e;
+            font-size: 16px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Word-by-Word Tooltip Styles */
+        .arabic-word {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .arabic-word:hover {
+            background-color: rgba(102, 126, 234, 0.1);
+        }
+
+        .word-tooltip {
+            visibility: hidden;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            white-space: nowrap;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            margin-bottom: 8px;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .word-tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #2c3e50;
+        }
+
+        .arabic-word:hover .word-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tooltip-transcription {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 4px;
+            font-style: italic;
+        }
+
+        .tooltip-turkish {
+            font-size: 13px;
+            font-weight: 400;
+            color: #ecf0f1;
+        }
+
+        .instructions {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .instructions strong {
+            color: #1976d2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🕌 Kuran-ı Kerim - Kelime Kelime Tooltip Demosu</h1>
+        <p class="subtitle">Her Arapça kelimenin üzerine gelin - okunuş ve anlamını görün</p>
+
+        <div class="instructions">
+            <strong>Nasıl Kullanılır:</strong> Arapça kelimelerin üzerine farenizi getirdiğinizde, kelimenin Arapça
+            okunuşu ve Türkçe anlamı görünecektir.
+        </div>
+
+        <div id="verses-container">
+            <!-- Verses will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample word-by-word data for Al-Fatiha
+        const demoData = {
+            "surah_number": 1,
+            "surah_name": "Al-Faatiha (Fatiha Suresi)",
+            "verses": [
+                {
+                    "verse_number": 1,
+                    "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+                    "turkish": "Rahman ve Rahim olan Allah'ın adıyla.",
+                    "words": [
+                        { "arabic": "بِسْمِ", "transcription": "bismi", "turkish": "adıyla" },
+                        { "arabic": "اللَّهِ", "transcription": "llahi", "turkish": "Allah'ın" },
+                        { "arabic": "الرَّحْمَٰنِ", "transcription": "r-rahmani", "turkish": "Rahman" },
+                        { "arabic": "الرَّحِيمِ", "transcription": "r-rahimi", "turkish": "Rahim" }
+                    ]
+                },
+                {
+                    "verse_number": 2,
+                    "arabic": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+                    "turkish": "Hamd, âlemlerin Rabbi Allah'a mahsustur.",
+                    "words": [
+                        { "arabic": "الْحَمْدُ", "transcription": "al-hamdu", "turkish": "hamd" },
+                        { "arabic": "لِلَّهِ", "transcription": "lillahi", "turkish": "Allah'a" },
+                        { "arabic": "رَبِّ", "transcription": "rabbi", "turkish": "Rab'bi" },
+                        { "arabic": "الْعَالَمِينَ", "transcription": "al-'alamina", "turkish": "alemlerin" }
+                    ]
+                },
+                {
+                    "verse_number": 3,
+                    "arabic": "الرَّحْمَٰنِ الرَّحِيمِ",
+                    "turkish": "Rahman ve Rahim olan.",
+                    "words": [
+                        { "arabic": "الرَّحْمَٰنِ", "transcription": "ar-rahmani", "turkish": "Rahman" },
+                        { "arabic": "الرَّحِيمِ", "transcription": "ar-rahimi", "turkish": "Rahim" }
+                    ]
+                }
+            ]
+        };
+
+        // Create tooltip HTML for a word
+        function createWordTooltip(arabicWord, transcription, turkish) {
+            return `<span class="arabic-word">${arabicWord}<span class="word-tooltip"><div class="tooltip-transcription">${transcription || ''}</div><div class="tooltip-turkish">${turkish || ''}</div></span></span>`;
+        }
+
+        // Render verses with tooltips
+        function renderVerses() {
+            const container = document.getElementById('verses-container');
+
+            demoData.verses.forEach(verse => {
+                // Build Arabic text with tooltips
+                let arabicHTML = '';
+                verse.words.forEach((word, index) => {
+                    arabicHTML += createWordTooltip(word.arabic, word.transcription, word.turkish);
+                    if (index < verse.words.length - 1) {
+                        arabicHTML += ' ';
+                    }
+                });
+
+                // Create verse element
+                const verseDiv = document.createElement('div');
+                verseDiv.className = 'verse';
+                verseDiv.innerHTML = `
+                    <div class="verse-number">Ayet ${verse.verse_number}</div>
+                    <div class="arabic-text">${arabicHTML}</div>
+                    <div class="translation">${verse.turkish}</div>
+                `;
+
+                container.appendChild(verseDiv);
+            });
+        }
+
+        // Load verses when page loads
+        document.addEventListener('DOMContentLoaded', renderVerses);
+    </script>
+</body>
+
+</html>
