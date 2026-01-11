@@ -519,51 +519,16 @@
     <div id="ebcedDetailModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="toggleEbcedDetailModal()">&times;</span>
-            <h3 style="margin-top: 0; color: var(--primary);">Fatiha Suresi Ebced Dökümü</h3>
-            <p style="font-size: 14px; color: var(--text-secondary);">Ayet bazlı ebced değerleri (139 Harf standardına
-                göre):</p>
-
-            <table class="ebced-table">
-                <thead>
-                    <tr style="background: var(--bg-color); font-weight: bold;">
-                        <td>Ayet</td>
-                        <td>Ebced Değeri</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1. Ayet (Besmele)</td>
-                        <td>786</td>
-                    </tr>
-                    <tr>
-                        <td>2. Ayet</td>
-                        <td>581</td>
-                    </tr>
-                    <tr>
-                        <td>3. Ayet</td>
-                        <td>618</td>
-                    </tr>
-                    <tr>
-                        <td>4. Ayet</td>
-                        <td>241</td>
-                    </tr>
-                    <tr>
-                        <td>5. Ayet</td>
-                        <td>836</td>
-                    </tr>
-                    <tr>
-                        <td>6. Ayet</td>
-                        <td>1072</td>
-                    </tr>
-                    <tr>
-                        <td>7. Ayet</td>
-                        <td>6009</td>
-                    </tr>
-                    <tr style="font-weight: bold; color: var(--accent); background: rgba(39, 174, 96, 0.1);">
-                        <td>TOPLAM</td>
-                        <td>10,143</td>
-                    </tr>
-                </tbody>
+            </tr>
+            <tr>
+                <td>7. Ayet</td>
+                <td>6009</td>
+            </tr>
+            <tr style="font-weight: bold; color: var(--accent); background: rgba(39, 174, 96, 0.1);">
+                <td>TOPLAM</td>
+                <td>10,143</td>
+            </tr>
+            </tbody>
             </table>
         </div>
     </div>
@@ -571,6 +536,7 @@
     <div id="loadingSpinner"></div>
     <div id="contentArea"></div>
 
+    <script src="surah_stats.js"></script>
     <script src="quran_word_by_word.js"></script>
     <script src="word_tooltip.js"></script>
     <script>
@@ -619,18 +585,45 @@
             // Genel Gerçekler
             insights.push({ key: "Kuran'daki Toplam Sure Sayısı", val: "114 (19 x 6)" });
 
+            // surah_stats.js'den verileri çek (Eğer mevcutsa)
+            const stats = (window.SURAH_STATS && window.SURAH_STATS[surahNum]) ? window.SURAH_STATS[surahNum] : null;
+
+            if (stats) {
+                insights.push({ key: "Ayet Sayısı", val: stats.verses.length });
+                insights.push({ key: "Kelime Sayısı", val: stats.words.toLocaleString('tr-TR') });
+                insights.push({ key: "Harf Sayısı (Resm-i Osmâni)", val: stats.chars_strict.toLocaleString('tr-TR') });
+                insights.push({ key: "Harf Sayısı (Asarlar dahil)", val: stats.chars_extended.toLocaleString('tr-TR') });
+
+                // Fatiha (1) için Besmele Ebcedini özel göster
+                if (surahNum === 1) {
+                    insights.push({ key: "Besmele-i Şerife Ebcedi", val: "786" });
+                }
+
+                // Surenin Toplam Ebcedi Tıklanabilir
+                const totalEbcedStr = stats.ebced.toLocaleString('tr-TR');
+                insights.push({
+                    key: "Surenin Toplam Ebcedi",
+                    val: `<span onclick="toggleEbcedDetailModal(${surahNum})" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: bold;">${totalEbcedStr}</span>`
+                });
+
+                // Önceki Fatiha özel ebcedini (494) manuel ekleyelim (Bu isim ebcediydi)
+                if (surahNum === 1) {
+                    insights.push({ key: "'Fatiha' İsmi Ebcedi", val: "494", tag: "19 x 26" });
+                }
+            } else {
+                // Yedek Mekanizma (Eğer JS yüklenmezse eski statik mantık)
+                if (surahNum === 1) {
+                    insights.push({ key: "Ayet Sayısı", val: "7" });
+                    insights.push({ key: "Kelime Sayısı", val: "29" });
+                    insights.push({ key: "Harf Sayısı", val: "139" });
+                    insights.push({ key: "Surenin Toplam Ebcedi", val: "10,143" });
+                }
+            }
+
+            // Diğer özel tespitler
             if (surahNum === 1) {
-                insights.push({ key: "Ayet Sayısı", val: "7" });
-                insights.push({ key: "Kelime Sayısı", val: "29" });
-                insights.push({ key: "Harf Sayısı (Resm-i Osmâni)", val: "139" });
-                insights.push({ key: "Harf Sayısı (Asarlar dahil)", val: "145" });
-                insights.push({ key: "Besmele-i Şerife Ebcedi", val: "786" });
-                insights.push({ key: "Surenin Toplam Ebcedi (139 Harf)", val: `<span onclick="toggleEbcedDetailModal()" style="color: var(--accent); cursor: pointer; text-decoration: underline;">10,143</span>` });
-                insights.push({ key: "'Fatiha' İsmi Ebcedi", val: "494", tag: "19 x 26" });
+                // Fatiha için ek bir şey yok
             } else if (surahNum === 2) {
-                insights.push({ key: "Ayet Sayısı", val: "286" });
-                insights.push({ key: "Kelime Sayısı", val: "6118 (Dijital)" });
-                insights.push({ key: "Harf Sayısı", val: "25860 (Dijital)" });
                 insights.push({ key: "Alif-Lam-Mim (الم) Ebcedi", val: "71" });
             } else if (surahNum === 42 || surahNum === 50) {
                 insights.push({ key: "Başlangıç Harfi 'Kaf' Toplamı (42+50)", val: "114 (19 x 6)" });
@@ -754,9 +747,41 @@
         }
 
         // Ebced Detay Modalını aç/kapat
-        function toggleEbcedDetailModal() {
+        function toggleEbcedDetailModal(surahNum = null) {
             const modal = document.getElementById('ebcedDetailModal');
-            modal.style.display = (modal.style.display === 'block') ? 'none' : 'block';
+            const body = document.getElementById('ebcedDetailBody');
+            const title = document.getElementById('ebcedModalTitle');
+
+            if (modal.style.display === 'block') {
+                modal.style.display = 'none';
+                return;
+            }
+
+            if (surahNum && window.SURAH_STATS && window.SURAH_STATS[surahNum]) {
+                const stats = window.SURAH_STATS[surahNum];
+                const sName = surahNames[surahNum - 1];
+                title.textContent = `${sName} Suresi Ebced Dökümü`;
+                body.innerHTML = '';
+
+                stats.verses.forEach(v => {
+                    const tr = document.createElement('tr');
+                    let label = `${v.v}. Ayet`;
+                    if (surahNum === 1 && v.v === 1) label += " (Besmele)";
+
+                    tr.innerHTML = `<td>${label}</td><td>${v.e.toLocaleString('tr-TR')}</td>`;
+                    body.appendChild(tr);
+                });
+
+                // Toplam satırı
+                const totalTr = document.createElement('tr');
+                totalTr.style.fontWeight = 'bold';
+                totalTr.style.color = 'var(--accent)';
+                totalTr.style.background = 'rgba(39, 174, 96, 0.1)';
+                totalTr.innerHTML = `<td>TOPLAM</td><td>${stats.ebced.toLocaleString('tr-TR')}</td>`;
+                body.appendChild(totalTr);
+
+                modal.style.display = 'block';
+            }
         }
 
         // Modal dışına tıklayınca kapat
