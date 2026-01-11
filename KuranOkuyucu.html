@@ -441,10 +441,22 @@
             </div>
             <div id="ebcedInfo"
                 style="font-size: 11px; margin-top: 8px; font-style: italic; color: var(--text-secondary); line-height: 1.4; border-top: 1px dashed var(--border-color); padding-top: 8px; display: flex; flex-direction: column; gap: 5px;">
-                <div>
-                    <strong>Ebced Hesabı:</strong> Arap alfabesindeki her harfin sayısal bir değere sahip olduğu
-                    sistemdir. Kelimeyi oluşturan harflerin değerleri toplanarak o kelimenin matematiksel karşılığı
-                    bulunur.
+                <div style="margin-bottom: 5px;">
+                    <strong style="color: var(--accent);">Ebced Hesaplama Yöntemi</strong><br>
+                    Hesaplamalar şu kurallara göre yapılmıştır:
+                    <ul style="margin: 5px 0; padding-left: 20px; list-style-type: disc;">
+                        <li><strong>Harekeler Hariç:</strong> Üstün, esre, ötre, cezm ve şedde gibi işaretler
+                            hesaplamaya dahil edilmez.</li>
+                        <li><strong>Sadece Harfler:</strong> Sadece Elif'ten Ya'ya kadar olan temel harf karakterleri
+                            toplanır.</li>
+                        <li><strong>Resm-i Osmâni:</strong> Kur'an'ın orijinal Mushaf yazılışı (harf dizilimi) esas
+                            alınır.</li>
+                    </ul>
+                    <div
+                        style="background: rgba(39, 174, 96, 0.1); padding: 5px; border-radius: 4px; margin-top: 5px; border-left: 3px solid var(--accent);">
+                        <strong>NOT:</strong> Bu yöntemle Besmele'nin değeri tam <strong>786</strong> çıkmaktadır. Bu,
+                        harflerin orijinal yerleşimi ve ebced değerlerinin standart karşılığıdır.
+                    </div>
                 </div>
                 <button onclick="toggleEbcedModal()"
                     style="background: none; border: 1px solid var(--accent); color: var(--accent); padding: 2px 8px; border-radius: 10px; cursor: pointer; font-size: 10px; width: fit-content; align-self: flex-end;">
@@ -499,6 +511,59 @@
                     <td><span class="ebced-letter">ظ</span><br><span class="ebced-value">900</span></td>
                     <td><span class="ebced-letter">غ</span><br><span class="ebced-value">1000</span></td>
                 </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Ebced Detay Modal -->
+    <div id="ebcedDetailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="toggleEbcedDetailModal()">&times;</span>
+            <h3 style="margin-top: 0; color: var(--primary);">Fatiha Suresi Ebced Dökümü</h3>
+            <p style="font-size: 14px; color: var(--text-secondary);">Ayet bazlı ebced değerleri (139 Harf standardına
+                göre):</p>
+
+            <table class="ebced-table">
+                <thead>
+                    <tr style="background: var(--bg-color); font-weight: bold;">
+                        <td>Ayet</td>
+                        <td>Ebced Değeri</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1. Ayet (Besmele)</td>
+                        <td>786</td>
+                    </tr>
+                    <tr>
+                        <td>2. Ayet</td>
+                        <td>581</td>
+                    </tr>
+                    <tr>
+                        <td>3. Ayet</td>
+                        <td>618</td>
+                    </tr>
+                    <tr>
+                        <td>4. Ayet</td>
+                        <td>241</td>
+                    </tr>
+                    <tr>
+                        <td>5. Ayet</td>
+                        <td>836</td>
+                    </tr>
+                    <tr>
+                        <td>6. Ayet</td>
+                        <td>1072</td>
+                    </tr>
+                    <tr>
+                        <td>7. Ayet</td>
+                        <td>6009</td>
+                    </tr>
+                    <tr style="font-weight: bold; color: var(--accent); background: rgba(39, 174, 96, 0.1);">
+                        <td>TOPLAM</td>
+                        <td>10,143</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
