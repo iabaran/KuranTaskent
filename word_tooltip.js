@@ -13,35 +13,61 @@ function updateStatus(msg, isError = false) {
     }
 }
 
-// Load word-by-word JSON data for a specific surah
+// Load word-by-word data for a specific surah using dynamic script injection
+// This method bypasses CORS issues when running locally from file://
 async function loadWordByWordData(surahNumber) {
     if (!surahNumber) return false;
     if (surahCache[surahNumber]) return true;
+
+    if (isLoading && currentLoadingSurah === surahNumber) return true;
 
     isLoading = true;
     currentLoadingSurah = surahNumber;
     updateStatus(`Sure ${surahNumber} kelime mealleri yükleniyor...`);
 
-    try {
-        console.log(`📥 Loading word data for Surah ${surahNumber}...`);
-        // We now fetch from the 'words' directory
-        const response = await fetch(`words/surah_${surahNumber}.json`);
-        if (!response.ok) throw new Error(`Sure ${surahNumber} verisi bulunamadı.`);
+    return new Promise((resolve) => {
+        console.log(`📥 Loading script: words/surah_${surahNumber}.js`);
 
-        const data = await response.json();
-        surahCache[surahNumber] = data;
+        // Remove any old loading script if it got stuck
+        const oldScript = document.getElementById('surah-data-script');
+        if (oldScript) oldScript.remove();
 
-        isLoading = false;
-        currentLoadingSurah = null;
-        updateStatus(`✅ Sure ${surahNumber} hazır.`);
-        return true;
-    } catch (error) {
-        console.error(`❌ Error loading Surah ${surahNumber} data:`, error);
-        isLoading = false;
-        currentLoadingSurah = null;
-        updateStatus(`Yükleme hatası: Sure ${surahNumber} verisi alınamadı.`, true);
-        return false;
-    }
+        const script = document.createElement('script');
+        script.id = 'surah-data-script';
+        script.src = `words/surah_${surahNumber}.js`;
+
+        script.onload = () => {
+            if (window.currentSurahWordData) {
+                surahCache[surahNumber] = window.currentSurahWordData;
+                // Don't delete window.currentSurahWordData yet as other surahs might reuse it
+                console.log(`✅ Loaded Surah ${surahNumber} data:`, surahCache[surahNumber]);
+
+                isLoading = false;
+                currentLoadingSurah = null;
+                updateStatus(`✅ Sure ${surahNumber} hazır.`);
+                script.remove();
+                resolve(true);
+            } else {
+                console.error(`❌ Data not found after loading Surah ${surahNumber}.js`);
+                isLoading = false;
+                currentLoadingSurah = null;
+                updateStatus(`Yükleme hatası: Sure ${surahNumber} verisi beklenen formatta değil.`, true);
+                script.remove();
+                resolve(false);
+            }
+        };
+
+        script.onerror = () => {
+            console.error(`❌ Failed to load script: words/surah_${surahNumber}.js`);
+            isLoading = false;
+            currentLoadingSurah = null;
+            updateStatus(`Yükleme hatası: Sure ${surahNumber} script dosyası yüklenemedi.`, true);
+            script.remove();
+            resolve(false);
+        };
+
+        document.head.appendChild(script);
+    });
 }
 
 // Get word data for a specific verse
