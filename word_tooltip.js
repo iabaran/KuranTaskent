@@ -1,10 +1,9 @@
 // Word-by-Word Tooltip Functionality for Kuran Okuyucu
 // Optimized for large JSON data and dynamic UI updates
 
-let wordByWordData = null;
-let isDataLoaded = false;
+const surahCache = {}; // Cache for loaded surahs
 let isLoading = false;
-let loadPromise = null;
+let currentLoadingSurah = null;
 
 function updateStatus(msg, isError = false) {
     const statusDiv = document.getElementById('tooltipStatus');
@@ -14,51 +13,40 @@ function updateStatus(msg, isError = false) {
     }
 }
 
-// Load word-by-word JSON data
-async function loadWordByWordData() {
-    if (isDataLoaded) return true;
-
-    // Bypassing CORS: check if data is already loaded via script tag
-    if (window.quranWordByWordData) {
-        console.log('✅ Data found in global variable (No CORS issues)');
-        wordByWordData = window.quranWordByWordData;
-        isDataLoaded = true;
-        updateStatus('✅ Kelime mealleri hazır.');
-        return true;
-    }
-
-    if (isLoading) return loadPromise;
+// Load word-by-word JSON data for a specific surah
+async function loadWordByWordData(surahNumber) {
+    if (!surahNumber) return false;
+    if (surahCache[surahNumber]) return true;
 
     isLoading = true;
-    updateStatus('Veriler yükleniyor (24MB)...');
+    currentLoadingSurah = surahNumber;
+    updateStatus(`Sure ${surahNumber} kelime mealleri yükleniyor...`);
 
-    loadPromise = (async () => {
-        try {
-            console.log('📥 Loading word-by-word data (24MB)...');
-            const response = await fetch('quran_word_by_word.json');
-            if (!response.ok) throw new Error('Kelime meali verisi bulunamadı.');
+    try {
+        console.log(`📥 Loading word data for Surah ${surahNumber}...`);
+        // We now fetch from the 'words' directory
+        const response = await fetch(`words/surah_${surahNumber}.json`);
+        if (!response.ok) throw new Error(`Sure ${surahNumber} verisi bulunamadı.`);
 
-            wordByWordData = await response.json();
-            isDataLoaded = true;
-            isLoading = false;
-            updateStatus('✅ Kelime mealleri hazır.');
-            console.log('✅ Word-by-word data loaded successfully');
-            return true;
-        } catch (error) {
-            console.error('❌ Error loading word-by-word data:', error);
-            isLoading = false;
-            updateStatus('Yükleme hatası (Yerel dosyayı doğrudan açtığınız için CORS engeli). Lütfen quran_word_by_word.js dosyasının oluştuğundan emin olun.', true);
-            return false;
-        }
-    })();
-    return loadPromise;
+        const data = await response.json();
+        surahCache[surahNumber] = data;
+
+        isLoading = false;
+        currentLoadingSurah = null;
+        updateStatus(`✅ Sure ${surahNumber} hazır.`);
+        return true;
+    } catch (error) {
+        console.error(`❌ Error loading Surah ${surahNumber} data:`, error);
+        isLoading = false;
+        currentLoadingSurah = null;
+        updateStatus(`Yükleme hatası: Sure ${surahNumber} verisi alınamadı.`, true);
+        return false;
+    }
 }
 
 // Get word data for a specific verse
 function getVerseWords(surahNumber, verseNumber) {
-    if (!wordByWordData) return null;
-
-    const surah = wordByWordData.surahs?.find(s => parseInt(s.surah_number) === parseInt(surahNumber));
+    const surah = surahCache[surahNumber];
     if (!surah) return null;
 
     const verse = surah.verses?.find(v => parseInt(v.verse_number) === parseInt(verseNumber));
@@ -147,17 +135,15 @@ function processVerseWithTooltips(arabicText, surahNumber, verseNumber, startCou
 
 // Global initialization function
 window.initWordTooltips = async function () {
-    console.log('🔄 Initializing cumulative word counter...');
-
-    // Verilerin yüklendiğinden emin ol
-    if (!isDataLoaded) {
-        const loaded = await loadWordByWordData();
-        if (!loaded) return;
-    }
-
     const surahSelect = document.getElementById('surahSelect');
     const surahNumber = surahSelect ? parseInt(surahSelect.value) : null;
     if (!surahNumber) return;
+
+    console.log(`🔄 Initializing word tooltips for Surah ${surahNumber}...`);
+
+    // Verilerin yüklendiğinden emin ol
+    const loaded = await loadWordByWordData(surahNumber);
+    if (!loaded) return;
 
     // Hedef alanları bul (ayet kartları ve besmele başlıkları)
     // ÖNEMLİ: Sıralama DOM sırasına göre olmalı ki sayaç düzgün devam etsin
@@ -200,7 +186,4 @@ window.initWordTooltips = async function () {
     console.log(`✅ Cumulative counter complete for Surah ${surahNumber}. Total words: ${surahWordCounter - 1}`);
 };
 
-// Sayfa ilk yüklendiğinde veriyi çekmeye başla
-document.addEventListener('DOMContentLoaded', () => {
-    loadWordByWordData();
-});
+// Not: loadWordByWordData artık surah seçildiğinde initWordTooltips tarafından çağrılıyor.
