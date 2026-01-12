@@ -67,12 +67,15 @@ function getVerseWords(surahNumber, verseNumber) {
 
 // Create tooltip HTML for a word with cumulative index
 function createWordTooltip(arabicWord, transcription, turkish, currentIndex) {
+    const ts = transcription || '---';
+    const tr = turkish || '[Meal Bekleniyor]';
+
     return `<span class="arabic-word">
                 ${arabicWord}
                 <span class="word-index">${currentIndex}</span>
                 <span class="word-tooltip">
-                    <div class="tooltip-transcription">${transcription || ''}</div>
-                    <div class="tooltip-turkish">${turkish || ''}</div>
+                    <div class="tooltip-transcription">${ts}</div>
+                    <div class="tooltip-turkish">${tr}</div>
                 </span>
             </span>`;
 }
