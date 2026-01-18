@@ -59,4 +59,12 @@ Thumbs.db
 *.js
 !word_tooltip.js
 !surah_stats.js
+!allah_data.js
+!rahman_rahim_data.js
+!angel_data_with_words.js
+!satan_data_with_words.js
+!jannah_data_raw.js
+!jahannam_data_raw.js
+!quran_arabic_js.js
+!quran_tr_js.js
 !words/
