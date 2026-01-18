@@ -1411,28 +1411,24 @@
             }
         }
 
-        // Shams (Sun) Tooltip - Placeholder until data is generated
+        // Shams (Sun) Tooltip
         function showShamsTooltip(event) {
-            event.stopPropagation();
-            alert('"Güneş" (Şems) kelimesi Kur\'an\'da toplam 33 defa geçmektedir.\n(Detaylı liste yakında eklenecektir.)');
+            showGenericWordTooltip(event, 'shamsTooltip', '☀️ Güneş (Şems) Kelimesi', typeof shamsData !== 'undefined' ? shamsData : [], 'شمس');
         }
 
-        // Qamar (Moon) Tooltip - Placeholder until data is generated
+        // Qamar (Moon) Tooltip
         function showQamarTooltip(event) {
-            event.stopPropagation();
-            alert('"Ay" (Kamer) kelimesi Kur\'an\'da toplam 27 defa geçmektedir.\nYörünge süresi: 27 gün\n(Detaylı liste yakında eklenecektir.)');
+            showGenericWordTooltip(event, 'qamarTooltip', '🌙 Ay (Kamer) Kelimesi', typeof qamarData !== 'undefined' ? qamarData : [], 'قمر');
         }
 
-        // Shehr (Month) Tooltip - Placeholder until data is generated
+        // Shehr (Month) Tooltip
         function showShehrTooltip(event) {
-            event.stopPropagation();
-            alert('"Ay" (Şehr) kelimesi Kur\'an\'da toplam 12 defa geçmektedir.\n1 Yıl\n(Detaylı liste yakında eklenecektir.)');
+            showGenericWordTooltip(event, 'shehrTooltip', '📅 Ay (Şehr) Kelimesi', typeof shehrData !== 'undefined' ? shehrData : [], 'شهر');
         }
 
-        // Yevm (Day) Tooltip - Placeholder until data is generated
+        // Yevm (Day) Tooltip
         function showYevmTooltip(event) {
-            event.stopPropagation();
-            alert('"Gün" (Yevm) kelimesi Kur\'an\'da toplam 365 defa geçmektedir.\n1 Yıl\n(Detaylı liste yakında eklenecektir.)');
+            showGenericWordTooltip(event, 'yevmTooltip', '📆 Gün (Yevm) Kelimesi', typeof yevmData !== 'undefined' ? yevmData : [], 'يوم');
         }
 
         // Allah Tooltip
@@ -1483,6 +1479,7 @@
     <script src="satan_data_with_words.js"></script>
     <script src="jannah_data_raw.js"></script>
     <script src="jahannam_data_raw.js"></script>
+    <script src="shams_qamar_yevm_shehr_data.js"></script>
     <script src="quran_arabic_js.js"></script>
     <script src="quran_tr_js.js"></script>
 </body>
