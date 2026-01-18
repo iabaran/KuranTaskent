@@ -1,0 +1,62 @@
+
+======== ANALYZING: SATAN (Singular: Shaytan) ========
+Searching for pattern: شيطان
+Total Occurrences Found: 70
+Forms Distribution:
+  الشيطان: 63
+  شيطان: 4
+  شيطانا: 2
+  للشيطان: 1
+
+======== ANALYZING: DEVILS (Plural: Shayatin) ========
+Searching for pattern: شياطين
+Total Occurrences Found: 18
+Forms Distribution:
+  الشياطين: 13
+  والشياطين: 2
+  شياطينهم: 1
+  شياطين: 1
+  للشياطين: 1
+
+======== ANALYZING: ANGELS (Plural: Malaika) ========
+Searching for pattern: ملائكة
+Total Occurrences Found: 68
+Forms Distribution:
+  الملائكة: 38
+  والملائكة: 14
+  للملائكة: 9
+  ملائكة: 6
+  بالملائكة: 1
+
+======== ANALYZING: ANGEL/KING (Root: Malak/Malik) ========
+Searching for pattern: ملك
+Total Occurrences Found: 131
+Forms Distribution:
+  ملك: 31
+  الملك: 28
+  ملكت: 15
+  يملكون: 10
+  يملك: 8
+  ملكا: 7
+  املك: 5
+  ملكوت: 4
+  ملكه: 3
+  عملكم: 3
+  تملك: 2
+  تملكون: 2
+  والملك: 2
+  الملكين: 1
+  بالملك: 1
+  ملكين: 1
+  احملكم: 1
+  بملكنا: 1
+  وملك: 1
+  ملكتم: 1
+  لعملكم: 1
+  تملكهم: 1
+  عملك: 1
+  وملكا: 1
+
+======== CATEGORIZING 'MLK' MATCHES ========
+Potential Angels (Lam+Fatha): 35
+Potential Kings (Lam+Kasra): 42

@@ -160,9 +160,17 @@ function processVerseWithTooltips(arabicText, surahNumber, verseNumber, startCou
 }
 
 // Global initialization function
-window.initWordTooltips = async function () {
-    const surahSelect = document.getElementById('surahSelect');
-    const surahNumber = surahSelect ? parseInt(surahSelect.value) : null;
+window.initWordTooltips = async function (num) {
+    let surahNumber = num;
+
+    if (!surahNumber) {
+        const surahSearch = document.getElementById('surahSearch');
+        if (surahSearch && surahSearch.value) {
+            const match = surahSearch.value.match(/^(\d+)\./);
+            if (match) surahNumber = parseInt(match[1]);
+        }
+    }
+
     if (!surahNumber) return;
 
     console.log(`🔄 Initializing word tooltips for Surah ${surahNumber}...`);

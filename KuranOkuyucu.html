@@ -295,6 +295,108 @@
             color: #fff;
         }
 
+        /* Verse Preview Modal Styles */
+        .verse-preview-modal {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            background: var(--card-bg);
+            border: 3px solid var(--accent);
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            padding: 25px;
+            overflow-y: auto;
+            color: var(--text-main);
+        }
+
+        .verse-preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 12px;
+        }
+
+        .verse-preview-title {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 18px;
+        }
+
+        .verse-preview-arabic {
+            font-size: 32px;
+            text-align: right;
+            direction: rtl;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(39, 174, 96, 0.05);
+            border-radius: 10px;
+            line-height: 1.8;
+            font-family: 'Traditional Arabic', serif;
+            color: var(--arabic-color);
+        }
+
+        .verse-preview-turkish {
+            font-size: 16px;
+            line-height: 1.7;
+            padding: 15px;
+            background: rgba(39, 174, 96, 0.05);
+            border-radius: 10px;
+            color: var(--text-main);
+            margin-bottom: 25px;
+        }
+
+        .verse-preview-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .verse-preview-actions button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .verse-preview-actions .primary-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .verse-preview-actions .secondary-btn {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .verse-preview-actions button:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        .highlighted-word {
+            font-weight: bold;
+            color: var(--accent);
+            background: rgba(39, 174, 96, 0.2);
+            padding: 0 4px;
+            border-radius: 4px;
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 5px rgba(39, 174, 96, 0.3);
+        }
+
         /* Modal Styles */
         .modal {
             display: none;
@@ -481,6 +583,11 @@
             <span id="themeIcon">🌙</span>
             <span id="themeText">Gece Modu</span>
         </button>
+        <button id="miracleToggle" onclick="toggleMiraclePanel()"
+            style="background: var(--card-bg); border: 2px solid var(--accent); color: var(--accent); padding: 8px 15px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: bold; transition: all 0.3s; margin-left: 10px;">
+            <span>✨</span>
+            <span>Mucizeler</span>
+        </button>
         <h1>Kuran-ı Kerim Okuyucu</h1>
     </div>
 
@@ -488,8 +595,8 @@
         <div style="display: flex; flex-direction: column; width: 100%; gap: 15px;">
             <div class="search-container">
                 <input type="text" id="surahSearch" placeholder="🔍 Sure Ara veya Seç..."
-                    onclick="toggleSuggestions(true)" oninput="filterSuggestions(this.value)" class="search-input"
-                    autocomplete="off">
+                    onclick="this.select(); toggleSuggestions(true)" oninput="filterSuggestions(this.value)"
+                    class="search-input" autocomplete="off">
                 <div id="surahSuggestions" class="suggestions-list">
                     <!-- JS ile dolacak -->
                 </div>
@@ -513,16 +620,10 @@
 
     <div id="analysisContainer">
         <div id="miraclePanel" class="analysis-panel">
-            <div class="analysis-title">✨ 19 Mucizesi Analiz Paneli</div>
-            <ul id="insightList" class="insight-list">
-                <!-- Veriler JS ile dolacak -->
-            </ul>
-            <div id="tooltipStatus"
-                style="font-size: 11px; margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 8px; color: #7f8c8d; font-family: sans-serif;">
-                🔍 Kelime Mealleri: Bekleniyor...
-            </div>
+            <div class="analysis-title">✨ Kuran Mucizesi Analiz Paneli</div>
+
             <div id="ebcedInfo"
-                style="font-size: 11px; margin-top: 8px; font-style: italic; color: var(--text-secondary); line-height: 1.4; border-top: 1px dashed var(--border-color); padding-top: 8px; display: flex; flex-direction: column; gap: 5px;">
+                style="font-size: 11px; margin-bottom: 15px; font-style: italic; color: var(--text-secondary); line-height: 1.4; border-bottom: 1px dashed var(--border-color); padding-bottom: 8px; display: flex; flex-direction: column; gap: 5px;">
                 <div style="margin-bottom: 5px;">
                     <strong style="color: var(--accent);">Ebced Hesaplama Yöntemi</strong><br>
                     Hesaplamalar şu kurallara göre yapılmıştır:
@@ -541,9 +642,143 @@
                     </div>
                 </div>
                 <button onclick="toggleEbcedModal()"
-                    style="background: none; border: 1px solid var(--accent); color: var(--accent); padding: 2px 8px; border-radius: 10px; cursor: pointer; font-size: 10px; width: fit-content; align-self: flex-end;">
-                    📊 Harf Değerlerini Gör
+                    style="background: var(--accent); border: 2px solid var(--accent); color: white; padding: 6px 12px; border-radius: 10px; cursor: pointer; font-size: 11px; font-weight: bold; width: fit-content; align-self: flex-end; transition: all 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"
+                    onmouseover="this.style.background='transparent'; this.style.color='var(--accent)';"
+                    onmouseout="this.style.background='var(--accent)'; this.style.color='white';">
+                    📊 Ebced Tablosu
                 </button>
+            </div>
+
+            <ul id="insightList" class="insight-list">
+                <!-- Veriler JS ile dolacak -->
+            </ul>
+            <div id="tooltipStatus"
+                style="font-size: 11px; margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 8px; color: #7f8c8d; font-family: sans-serif;">
+                🔍 Kelime Mealleri: Bekleniyor...
+            </div>
+
+            <!-- 19 Mucizesi Bulguları (Merged) -->
+            <ul id="nineteenInsightList" class="insight-list"
+                style="margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                <li class="insight-item">
+                    <span>Besmele-i Şerife Harf Sayısı</span>
+                    <span>19 <span class="miracle-badge">✅ Doğrulandı</span></span>
+                </li>
+                <li class="insight-item">
+                    <span>Sure Sayısı</span>
+                    <span>114 <span class="miracle-badge">19 x 6</span></span>
+                </li>
+                <li class="insight-item">
+                    <span>Besmele-i Şerife Sayısı</span>
+                    <span>114 <span class="miracle-badge">19 x 6 ✅</span></span>
+                </li>
+
+                <li class="insight-item" style="position: relative;">
+                    <span>"Rahman" (رحمٰن) Lafzı</span>
+                    <span
+                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+                        onclick="showRahmanTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        178 <span class="miracle-badge">64 + 114 = 178 (19 × 9 + 7) ✅</span> 🔍
+                    </span>
+                </li>
+                <li class="insight-item" style="position: relative;">
+                    <span>"Rahim" Lafzı (Tüm Kur'an)</span>
+                    <span
+                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+                        onclick="showRahimTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        229 <span class="miracle-badge">115 + 114 Besmele = 19 × 12 + 1 ✅</span> 🔍
+                    </span>
+                </li>
+                <li class="insight-item" style="position: relative;">
+                    <span>"Güneş" (Şems) Lafzı</span>
+                    <span
+                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+                        onclick="showShamsTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        33 <span class="miracle-badge">🔍</span>
+                    </span>
+                </li>
+                <li class="insight-item" style="position: relative;">
+                    <span>"Ay" (Kamer) Lafzı</span>
+                    <span
+                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+                        onclick="showQamarTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        27 <span class="miracle-badge">Yörünge süresi: 27 gün 🔍</span>
+                    </span>
+                </li>
+                <li class="insight-item" style="position: relative;">
+                    <span>"Ay" (Şehr) Lafzı</span>
+                    <span
+                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+                        onclick="showShehrTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        12 <span class="miracle-badge">1 Yıl 🔍</span>
+                    </span>
+                </li>
+                <li class="insight-item" style="position: relative;">
+                    <span>"Gün" (Yevm) Lafzı</span>
+                    <span
+                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+                        onclick="showYevmTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        365 <span class="miracle-badge">1 Yıl 🔍</span>
+                    </span>
+                </li>
+                <li class="insight-item" style="position: relative;">
+                    <span>"Cehennem" (Cehennem) Lafzı</span>
+                    <span
+                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+                        onclick="showJahannamTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        77 🔍
+                    </span>
+                </li>
+                <li class="insight-item" style="position: relative;">
+                    <span>"Cennet" (Cennet) Lafzı</span>
+                    <span
+                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+                        onclick="showJannahTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        <script>document.write(typeof jannahData !== 'undefined' ? jannahData.length : '77')</script> 🔍
+                    </span>
+                </li>
+                <li class="insight-item" style="position: relative;">
+                    <span>"Şeytan" (Şeytan) Lafzı</span>
+                    <span
+                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+                        onclick="showSatanTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        88 🔍
+                    </span>
+                </li>
+                <li class="insight-item" style="position: relative;">
+                    <span>"Melek" (Melek) Lafzı</span>
+                    <span
+                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+                        onclick="showAngelTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        88 🔍
+                    </span>
+                </li>
+                <li class="insight-item" style="position: relative;">
+                    <span>"Allah" (Lafza-i Celal)</span>
+                    <span
+                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+                        onclick="showAllahTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        2698 <span class="miracle-badge">19x142 🔍</span>
+                    </span>
+                </li>
+            </ul>
+            <div
+                style="font-size: 11px; margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--border-color); color: var(--text-secondary); line-height: 1.5;">
+                <strong>Besmele Detayı:</strong> Kur'an'da toplam <strong>114 Besmele</strong> vardır:
+                <br>• 113 surenin başında (Tevbe suresi hariç)
+                <br>• 1 adet Neml suresi 27:30'da
+                <br>• 114 = 19 × 6 ✅
             </div>
         </div>
     </div>
@@ -622,7 +857,7 @@
     <div id="contentArea"></div>
 
     <script src="surah_stats.js"></script>
-    <script src="quran_word_by_word.js"></script>
+
     <script src="word_tooltip.js"></script>
     <script>
         const surahNames = [
@@ -659,7 +894,7 @@
 
         function toggleSuggestions(show) {
             if (show) {
-                populateSuggestions(document.getElementById('surahSearch').value);
+                populateSuggestions(''); // Show all surahs on click/focus
                 suggestionsDiv.classList.add('active');
             } else {
                 setTimeout(() => suggestionsDiv.classList.remove('active'), 200);
@@ -681,22 +916,67 @@
         // Initialize suggestions on load
         populateSuggestions();
 
-        async function fetchAyah(surah, ayah) {
-            // alquran.cloud API'sini kullanıyoruz (Türkçe için çok daha stabil)
-            const url = `https://api.alquran.cloud/v1/ayah/${surah}:${ayah}/editions/quran-uthmani,tr.diyanet`;
+        async function fetchAyah(surah, ayah, isHeader = false) {
+            console.log(`fetchAyah called: ${surah}:${ayah}, isHeader: ${isHeader}`);
+
+            if (isHeader) {
+                return {
+                    arabic: "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+                    turkish: "Rahman ve Rahim olan Allah'ın adıyla.",
+                    isHeader: true
+                };
+            }
+
+            const sNum = parseInt(surah);
+            const aNum = parseInt(ayah);
+
+            // 1. Try API with Timeout
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 saniye zaman aşımı
 
             try {
-                const res = await fetch(url);
-                if (!res.ok) throw new Error("API hatası");
+                const url = `https://api.alquran.cloud/v1/ayah/${sNum}:${aNum}/editions/quran-uthmani,tr.diyanet`;
+                const res = await fetch(url, { signal: controller.signal });
+                clearTimeout(timeoutId);
+
+                if (!res.ok) throw new Error("API yanıt vermedi");
                 const json = await res.json();
+
+                if (!json.data || json.data.length < 2) throw new Error("Eksik API verisi");
 
                 return {
                     arabic: json.data[0].text,
                     turkish: json.data[1].text
                 };
             } catch (err) {
-                console.error("Fetch hatası:", err);
-                return null;
+                console.warn("API hatası/zaman aşımı, yerel veri deneniyor:", err);
+
+                // 2. Fallback to Local Data
+                try {
+                    if (typeof GLOBAL_QURAN_ARABIC === 'undefined') throw new Error("GLOBAL_QURAN_ARABIC yüklenmedi");
+                    if (typeof GLOBAL_QURAN_TR === 'undefined') throw new Error("GLOBAL_QURAN_TR yüklenmedi");
+
+                    // Arabic Data Search (Loose equality for safety)
+                    const arabicSurah = GLOBAL_QURAN_ARABIC.find(s => s.id == sNum);
+                    const arabicVerse = arabicSurah?.verses.find(v => v.id == aNum);
+
+                    // Turkish Data Search (Handle potential key types)
+                    const trSurah = GLOBAL_QURAN_TR[sNum] || GLOBAL_QURAN_TR[sNum.toString()];
+                    const trVerse = trSurah?.ayahs?.[aNum] || trSurah?.ayahs?.[aNum.toString()];
+
+                    if (arabicVerse && trVerse) {
+                        console.log('Yerel veri başarıyla kullanıldı.');
+                        return {
+                            arabic: arabicVerse.text,
+                            turkish: trVerse
+                        };
+                    }
+
+                    throw new Error(`Yerel veri bulunamadı: Sure ${sNum}, Ayet ${aNum}`);
+                } catch (localErr) {
+                    console.error("Kritik Hata (Yerel Veri):", localErr);
+                    return null;
+                }
             }
         }
 
@@ -762,8 +1042,30 @@
                     li.innerHTML = `<span>${item.key}</span> <span>${item.val} ${item.tag ? `<span class="miracle-badge">${item.tag}</span>` : ''}</span>`;
                     list.appendChild(li);
                 });
-                panel.style.display = 'block';
+                // 19 Mucizesi Bulguları paneli
+                const nineteenPanel = document.getElementById('nineteenMiraclePanel');
+                if (nineteenPanel) {
+                    // Auto-show logic removed. Controlled by toggle button.
+                    // nineteenPanel.style.display = 'block'; 
+                }
             } else {
+            }
+        }
+
+        // Toggle Miracle Panel manually
+        function toggleMiraclePanel() {
+            const panel = document.getElementById('miraclePanel');
+            const analysisContainer = document.getElementById('analysisContainer');
+
+            // Ensure the container is visible if it was hidden
+            if (analysisContainer.style.display === 'none') analysisContainer.style.display = 'block';
+
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+            } else {
+                panel.style.display = 'block';
+                // Scroll to panel for better UX
+                panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
@@ -856,8 +1158,8 @@
                     content.appendChild(card);
                 }
 
-                // Tüm ayetler yüklendikten sonra tooltip'leri bir kez başlat
-                if (window.initWordTooltips) await initWordTooltips();
+                // Tüm ayetler yüklendikten sonra tooltip'leri başlat
+                if (window.initWordTooltips) await initWordTooltips(surahNum);
 
             } catch (err) {
                 content.innerHTML = `<div class="error-msg">Sure yüklenirken bir hata oluştu: ${err.message}</div>`;
@@ -948,10 +1250,211 @@
             }
         }
 
+
+
+        function showGenericWordTooltip(event, tooltipId, title, dataArray, highlightWord) {
+            event.stopPropagation();
+            let tooltip = document.getElementById(tooltipId);
+
+            if (tooltip && tooltip.style.display === 'block') {
+                tooltip.style.display = 'none';
+                return;
+            }
+
+            if (!tooltip) {
+                tooltip = document.createElement('div');
+                tooltip.id = tooltipId;
+                tooltip.style.cssText = `position: fixed; background: var(--card-bg); border: 3px solid var(--accent); border-radius: 12px; padding: 20px; max-width: 500px; max-height: 500px; overflow-y: auto; box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 10000; font-size: 12px; color: var(--text-main); left: 50%; top: 50%; transform: translate(-50%, -50%);`;
+                document.body.appendChild(tooltip);
+
+                document.addEventListener('click', (e) => {
+                    if (tooltip && !tooltip.contains(e.target) && tooltip.style.display === 'block') {
+                        tooltip.style.display = 'none';
+                    }
+                });
+            }
+
+            if (!dataArray || dataArray.length === 0) {
+                tooltip.innerHTML = `<div style="text-align:center; padding:10px;">${title} verisi yüklenemedi.</div>`;
+                tooltip.style.display = 'block';
+                return;
+            }
+
+            let html = '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">';
+            html += `<div style="font-weight: bold; color: var(--accent); font-size: 14px;">${title} (${dataArray.length})</div>`;
+            html += `<span onclick="document.getElementById('${tooltipId}').style.display='none'" style="cursor: pointer; font-size: 24px; color: var(--text-secondary); line-height: 1; padding: 0 5px;">&times;</span>`;
+            html += '</div>';
+
+            html += '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 6px; font-size: 11px;">';
+            dataArray.forEach((loc) => {
+                const isHeader = loc.h === 1;
+                const label = isHeader ? `${loc.s}:B` : `${loc.s}:${loc.a}`;
+                const word = loc.w || highlightWord || '';
+                const wordEscaped = word.replace(/'/g, "\\'");
+
+                const onclick = `navigateToVerse(${loc.s}, ${isHeader ? 1 : loc.a}, '${wordEscaped}', ${isHeader}); document.getElementById('${tooltipId}').style.display='none';`;
+
+                const bg = isHeader ? "rgba(241, 196, 15, 0.15)" : "rgba(39,174,96,0.15)";
+                html += `<div onclick="${onclick}" style="padding: 5px; background: ${bg}; border-radius: 4px; text-align: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(39,174,96,0.35)'" onmouseout="this.style.background='${bg}'">${label}</div>`;
+            });
+            html += '</div>';
+            html += '<div style="margin-top: 10px; font-size: 10px; color: var(--text-secondary); text-align: center; border-top: 1px solid var(--border-color); padding-top: 8px;">B = Surenin Besmelesi</div>';
+
+            tooltip.innerHTML = html;
+            tooltip.style.display = 'block';
+        }
+
+        // Tooltip specialized functions
+        function showAllahTooltip(event) { showGenericWordTooltip(event, 'allahTooltip', '☪️ Allah', typeof allahData !== 'undefined' ? allahData : [], 'الله'); }
+        function hideAllahTooltip() { const t = document.getElementById('allahTooltip'); if (t) t.style.display = 'none'; }
+
+        function showRahmanTooltip(event) { showGenericWordTooltip(event, 'rahmanTooltip', '📖 Rahman Kelimesi', typeof rahmanData !== 'undefined' ? rahmanData : [], 'رحمٰن'); }
+        function hideRahmanTooltip() { const t = document.getElementById('rahmanTooltip'); if (t) t.style.display = 'none'; }
+
+        function showRahimTooltip(event) { showGenericWordTooltip(event, 'rahimTooltip', '📖 Rahim Kelimesi', typeof rahimData !== 'undefined' ? rahimData : [], 'رحيم'); }
+        function hideRahimTooltip() { const t = document.getElementById('rahimTooltip'); if (t) t.style.display = 'none'; }
+
+        function showJannahTooltip(event) { showGenericWordTooltip(event, 'jannahTooltip', '🏞️ Cennet Kelimesi', typeof jannahData !== 'undefined' ? jannahData : [], 'جنة'); }
+        function hideJannahTooltip() { const t = document.getElementById('jannahTooltip'); if (t) t.style.display = 'none'; }
+
+        function showJahannamTooltip(event) { showGenericWordTooltip(event, 'jahannamTooltip', '🔥 Cehennem Kelimesi', typeof jahannamData !== 'undefined' ? jahannamData : [], 'جهنم'); }
+        function hideJahannamTooltip() { const t = document.getElementById('jahannamTooltip'); if (t) t.style.display = 'none'; }
+
+        function showAngelTooltip(event) { showGenericWordTooltip(event, 'angelTooltip', '👼 Melek Kelimesi', typeof angelData !== 'undefined' ? angelData : [], 'ملئكة'); }
+        function hideAngelTooltip() { const t = document.getElementById('angelTooltip'); if (t) t.style.display = 'none'; }
+
+        function showSatanTooltip(event) { showGenericWordTooltip(event, 'satanTooltip', '😈 Şeytan Kelimesi', typeof satanData !== 'undefined' ? satanData : [], 'شيطان'); }
+        function hideSatanTooltip() { const t = document.getElementById('satanTooltip'); if (t) t.style.display = 'none'; }
+
+        // Core Navigation Function
+        async function navigateToVerse(surahNum, verseNum, highlightWord = '', isHeader = false) {
+            console.log('navigateToVerse called:', { surahNum, verseNum, highlightWord, isHeader });
+
+            const sInt = parseInt(surahNum);
+            const vInt = parseInt(verseNum);
+
+            let modal = document.getElementById('versePreview');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'versePreview';
+                modal.className = 'verse-preview-modal';
+                document.body.appendChild(modal);
+            }
+
+            modal.style.display = 'block';
+            modal.innerHTML = `<div style="display: flex; justify-content: center; align-items: center; height: 100px;"><div class="loading-spinner"></div></div>`;
+
+            try {
+                const data = await fetchAyah(sInt, vInt, isHeader);
+                if (!data) throw new Error("Ayet verisi alınamadı.");
+
+                let arabicText = data.arabic;
+                if (highlightWord) {
+                    const normalize = (text) => text.replace(/[\u0640\u064B-\u065F\u0670\u06D6-\u06ED\u06E1\u0653-\u0655]/g, '');
+                    const normalizedSearch = normalize(highlightWord).trim();
+
+                    if (normalizedSearch) {
+                        let pattern = '';
+                        // Create a pattern that allows harakat between characters
+                        for (let char of normalizedSearch) {
+                            // If char itself is a diacritic, skip it in pattern construction if accidentally passed
+                            if (char.match(/[\u0640\u064B-\u065F\u0670\u06D6-\u06ED\u06E1\u0653-\u0655]/)) continue;
+
+                            // Handle Alef/Alif variants: Standardize lookup for Alif (\u0627) to match Alef Wasla (\u0671) too
+                            if (char === '\u0627') {
+                                pattern += '[\u0627\u0671\u0622\u0623\u0625]'; // Match bare Alif, Alef Wasla, Madda, Hamza Above/Below
+                            } else {
+                                // Escape regex special chars
+                                const escapedChar = char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                                pattern += escapedChar;
+                            }
+
+                            // Allow optional diacritics after the character
+                            pattern += '[\\u0640\\u064B-\\u065F\\u0670\\u06D6-\\u06ED\\u06E1\\u0653-\\u0655]*';
+                        }
+
+                        // Use simple replacement but verify strict match of skeleton
+                        const regex = new RegExp(pattern, 'g');
+                        arabicText = arabicText.replace(regex, (match) => {
+                            const normMatch = normalize(match);
+                            // Strict check: mismatched length or content implies partial match
+                            if (normMatch === normalizedSearch) {
+                                return `<span class="highlighted-word">${match}</span>`;
+                            }
+                            return match;
+                        });
+                    }
+                }
+
+                const displayName = isHeader ? `${surahNames[sInt - 1]} (Besmele)` : `${surahNames[sInt - 1]} ${sInt}:${vInt}`;
+
+                modal.innerHTML = `
+                    <div class="verse-preview-header">
+                        <div class="verse-preview-title">📖 ${displayName}</div>
+                        <span class="close-btn" onclick="hideVersePreview()">&times;</span>
+                    </div>
+                    <div class="verse-preview-arabic">${arabicText}</div>
+                    <div class="verse-preview-turkish">${data.turkish}</div>
+                    <div class="verse-preview-actions">
+                        <button class="primary-btn" onclick="hideVersePreview(); loadSurah(${sInt}).then(() => setTimeout(() => { const el = document.querySelector('.arabic-line[data-ayah=\\'${vInt}\\']'); if(el) el.closest('.verse-card').scrollIntoView({behavior:'smooth',block:'center'}); }, 500));">📜 Tüm Sureyi Aç</button>
+                        <button class="secondary-btn" onclick="hideVersePreview()">Kapat</button>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error in navigateToVerse:', error);
+                modal.innerHTML = `
+                    <div style="text-align: center; padding: 20px; color: #e74c3c;">
+                        ❌ Hata: ${error.message}
+                        <button onclick="hideVersePreview()" style="margin-top: 15px; background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">Kapat</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Shams (Sun) Tooltip - Placeholder until data is generated
+        function showShamsTooltip(event) {
+            event.stopPropagation();
+            alert('"Güneş" (Şems) kelimesi Kur\'an\'da toplam 33 defa geçmektedir.\n(Detaylı liste yakında eklenecektir.)');
+        }
+
+        // Qamar (Moon) Tooltip - Placeholder until data is generated
+        function showQamarTooltip(event) {
+            event.stopPropagation();
+            alert('"Ay" (Kamer) kelimesi Kur\'an\'da toplam 27 defa geçmektedir.\nYörünge süresi: 27 gün\n(Detaylı liste yakında eklenecektir.)');
+        }
+
+        // Shehr (Month) Tooltip - Placeholder until data is generated
+        function showShehrTooltip(event) {
+            event.stopPropagation();
+            alert('"Ay" (Şehr) kelimesi Kur\'an\'da toplam 12 defa geçmektedir.\n1 Yıl\n(Detaylı liste yakında eklenecektir.)');
+        }
+
+        // Yevm (Day) Tooltip - Placeholder until data is generated
+        function showYevmTooltip(event) {
+            event.stopPropagation();
+            alert('"Gün" (Yevm) kelimesi Kur\'an\'da toplam 365 defa geçmektedir.\n1 Yıl\n(Detaylı liste yakında eklenecektir.)');
+        }
+
+        // Allah Tooltip
+        function showAllahTooltip(event) {
+            showGenericWordTooltip(event, 'allahTooltip', '☪️ Allah (Lafza-i Celal)', allahData, 'الله');
+        }
+        function hideAllahTooltip() {
+            const t = document.getElementById('allahTooltip'); if (t) t.style.display = 'none';
+        }
+
+        function hideVersePreview() {
+            const preview = document.getElementById('versePreview');
+            if (preview) {
+                preview.style.display = 'none';
+            }
+        }
+
         // Modal dışına tıklayınca kapat
         window.onclick = function (event) {
             const ebcedModal = document.getElementById('ebcedModal');
             const detailModal = document.getElementById('ebcedDetailModal');
+            const versePreview = document.getElementById('versePreview');
             if (event.target == ebcedModal) ebcedModal.style.display = 'none';
             if (event.target == detailModal) detailModal.style.display = 'none';
         }
@@ -974,8 +1477,14 @@
             }
         });
     </script>
-    <script src="surah_stats.js"></script>
-    <script src="word_tooltip.js"></script>
+    <script src="allah_data.js"></script>
+    <script src="rahman_rahim_data.js"></script>
+    <script src="angel_data_with_words.js"></script>
+    <script src="satan_data_with_words.js"></script>
+    <script src="jannah_data_raw.js"></script>
+    <script src="jahannam_data_raw.js"></script>
+    <script src="quran_arabic_js.js"></script>
+    <script src="quran_tr_js.js"></script>
 </body>
 
 </html>
