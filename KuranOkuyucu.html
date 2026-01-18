@@ -1256,14 +1256,33 @@
 
 
 
+        // Aktif tooltip'i takip etmek için global değişken
+        let activeTooltipId = null;
+
+        function closeAllTooltips() {
+            // Tüm açık tooltip'leri kapat
+            const tooltips = document.querySelectorAll('[id$="Tooltip"]');
+            tooltips.forEach(t => {
+                if (t.style.display === 'block') {
+                    t.style.display = 'none';
+                }
+            });
+            activeTooltipId = null;
+        }
+
         function showGenericWordTooltip(event, tooltipId, title, dataArray, highlightWord) {
             event.stopPropagation();
-            let tooltip = document.getElementById(tooltipId);
 
+            // Eğer aynı tooltip zaten açıksa kapat
+            let tooltip = document.getElementById(tooltipId);
             if (tooltip && tooltip.style.display === 'block') {
                 tooltip.style.display = 'none';
+                activeTooltipId = null;
                 return;
             }
+
+            // Diğer tüm tooltip'leri kapat (üst üste binmeyi önle)
+            closeAllTooltips();
 
             if (!tooltip) {
                 tooltip = document.createElement('div');
@@ -1272,8 +1291,13 @@
                 document.body.appendChild(tooltip);
 
                 document.addEventListener('click', (e) => {
-                    if (tooltip && !tooltip.contains(e.target) && tooltip.style.display === 'block') {
+                    // Tooltip dışına tıklandığında ve verse preview açık değilse kapat
+                    const versePreview = document.getElementById('verse-preview');
+                    const isVersePreviewOpen = versePreview && versePreview.style.display === 'block';
+
+                    if (tooltip && !tooltip.contains(e.target) && tooltip.style.display === 'block' && !isVersePreviewOpen) {
                         tooltip.style.display = 'none';
+                        if (activeTooltipId === tooltipId) activeTooltipId = null;
                     }
                 });
             }
@@ -1281,12 +1305,13 @@
             if (!dataArray || dataArray.length === 0) {
                 tooltip.innerHTML = `<div style="text-align:center; padding:10px;">${title} verisi yüklenemedi.</div>`;
                 tooltip.style.display = 'block';
+                activeTooltipId = tooltipId;
                 return;
             }
 
             let html = '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">';
             html += `<div style="font-weight: bold; color: var(--accent); font-size: 14px;">${title} (${dataArray.length})</div>`;
-            html += `<span onclick="document.getElementById('${tooltipId}').style.display='none'" style="cursor: pointer; font-size: 24px; color: var(--text-secondary); line-height: 1; padding: 0 5px;">&times;</span>`;
+            html += `<span onclick="document.getElementById('${tooltipId}').style.display='none'; activeTooltipId=null;" style="cursor: pointer; font-size: 24px; color: var(--text-secondary); line-height: 1; padding: 0 5px;">&times;</span>`;
             html += '</div>';
 
             html += '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 6px; font-size: 11px;">';
@@ -1296,7 +1321,8 @@
                 const word = loc.w || highlightWord || '';
                 const wordEscaped = word.replace(/'/g, "\\'");
 
-                const onclick = `navigateToVerse(${loc.s}, ${isHeader ? 1 : loc.a}, '${wordEscaped}', ${isHeader}); document.getElementById('${tooltipId}').style.display='none';`;
+                // Ayet açılınca tooltip KAPATILMIYOR artık
+                const onclick = `navigateToVerse(${loc.s}, ${isHeader ? 1 : loc.a}, '${wordEscaped}', ${isHeader});`;
 
                 const bg = isHeader ? "rgba(241, 196, 15, 0.15)" : "rgba(39,174,96,0.15)";
                 html += `<div onclick="${onclick}" style="padding: 5px; background: ${bg}; border-radius: 4px; text-align: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(39,174,96,0.35)'" onmouseout="this.style.background='${bg}'">${label}</div>`;
@@ -1306,6 +1332,7 @@
 
             tooltip.innerHTML = html;
             tooltip.style.display = 'block';
+            activeTooltipId = tooltipId;
         }
 
         // Tooltip specialized functions
