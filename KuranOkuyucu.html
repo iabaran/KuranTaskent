@@ -649,6 +649,35 @@
                 </button>
             </div>
 
+            <!-- Mukatta Table Section -->
+            <div id="mukattaContainer"
+                style="margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
+                <button onclick="toggleMukattaTable()"
+                    style="background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 8px 12px; border-radius: 8px; cursor: pointer; width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center; font-weight: bold; transition: all 0.2s;">
+                    <span>📜 Harflerle Başlayan Sureler</span>
+                    <span id="mukattaToggleIcon">▼</span>
+                </button>
+                <div id="mukattaTableArea" style="display: none; margin-top: 10px; overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                        <thead>
+                            <tr style="background: rgba(39, 174, 96, 0.1); color: var(--primary);">
+                                <th style="padding: 8px; text-align: left; border: 1px solid var(--border-color);">Sure
+                                </th>
+                                <th style="padding: 8px; text-align: center; border: 1px solid var(--border-color);">No
+                                </th>
+                                <th style="padding: 8px; text-align: left; border: 1px solid var(--border-color);">
+                                    Başlangıç</th>
+                                <th style="padding: 8px; text-align: left; border: 1px solid var(--border-color);">1.
+                                    Ayet Harf Dağılımı</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mukattaTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <ul id="insightList" class="insight-list">
                 <!-- Veriler JS ile dolacak -->
             </ul>
@@ -1566,6 +1595,40 @@
     <script src="jahannam_data_raw.js"></script>
     <script src="shams_qamar_yevm_shehr_data.js"></script>
     <script src="afterlife_days_data.js"></script>
+    <script src="mukatta_data.js"></script>
+    <script>
+        function toggleMukattaTable() {
+            const area = document.getElementById('mukattaTableArea');
+            const icon = document.getElementById('mukattaToggleIcon');
+            const tbody = document.getElementById('mukattaTableBody');
+
+            if (area.style.display === 'none') {
+                area.style.display = 'block';
+                icon.textContent = '▲';
+
+                // Always try to populate when opening to ensure data is there
+                tbody.innerHTML = '';
+
+                if (typeof mukattaData !== 'undefined') {
+                    mukattaData.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td style="padding: 6px; border: 1px solid var(--border-color);">${row.name}</td>
+                            <td style="padding: 6px; text-align: center; border: 1px solid var(--border-color);">${row.id}</td>
+                            <td style="padding: 6px; border: 1px solid var(--border-color); font-weight: 500;">${row.start}</td>
+                            <td style="padding: 6px; border: 1px solid var(--border-color); font-family: monospace; font-size: 11px;">${row.counts}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="4" style="padding:10px; text-align:center;">Veri yüklenemedi (mukattaData tanimsiz).</td></tr>';
+                }
+            } else {
+                area.style.display = 'none';
+                icon.textContent = '▼';
+            }
+        }
+    </script>
     <script src="quran_arabic_js.js"></script>
     <script src="quran_tr_js.js"></script>
 </body>

@@ -1,0 +1,83 @@
+DEEP ANALYSIS: Looking for missed شمس occurrences
+============================================================
+
+  SHAMS 1: 2:258
+  SHAMS 2: 6:78
+  SHAMS 3: 6:96
+  SHAMS 4: 7:54
+  SHAMS 5: 10:5
+  SHAMS 6: 12:4
+  SHAMS 7: 13:2
+  SHAMS 8: 14:33
+  SHAMS 9: 16:12
+  SHAMS 10: 17:78
+  SHAMS 11: 18:17
+  SHAMS 12: 18:86
+  SHAMS 13: 18:90
+  SHAMS 14: 20:130
+  SHAMS 15: 21:33
+  SHAMS 16: 22:18
+  SHAMS 17: 25:45
+  SHAMS 18: 27:24
+  SHAMS 19: 29:61
+  SHAMS 20: 31:29
+  SHAMS 21: 35:13
+  SHAMS 22: 36:38
+  SHAMS 23: 36:40
+  SHAMS 24: 39:5
+  SHAMS 25: 41:37
+  SHAMS 26: 50:39
+  SHAMS 27: 55:5
+  SHAMS 28: 71:16
+  SHAMS 29: 75:9
+  SHAMS 30: 76:13
+  SHAMS 31: 81:1
+  SHAMS 32: 91:1
+
+Total شمس: 32
+
+
+============================================================
+DEEP ANALYSIS: Looking for missed قمر occurrences
+============================================================
+
+  QAMAR 1: 6:77
+  QAMAR 2: 6:96
+  QAMAR 3: 7:54
+  QAMAR 4: 10:5
+  QAMAR 5: 12:4
+  QAMAR 6: 13:2
+  QAMAR 7: 14:33
+  QAMAR 8: 16:12
+  QAMAR 9: 21:33
+  QAMAR 10: 22:18
+  QAMAR 11: 25:61
+  QAMAR 12: 29:61
+  QAMAR 13: 31:29
+  QAMAR 14: 35:13
+  QAMAR 15: 36:39
+  QAMAR 16: 36:40
+  QAMAR 17: 39:5
+  QAMAR 18: 41:37
+  QAMAR 19: 54:1
+  QAMAR 20: 55:5
+  QAMAR 21: 71:16
+  QAMAR 22: 74:32
+  QAMAR 23: 75:8
+  QAMAR 24: 75:9
+  QAMAR 25: 84:18
+  QAMAR 26: 91:2
+
+Total قمر: 26
+
+
+============================================================
+CONCLUSION
+============================================================
+شمس (Shams/Sun): 32 verses
+قمر (Qamar/Moon): 26 verses
+
+Note: The '33 and 27' counts might include:
+- Different counting methodologies
+- Counting individual word occurrences (some verses may have 2 mentions)
+- Different Quran text editions
