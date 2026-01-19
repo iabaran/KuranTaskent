@@ -1340,13 +1340,18 @@
                 document.body.appendChild(tooltip);
 
                 document.addEventListener('click', (e) => {
-                    // Tooltip dışına tıklandığında ve verse preview açık değilse kapat
-                    const versePreview = document.getElementById('verse-preview');
+                    // Tooltip dışına tıklandığında...
+                    // AMA: Verse preview modalı açıksa veya tıklanan yer modalın içindeyse KAPATMA
+                    const versePreview = document.getElementById('versePreview');
                     const isVersePreviewOpen = versePreview && versePreview.style.display === 'block';
+                    const isClickInsideModal = versePreview && versePreview.contains(e.target);
 
-                    if (tooltip && !tooltip.contains(e.target) && tooltip.style.display === 'block' && !isVersePreviewOpen) {
-                        tooltip.style.display = 'none';
-                        if (activeTooltipId === tooltipId) activeTooltipId = null;
+                    if (tooltip && !tooltip.contains(e.target) && tooltip.style.display === 'block') {
+                        // Eğer modal açıksa veya modalın içine tıklandıysa (örn: kapat butonu) kapatma
+                        if (!isVersePreviewOpen && !isClickInsideModal) {
+                            tooltip.style.display = 'none';
+                            if (activeTooltipId === tooltipId) activeTooltipId = null;
+                        }
                     }
                 });
             }

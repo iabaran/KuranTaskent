@@ -70,3 +70,5 @@ Thumbs.db
 !shams_qamar_yevm_shehr_data.js
 !afterlife_days_data.js
 !words/
+!words/*.js
+!words/*.json
