@@ -18,7 +18,7 @@ const mukattaData = [
     { name: "Lokmân", id: 31, start: "Elif Lam Mim", counts: "ا: 1, ل: 1, م: 1", basmala: "ا: 3, ل: 4, م: 3", surahFreq: "ا: 241, ل: 293, م: 170", grandTotal: "ا: 244, ل: 297, م: 173 (714)" },
     { name: "Secde", id: 32, start: "Elif Lam Mim", counts: "ا: 1, ل: 1, م: 1", basmala: "ا: 3, ل: 4, م: 3", surahFreq: "ا: 177, ل: 151, م: 155", grandTotal: "ا: 180, ل: 155, م: 158 (493)" },
     { name: "Yâsîn", id: 36, start: "Yâ Sîn", counts: "ي: 1, س: 1", basmala: "ي: 1, س: 1", surahFreq: "ي: 212, س: 47", grandTotal: "ي: 213, س: 48 (261)" },
-    { name: "Sâd", id: 38, start: "Sâd", counts: "ص: 1", basmala: "ص: 0", surahFreq: "ص: 29", grandTotal: "ص: 29 (29)" },
+    { name: "Sâd", id: 38, start: "ص", counts: "ص: 1", basmala: "ص: 0", surahFreq: "ص: 29", grandTotal: "ص: 29 (29)" },
     { name: "Mü'min", id: 40, start: "Hâ Mîm", counts: "ح: 1, م: 1", basmala: "ح: 2, م: 3", surahFreq: "ح: 62, م: 377", grandTotal: "ح: 64, م: 380 (444)" },
     { name: "Fussilet", id: 41, start: "Hâ Mîm", counts: "ح: 1, م: 1", basmala: "ح: 2, م: 3", surahFreq: "ح: 46, م: 273", grandTotal: "ح: 48, م: 276 (324)" },
     { name: "Şûrâ", id: 42, start: "Hâ Mîm", counts: "ح: 1, م: 1", basmala: "ح: 2, م: 3", surahFreq: "ح: 51, م: 297", grandTotal: "ح: 53, م: 300 (353)" },
