@@ -669,6 +669,8 @@
                                     Başlangıç</th>
                                 <th style="padding: 8px; text-align: left; border: 1px solid var(--border-color);">1.
                                     Ayet Harf Dağılımı</th>
+                                <th style="padding: 8px; text-align: left; border: 1px solid var(--border-color);">
+                                    Surede Toplam Geçiş</th>
                             </tr>
                         </thead>
                         <tbody id="mukattaTableBody">
@@ -1617,11 +1619,12 @@
                             <td style="padding: 6px; text-align: center; border: 1px solid var(--border-color);">${row.id}</td>
                             <td style="padding: 6px; border: 1px solid var(--border-color); font-weight: 500;">${row.start}</td>
                             <td style="padding: 6px; border: 1px solid var(--border-color); font-family: monospace; font-size: 11px;">${row.counts}</td>
+                            <td style="padding: 6px; border: 1px solid var(--border-color); font-family: monospace; font-size: 11px; color: var(--accent); font-weight: 600;">${row.surahFreq}</td>
                         `;
                         tbody.appendChild(tr);
                     });
                 } else {
-                    tbody.innerHTML = '<tr><td colspan="4" style="padding:10px; text-align:center;">Veri yüklenemedi (mukattaData tanimsiz).</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="5" style="padding:10px; text-align:center;">Veri yüklenemedi (mukattaData tanimsiz).</td></tr>';
                 }
             } else {
                 area.style.display = 'none';
