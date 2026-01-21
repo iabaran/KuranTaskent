@@ -265,6 +265,15 @@
             background-color: rgba(39, 174, 96, 0.1);
         }
 
+        /* Mukatta Letter Highlighting */
+        .mukatta-highlight {
+            background-color: rgba(241, 196, 15, 0.25);
+            border-bottom: 2px solid #f1c40f;
+            font-weight: 600;
+            padding: 2px;
+            border-radius: 3px;
+        }
+
         /* Kelime Sayacı Sayıları */
         .word-index {
             display: none;
@@ -1559,6 +1568,66 @@
             const t = document.getElementById('allahTooltip'); if (t) t.style.display = 'none';
         }
 
+        // Load Surah avec la mise en évidence des lettres Mukatta
+        async function loadSurahWithMukattaHighlight(surahNum, mukattaLetters) {
+            // Scroll to top and load the surah
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Load the surah first
+            await loadSurah(surahNum);
+
+            // Wait a bit for the surah to be fully loaded
+            setTimeout(() => {
+                if (!mukattaLetters || mukattaLetters === '') return;
+
+                // Parse the letters
+                const letters = mukattaLetters.split(',').filter(l => l.trim());
+                if (letters.length === 0) return;
+
+                // Function to normalize Arabic text (remove diacritics but keep consonants)
+                function normalizeArabic(text) {
+                    const diacritics = /[\u064B-\u065F\u0670\u06D6-\u06ED\u0640\u0653-\u0655]/g;
+                    return text.replace(diacritics, '');
+                }
+
+                // Get all Arabic lines
+                const arabicLines = document.querySelectorAll('.arabic-line');
+
+                arabicLines.forEach(line => {
+                    let html = line.innerHTML;
+
+                    // For each Mukatta letter, highlight it
+                    letters.forEach(letter => {
+                        const normalizedLetter = normalizeArabic(letter.trim());
+                        if (!normalizedLetter) return;
+
+                        // Create a regex that matches the letter with optional diacritics
+                        // Handle Alef variants
+                        let pattern;
+                        if (normalizedLetter === 'ا') {
+                            pattern = '[اٱأإآ][\\u064B-\\u065F\\u0670\\u06D6-\\u06ED\\u0640\\u0653-\\u0655]*';
+                        } else {
+                            const escapedLetter = normalizedLetter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                            pattern = escapedLetter + '[\\u064B-\\u065F\\u0670\\u06D6-\\u06ED\\u0640\\u0653-\\u0655]*';
+                        }
+
+                        const regex = new RegExp(pattern, 'g');
+                        html = html.replace(regex, (match) => {
+                            // Don't highlight if already highlighted or inside a tag
+                            if (html.indexOf(`<span class="mukatta-highlight">${match}</span>`) !== -1) {
+                                return match;
+                            }
+                            return `<span class="mukatta-highlight">${match}</span>`;
+                        });
+                    });
+
+                    line.innerHTML = html;
+                });
+
+                console.log(`✨ Mukatta harfleri vurgulandı: ${letters.join(', ')}`);
+            }, 1000); // Wait 1 second for surah to load
+        }
+
         function hideVersePreview() {
             const preview = document.getElementById('versePreview');
             if (preview) {
@@ -1618,8 +1687,17 @@
                 if (typeof mukattaData !== 'undefined') {
                     mukattaData.forEach(row => {
                         const tr = document.createElement('tr');
+                        // Extract just the Arabic letters from the start field for highlighting
+                        const mukattaLetters = row.start.split(' ').filter(word => /[\u0600-\u06FF]/.test(word)).join(',');
                         tr.innerHTML = `
-                            <td style="padding: 6px; border: 1px solid var(--border-color);">${row.name}</td>
+                            <td style="padding: 6px; border: 1px solid var(--border-color);">
+                                <span onclick="loadSurahWithMukattaHighlight(${row.id}, '${mukattaLetters}')" 
+                                      style="cursor: pointer; color: var(--accent); text-decoration: underline; font-weight: 600;"
+                                      onmouseover="this.style.opacity='0.7'" 
+                                      onmouseout="this.style.opacity='1'">
+                                    ${row.name}
+                                </span>
+                            </td>
                             <td style="padding: 6px; text-align: center; border: 1px solid var(--border-color);">${row.id}</td>
                             <td style="padding: 6px; border: 1px solid var(--border-color); font-weight: 500;">${row.start}</td>
                             <td style="padding: 6px; border: 1px solid var(--border-color); font-family: monospace; font-size: 10px;">${row.counts}</td>
