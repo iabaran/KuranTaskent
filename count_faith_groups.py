@@ -23,18 +23,41 @@ def normalize_arabic(text):
     
     return text
 
-# Hedef Kelimeler ve Regex Desenleri (Harekesiz ve Normalize edilmiş metin için)
-def create_regex(core_pattern):
+# Hedef Kelimeler ve Regex Desenleri (Kök tabanlı esnek arama)
+def create_sensitive_regex(pattern):
+    # Prefix: Wa, Fa, Lam, Ba, Kaf, Al
     prefix = r"(?:[وفلبك]?(?:ال)?)"
-    suffix = r"(?:ون|ين|ات|ان|ة)?" 
-    return re.compile(r"\b" + prefix + core_pattern + suffix + r"\b")
+    # Suffix: wn, yn, at, an, a (tekil dişil), hum, him vb
+    suffix = r"(?:ون|ين|ات|ان|ة|هم|كم)?" 
+    return re.compile(r"\b" + prefix + pattern + suffix + r"\b")
 
 patterns = {
-    "Munafik": create_regex(r"من[ا]?فق"), # Alef opsiyonel (منفق veya منافق)
-    "Mushrik": create_regex(r"مشرك"),
-    "Muslim": create_regex(r"مسلم"),
-    "Mumin": create_regex(r"م[وؤ]?من"), # Waw/Hamza opsiyonel
-    "Nasara": create_regex(r"نص[ا]?ر[ىي]"), # Alef opsiyonel, son harf Y/AlefMaksura
+    # Munafik: Mim-Nun-(Alef?)-Fa-Qaf
+    "Munafik": create_sensitive_regex(r"من[ا]?فق"),
+    
+    # Mushrik: Mim-Shin-Ra-Kaf
+    "Mushrik": create_sensitive_regex(r"مشرك"),
+    
+    # Muslim: Mim-Sin-Lam-Mim
+    "Muslim": create_sensitive_regex(r"مسلم"),
+    
+    # Mumin: Mim-(Waw/Hamza/Alef?)-Mim-Nun
+    # 'Mu'min' bazen 'مؤمن', bazen 'مومن' (temizlenince)
+    "Mumin": create_sensitive_regex(r"م[وؤأا]?من"),
+    
+    # Nasara: Nun-Sad-(Alef?)-Ra-(Ya/Alef/Maksura?)-(Alef?)
+    # Nasara, Nasra, Nasraniyy
+    # Hıristiyan: النصارى, نصرانيا
+    "Nasara": create_sensitive_regex(r"نص[ا]?ر(?:[ايىي]|$)[ا]?"),
+    
+    # Yahud: Ya-Ha-(Waw?)-Dal- ... 
+    # Yahud, Hud, Haadu (Alladhina Hadu için ayrı bir mantık lazım ama kelime olarak Hadu da sayılabilir mi?)
+    # Yahudi: اليهود
+    # Alladhina Hadu: الذين هادوا (Bu iki kelime, regex ile zorlayabiliriz veya metin içinde ararız)
+    # Şimdilik "Yahud" (يهود) ve "Hud" (هود - ama Hud peygamber ile karışabilir!)
+    # Hud Peygamber ile karışmaması için dikkatli olunmalı. Hud (AS) ismi 'هود' olarak geçer.
+    # Yahudiler için 'هدنا', 'هادوا', 'يهود' kullanılır.
+    # En güvenlisi 'al-Yahud' (اليهود) ve 'Hadu' (هادوا).
     "Yahud": re.compile(r"\b(?:[وفلبك]?(?:ال)?)?(?:يهود|هادوا)\b")
 }
 
