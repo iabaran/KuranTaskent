@@ -32,7 +32,22 @@ patterns = {
     "Zeker": create_sensitive_regex(r"ذكر"),
     
     # Unsa (Dişi - Cinsiyet)
-    "Unsa": create_sensitive_regex(r"انث[ىي]")
+    "Unsa": create_sensitive_regex(r"انث[ىي]"),
+
+    # İnsan (Insan)
+    "Insan": create_sensitive_regex(r"انس[ا]?ن"),
+
+    # İnsanlar (Nas): Nun-Alef-Sin
+    # 'Nas' kelimesi 'Nesiye' (Unuttu) ile karışabilir mi?
+    # 'Nas' -> 'ناس'. 'Nesiye' -> 'نسي'. Karışmaz.
+    "Nas": create_sensitive_regex(r"ناس"),
+
+    # İns (Cin zıttı İnsan topluluğu): Alef-Nun-Sin -> 'ins'
+    # 'Ensa' (Unutturdu) -> 'انسى'. Karışabilir.
+    # 'Ins' kelimesi genelde 'el-ins' veya 'ins'.
+    # Regex strict olmalı. Suffix esnekliği 'ensa'yı yakalayabilir.
+    # Suffix'i manüel kısıtlayalım bu kelime için.
+    "Ins": re.compile(r"\b(?:[وفلبك]?(?:ال)?)?انس\b") 
 }
 
 results = {key: {"count": 0, "locations": [], "words": []} for key in patterns} # Kelime listesi de tutalım
