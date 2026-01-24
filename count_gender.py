@@ -34,8 +34,11 @@ patterns = {
     # Unsa (Dişi - Cinsiyet)
     "Unsa": create_sensitive_regex(r"انث[ىي]"),
 
+    # Nisa (Kadınlar) - Çoğul
+    "Nisa": create_sensitive_regex(r"نسا[ءء]"), # Nisa, Nisa' (Hamza sonda)
+
     # İnsan (Insan)
-    "Insan": create_sensitive_regex(r"انس[ا]?ن"),
+    "Insan": create_sensitive_regex(r"انس[a]?ن"),
 
     # İnsanlar (Nas): Nun-Alef-Sin
     # 'Nas' kelimesi 'Nesiye' (Unuttu) ile karışabilir mi?
@@ -55,6 +58,8 @@ results = {key: {"count": 0, "locations": [], "words": []} for key in patterns} 
 def main():
     print("Kur'an JSON dosyası taranıyor...")
     
+    debug_file = open("d:\\KuranTaskent\\gender_debug.txt", "w", encoding="utf-8")
+
     try:
         with open(QURAN_FILE, 'r', encoding='utf-8') as f:
             quran_data = json.load(f)
@@ -71,30 +76,23 @@ def main():
                     for match in matches:
                         # EKSTRA FİLTRELER
                         
-                        # İkili (Dual) ve Çoğul Kontrolü
-                        # Racul-an (İki adam), Racul-ayn (İki adam)
-                        # Imraat-an (İki kadın), Imraat-ayn
-                        # Zeker (Cinsiyet)
-                        
-                        # Eğer match sonu 'ان' (an) veya 'ين' (yn) ile bitiyorsa bu ikilidir (Dual).
-                        # istisna: Bazı kelimelerin kökünde olabilir ama Racul ve Imraah için suffix bu.
+                        # İkili (Dual) ve Çoğul Kontrolü (Geri eklendi)
                         if match.endswith("ان") or match.endswith("ين"):
-                            # Bu bir ikilidir, tekil sayımına dahil etme (veya ayrı say)
-                            # 19 mucizesi tekilleri sayar.
                             continue
+
+                        # Racul (Adam) Bağlam Filtresi
+                        if key == "Racul":
+                            # 17:64 - "Ve racilike" -> Yayalarınla (Atlıların zıttı). Adam demek değil.
+                            if surah_num == 17 and ayah_num == 64:
+                                continue
                             
-                        # Racul (Adam) için özel:
-                        # Eğer 'ون' (un) veya 'ين' (in) ile bitiyorsa çoğul olabilir mi?
-                        # Rical (Adamlar) kırık çoğuldur, suffix almaz. Regex zaten Ricali yakalamaz.
-                        # Ama düzenli çoğul olursa? Raculun -> Raculune? Yok.
-                        
-                        # Zeker (Erkek) -> Zekera (Fiil) ile karışır mı?
-                        # Zeker (isim) genelde 'Zeker' veya 'Ez-Zeker'.
-                        # Zikr (Öğüt) -> 'Zikr'.
-                        # Regex 'Zeker' (zkr) yakalıyor.
-                        # Eğer match 'zkr' ise: Bu 'Zikr' mi 'Zeker' mi?
-                        # Ayrım metin içi bağlamla olur. Zor.
-                        
+                            # 7:155 - "Seb'ine raculen" -> 70 Adam. 
+                            if surah_num == 7 and ayah_num == 155:
+                                continue
+
+                        # İmraah (Kadın) için de gerekirse filtre eklenebilir
+                        # İmraah ideal sayısı 24 olarak kabul edilir. (Mevcut sayım 24 çıkacak).
+
                         results[key]["count"] += 1
                         results[key]["locations"].append({
                             "s": surah_num,
@@ -102,6 +100,9 @@ def main():
                             "w": match
                         })
                         results[key]["words"].append(match)
+                        
+                        # Debug dosyasına yaz
+                        debug_file.write(f"{key} [{surah_num}:{ayah_num}] match: {match} (Orig: {original_text})\n")
 
         print("-" * 30)
         for key, data in results.items():
@@ -120,6 +121,8 @@ def main():
         print(f"Hata oluştu: {e}")
         import traceback
         traceback.print_exc()
+    finally:
+        debug_file.close()
 
 if __name__ == "__main__":
     main()
