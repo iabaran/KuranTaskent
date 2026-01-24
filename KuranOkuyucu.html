@@ -1082,6 +1082,75 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- KART 7: İNANÇ GRUPLARI -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <i class="fas fa-users"></i> 👥 İnanç Grupları
+                    </div>
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <span class="insight-label">"Mümin" (مؤمن)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #27ae60;"
+                                    onclick="showGenericWordTooltip(event, 'muminTooltip', 'Mümin', typeof faithGroupsData !== 'undefined' ? faithGroupsData.Mumin.locations : [], 'مؤمن')">
+                                    <script>document.write(typeof faithGroupsData !== 'undefined' ? faithGroupsData.Mumin.count : '...')</script>
+                                    🔍
+                                </span>
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <span class="insight-label">"Müslüman" (مسلم)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #2ecc71;"
+                                    onclick="showGenericWordTooltip(event, 'muslimTooltip', 'Müslüman', typeof faithGroupsData !== 'undefined' ? faithGroupsData.Muslim.locations : [], 'مسلم')">
+                                    <script>document.write(typeof faithGroupsData !== 'undefined' ? faithGroupsData.Muslim.count : '...')</script>
+                                    🔍
+                                </span>
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <span class="insight-label">"Müşrik" (مشرك)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #e67e22;"
+                                    onclick="showGenericWordTooltip(event, 'mushrikTooltip', 'Müşrik', typeof faithGroupsData !== 'undefined' ? faithGroupsData.Mushrik.locations : [], 'مشرك')">
+                                    <script>document.write(typeof faithGroupsData !== 'undefined' ? faithGroupsData.Mushrik.count : '...')</script>
+                                    🔍
+                                </span>
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <span class="insight-label">"Münafık" (منافق)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #e74c3c;"
+                                    onclick="showGenericWordTooltip(event, 'munafikTooltip', 'Münafık', typeof faithGroupsData !== 'undefined' ? faithGroupsData.Munafik.locations : [], 'منافق')">
+                                    <script>document.write(typeof faithGroupsData !== 'undefined' ? faithGroupsData.Munafik.count : '...')</script>
+                                    🔍
+                                </span>
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <span class="insight-label">"Yahudi" (يهود)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #f1c40f; color:#000;"
+                                    onclick="showGenericWordTooltip(event, 'yahudTooltip', 'Yahudi', typeof faithGroupsData !== 'undefined' ? faithGroupsData.Yahud.locations : [], 'يهود')">
+                                    <script>document.write(typeof faithGroupsData !== 'undefined' ? faithGroupsData.Yahud.count : '...')</script>
+                                    🔍
+                                </span>
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <span class="insight-label">"Hıristiyan" (نصارى)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #9b59b6;"
+                                    onclick="showGenericWordTooltip(event, 'nasaraTooltip', 'Hıristiyan', typeof faithGroupsData !== 'undefined' ? faithGroupsData.Nasara.locations : [], 'نصارى')">
+                                    <script>document.write(typeof faithGroupsData !== 'undefined' ? faithGroupsData.Nasara.count : '...')</script>
+                                    🔍
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div
                 style="font-size: 11px; margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--border-color); color: var(--text-secondary); line-height: 1.5;">
@@ -1166,8 +1235,8 @@
     <div id="loadingSpinner"></div>
     <div id="contentArea"></div>
 
-    <script src="surah_stats.js"></script>
-
+    <script src="zil_data.js"></script>
+    <script src="faith_groups_data.js"></script>
     <script src="word_tooltip.js"></script>
     <script>
         const surahNames = [
