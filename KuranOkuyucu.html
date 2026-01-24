@@ -7,6 +7,7 @@
     <title>Kuran Okuyucu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="faith_groups_data.js"></script>
+    <script src="gender_data.js"></script>
     <style>
         :root {
             --bg-color: #f4f7f6;
@@ -1146,6 +1147,52 @@
                                 <span class="insight-count-badge" style="background: #9b59b6;"
                                     onclick="showGenericWordTooltip(event, 'nasaraTooltip', 'Hıristiyan', typeof faithGroupsData !== 'undefined' ? faithGroupsData.Nasara.locations : [], 'نصارى')">
                                     <script>document.write(typeof faithGroupsData !== 'undefined' ? faithGroupsData.Nasara.count : '...')</script>
+                                    🔍
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- KART 8: İNSAN VE CİNSİYET -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <i class="fas fa-restroom"></i> 👫 İnsan ve Cinsiyet
+                    </div>
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <span class="insight-label">"Adam" (رجل)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #3498db;"
+                                    onclick="showGenericWordTooltip(event, 'raculTooltip', 'Adam (Racül)', typeof genderData !== 'undefined' ? genderData.Racul.locations : [], 'رجل')">
+                                    <script>document.write(typeof genderData !== 'undefined' ? genderData.Racul.count : '...')</script>
+                                    🔍
+                                </span>
+                                <span style="margin: 0 8px; color: var(--text-secondary);">=</span>
+                                <span style="margin-right: 8px; font-weight: 500;">"Kadın"</span>
+                                <span class="insight-count-badge" style="background: #e91e63;"
+                                    onclick="showGenericWordTooltip(event, 'imraahTooltip', 'Kadın (İmra\'ah)', typeof genderData !== 'undefined' ? genderData.Imraah.locations : [], 'امرأة')">
+                                    <script>document.write(typeof genderData !== 'undefined' ? genderData.Imraah.count : '...')</script>
+                                    🔍
+                                </span>
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <span class="insight-label">"Erkek" (ذكر)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #3498db;"
+                                    onclick="showGenericWordTooltip(event, 'zekerTooltip', 'Erkek (Zeker)', typeof genderData !== 'undefined' ? genderData.Zeker.locations : [], 'ذكر')">
+                                    <script>document.write(typeof genderData !== 'undefined' ? genderData.Zeker.count : '...')</script>
+                                    🔍
+                                </span>
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <span class="insight-label">"Dişi" (أنثى)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #e91e63;"
+                                    onclick="showGenericWordTooltip(event, 'unsaTooltip', 'Dişi (Ünşa)', typeof genderData !== 'undefined' ? genderData.Unsa.locations : [], 'أنثى')">
+                                    <script>document.write(typeof genderData !== 'undefined' ? genderData.Unsa.count : '...')</script>
                                     🔍
                                 </span>
                             </div>
