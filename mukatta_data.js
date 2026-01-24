@@ -1,7 +1,7 @@
 const mukattaData = [
     { name: "Bakara", id: 2, start: "ا,ل,م", counts: "ا: 1, ل: 1, م: 1", basmala: "ا: 3, ل: 4, م: 3", surahFreq: "ا: 3161, ل: 3198, م: 2192", grandTotal: "ا: 3164, ل: 3202, م: 2195 (8561)" },
     { name: "Âl-i İmrân", id: 3, start: "ا,ل,م", counts: "ا: 1, ل: 1, م: 1", basmala: "ا: 3, ل: 4, م: 3", surahFreq: "ا: 1759, ل: 1888, م: 1246", grandTotal: "ا: 1762, ل: 1892, م: 1249 (4903)" },
-    { name: "A'râf", id: 7, start: "ا,ل,م,ص", counts: "ا: 1, ل: 1, م: 1, ص: 1", basmala: "ا: 3, ل: 4, م: 3, ص: 0", surahFreq: "ا: 1727, ل: 1526, م: 1161, ص: 98", grandTotal: "ا: 1730, ل: 1530, م: 1164, ص: 98 (4522)" },
+    { name: "A'râf", id: 7, start: "ا,ل,م,ص", counts: "ا: 1, ل: 1, م: 1, ص: 1", basmala: "ا: 3, ل: 4, م: 3, ص: 0", surahFreq: "ا: 1727, ل: 1526, م: 1161, ص: 98", grandTotal: "ا: 1730, ل: 1530, م: 1164, ص: 98 (4522 = 19×238) ✨" },
     { name: "Yûnus", id: 10, start: "ا,ل,ر", counts: "ا: 2, ل: 4, ر: 1", basmala: "ا: 3, ل: 4, ر: 2", surahFreq: "ا: 901, ل: 909, ر: 255", grandTotal: "ا: 904, ل: 913, ر: 257 (2074)" },
     { name: "Hûd", id: 11, start: "ا,ل,ر", counts: "ا: 2, ل: 3, ر: 2", basmala: "ا: 3, ل: 4, ر: 2", surahFreq: "ا: 868, ل: 791, ر: 323", grandTotal: "ا: 871, ل: 795, ر: 325 (1991)" },
     { name: "Yûsuf", id: 12, start: "ا,ل,ر", counts: "ا: 4, ل: 4, ر: 1", basmala: "ا: 3, ل: 4, ر: 2", surahFreq: "ا: 818, ل: 808, ر: 255", grandTotal: "ا: 821, ل: 812, ر: 257 (1890)" },
@@ -21,7 +21,7 @@ const mukattaData = [
     { name: "Sâd", id: 38, start: "ص", counts: "ص: 1", basmala: "ص: 0", surahFreq: "ص: 29", grandTotal: "ص: 29 (29)" },
     { name: "Mü'min", id: 40, start: "ح,م", counts: "ح: 1, م: 1", basmala: "ح: 2, م: 3", surahFreq: "ح: 62, م: 377", grandTotal: "ح: 64, م: 380 (444)" },
     { name: "Fussilet", id: 41, start: "ح,م", counts: "ح: 1, م: 1", basmala: "ح: 2, م: 3", surahFreq: "ح: 46, م: 273", grandTotal: "ح: 48, م: 276 (324)" },
-    { name: "Şûrâ", id: 42, start: "ح,م", counts: "ح: 1, م: 1", basmala: "ح: 2, م: 3", surahFreq: "ح: 51, م: 297", grandTotal: "ح: 53, م: 300 (353)" },
+    { name: "Şûrâ", id: 42, start: "ح,م,ع,س,ق", counts: "ح: 1, م: 1, ع: 1, س: 1, ق: 1", basmala: "ح: 2, م: 3, ع: 0, س: 1, ق: 0", surahFreq: "ح: 51, م: 297, ع: 98, س: 53, ق: 57", grandTotal: "ح: 53, م: 300, ع: 98, س: 54, ق: 57 (562)" },
     { name: "Zuhruf", id: 43, start: "ح,م", counts: "ح: 1, م: 1", basmala: "ح: 2, م: 3", surahFreq: "ح: 42, م: 321", grandTotal: "ح: 44, م: 324 (368)" },
     { name: "Duhân", id: 44, start: "ح,م", counts: "ح: 1, م: 1", basmala: "ح: 2, م: 3", surahFreq: "ح: 14, م: 147", grandTotal: "ح: 16, م: 150 (166)" },
     { name: "Câsiye", id: 45, start: "ح,م", counts: "ح: 1, م: 1", basmala: "ح: 2, م: 3", surahFreq: "ح: 29, م: 197", grandTotal: "ح: 31, م: 200 (231)" },

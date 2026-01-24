@@ -1,0 +1,1919 @@
+
+--- Page 120 ---
+120
+faktörlerine bir göz atınız. Çarpım faktöründen amacımız, bir sayının 19'un kaç katı olduğunu
+bildiren sayıdır. Örneğin birinci gruptaki harflerin toplamı olan 1121 sayısı 19 x 59 dur. Buradaki
+çarpım faktörü 59'dur. İkinci gruptaki çarpım faktörü 54, üçüncüsünde 55, ve dördüncüsünde ise
+58'dir.
+Yukarıda tüm yedi suredeki H ve M harflerinin sayıları üzerinde uyguladığımız matematiksel işlemi
+bu kez alt gruplar üzerinde tekrarlayalım. Sonuç: Olağanüstü!
+Formül:
+9(R3) = (R1 + R4) + 2(R2 + R5)
+R = rakam
+Örn:
+9(16) = (26 + 24) + 2(32 + 15)
+SURE
+H
+M
+Basamakların Toplamı
+Toplam
+40
+64
+380
+6
++
+4
++
+3
++
+8
++
+0
+21
+41
+48
+276
+4
++
+8
++
+2
++
+7
++
+6
+27
+42
+53
+300
+5
++
+3
++
+3
++
+0
++
+0
+11
+Toplam
+1121 (19x59)
+15
++
+15
++
+8
++
+15
++
+6
+59
+Sure
+H
+M
+Basamakların Toplamı
+Toplam
+43
+44
+324
+4
++
+4
++
+3
++
+2
++
+4
+17
+44
+16
+150
+1
++
+6
++
+1
++
+5
++
+0
+13
+45
+31
+200
+3
++
+1
++
+2
++
+0
++
+0
+6
+46
+36
+225
+3
++
+6
++
+2
++
+2
++
+5
+18
+Toplam
+1026 (19x54)
+11
++
+17
++
+8
++
+9
++
+9
+54
+
+--- Page 121 ---
+121
+Sure
+H
+M
+Basamakların Toplamı
+Toplam
+41
+48
+276
+4
++
+8
++
+2
++
+7
++
+6
+27
+42
+53
+300
+5
++
+3
++
+3
++
+0
++
+0
+11
+43
+44
+324
+4
++
+4
++
+3
++
+2
++
+4
+17
+Toplam
+1045 (19x55)
+13
++
+15
++
+8
++
+9
++
+10
+55
+Sure
+H
+M
+Basamakların Toplamı
+Toplam
+40
+64
+380
+6
++
+4
++
+3
++
+8
++
+0
+21
+44
+16
+150
+1
++
+6
++
+1
++
+5
++
+0
+13
+45
+31
+200
+3
++
+1
++
+2
++
+0
++
+0
+6
+46
+36
+225
+3
++
+6
++
+2
++
+2
++
+5
+18
+Toplam
+1102 (19x58)
+13
++
+17
++
+8
++
+15
++
+5
+58
+
+--- Page 122 ---
+122
+K.H.Y.'A.S. ﺺﻌﯿﮭﻛ(Kef, He, Ye, Ayn, Sad)
+Sad harfli üç sureden biri olan 19'ncu sure (Meryem Suresi) aynı zamanda beş harfli eşsiz bir harf
+kombinasyonuna sahiptir. Bu beş harfin o suredeki toplam tekrarlama sayıları 19'un tam katıdır.
+K (Kef)
+137
+H (He)
+175
+Y (Ye)
+343
+'A (Ayn)
+117
+S (Sad)
+26
+_________
+798 (19 x 42)
+Yukarda verdiğimiz listedeki sayımları kontrol edebilmeniz için 19'uncu surenin her ayetinde bu
+beş harfin tekrar sayısını bir liste halinde veriyoruz.
+Not: Harf sayımlarında Sure başlarındaki tüm besmeleler dahil edilir. Bazı Kuran nüshalarında
+19:94 ayetindeki "Ahsahum" kelimesi yanlışlıkla fazla bir "Y" harfi ile yazılmıştır. Ayrıca 19:31
+ayetindeki "Evsani" kelimesi bazı nüshalarda 4. harfi elif olarak yazılmıştır. Doğrusu ye ile
+yazılmalıdır: "ﻲﻨﯿﺻوا".
+Ayet K
+H
+Y
+'A
+S
+ 0.
+0
+1
+1
+0
+0
+ 1.
+1
+1
+1
+1
+1
+ 2.
+3
+1
+1
+1
+0
+ 3.
+0
+1
+2
+0
+0
+ 4.
+2
+1
+5
+3
+0
+ 5.
+2
+1
+6
+1
+0
+ 6.
+0
+1
+5
+2
+0
+ 7.
+2
+2
+6
+1
+0
+ 8.
+3
+0
+5
+2
+0
+ 9.
+5
+2
+3
+1
+0
+10.
+2
+1
+5
+1
+0
+11.
+1
+3
+4
+2
+0
+12.
+2
+2
+6
+0
+1
+13.
+2
+1
+1
+0
+0
+
+--- Page 123 ---
+123
+14.
+1
+1
+3
+1
+1
+15.
+0
+1
+7
+2
+0
+16.
+3
+2
+3
+0
+0
+17.
+0
+3
+2
+0
+0
+18.
+2
+0
+2
+1
+0
+19.
+3
+1
+1
+0
+0
+20.
+2
+0
+6
+0
+0
+21.
+4
+5
+4
+2
+0
+22.
+1
+2
+1
+0
+1
+23.
+1
+3
+6
+1
+0
+24.
+2
+2
+3
+1
+0
+25.
+2
+2
+4
+2
+0
+26.
+2
+0
+9
+1
+1
+27.
+0
+3
+5
+0
+0
+28.
+4
+1
+2
+0
+0
+29.
+3
+2
+4
+0
+1
+30.
+1
+1
+5
+2
+0
+31.
+3
+2
+5
+1
+2
+32.
+0
+0
+4
+1
+0
+33.
+0
+0
+5
+2
+0
+34.
+1
+1
+6
+1
+0
+35.
+3
+3
+4
+0
+0
+36.
+1
+3
+2
+1
+1
+37.
+1
+2
+5
+1
+0
+38.
+1
+1
+5
+1
+1
+39.
+0
+5
+4
+0
+0
+40.
+0
+1
+3
+2
+0
+41.
+3
+2
+4
+0
+1
+42.
+1
+1
+7
+3
+1
+43.
+2
+1
+6
+2
+1
+44.
+1
+0
+4
+2
+1
+45.
+2
+0
+5
+1
+0
+46.
+1
+4
+6
+1
+0
+47.
+3
+1
+4
+1
+0
+48.
+2
+1
+4
+5
+0
+49.
+1
+4
+3
+4
+0
+50.
+0
+3
+1
+2
+1
+51.
+4
+1
+3
+0
+1
+52.
+0
+2
+3
+0
+0
+53.
+0
+4
+1
+0
+0
+54.
+4
+1
+3
+2
+1
+55.
+3
+5
+2
+1
+1
+56.
+3
+1
+4
+0
+1
+57.
+1
+1
+1
+2
+0
+58.
+2
+7
+14
+4
+0
+59.
+0
+3
+2
+3
+1
+60.
+1
+1
+4
+1
+1
+61.
+1
+3
+3
+4
+0
+
+--- Page 124 ---
+124
+62.
+1
+5
+4
+2
+0
+63.
+2
+1
+2
+1
+0
+64.
+4
+1
+5
+0
+0
+65.
+0
+5
+2
+3
+1
+66.
+0
+0
+2
+0
+0
+67.
+2
+1
+3
+0
+0
+68.
+1
+3
+3
+0
+0
+69.
+1
+2
+4
+4
+0
+70.
+0
+2
+3
+1
+1
+71.
+3
+1
+2
+1
+0
+72.
+0
+1
+5
+0
+0
+73.
+1
+1
+11
+1
+0
+74.
+2
+3
+1
+0
+0
+75.
+2
+4
+5
+5
+0
+76.
+1
+3
+7
+1
+1
+77.
+1
+0
+4
+0
+0
+78.
+0
+1
+1
+3
+0
+79.
+2
+1
+1
+1
+0
+80.
+0
+1
+3
+0
+0
+81.
+1
+4
+1
+1
+0
+82.
+3
+2
+3
+2
+0
+83.
+1
+1
+4
+1
+0
+84.
+0
+2
+1
+4
+0
+85.
+0
+0
+3
+0
+0
+86.
+0
+1
+2
+0
+0
+87.
+1
+2
+1
+3
+0
+88.
+0
+0
+0
+0
+0
+89.
+0
+0
+2
+0
+0
+90.
+1
+2
+1
+0
+0
+91.
+0
+0
+0
+1
+0
+92.
+0
+0
+3
+0
+0
+93.
+1
+0
+2
+1
+0
+94.
+0
+2
+0
+2
+1
+95.
+1
+3
+3
+0
+0
+96.
+0
+1
+2
+2
+1
+97.
+1
+3
+2
+0
+0
+98.
+3
+5
+0
+1
+0
+Top.  137    175    343    117      26
+798 (19 x 142)
+ﺮﺸﻋ ﺔﻌﺴﺗ ﺎﮭﯿﻠﻋ
+ÜZERİNDE ON DOKUZ VAR (74:30)
+
+--- Page 125 ---
+125
+N (Nun) ن
+Kuran'ın 68'nci suresi ن"NuN" harfi ile başlar. Bu suredeki "N"lerin sayısı 133 olup 19'un tam 7
+katıdır. Surenin başındaki N harfi tüm diğer başlangıç harflerinden farklı olarak, seslendirildiği
+biçimiyle, yani ن"NuN" diye yazılır.
+Elimizdeki birçok Kuran nüshasında 7:69'daki "Bastatan" kelimesinin yanlış olarak "Sad" harfiyle
+yazılı olduğunu tartışmıştık. Buna benzer ikinci bir imla hatasına 68'nci surenin başında karşılaşırız.
+Surenin girişindeki
+ن"NuN" başlangıcının bir tek "N" harfiyle yazıldığını görürüz. Ne var ki,
+Kuran'ın matematiksel sistemi bu ikinci yazım hatasını da düzeltir.
+"Bastatan" kelimesinin en eski nüshalarda, matematiksel sistemin öngördüğü biçimde doğru olarak
+yazılmış olduğunu biliyoruz. Peki, 68'nci surenin başındaki ن"N" harfi eski Kuran nüshalarında
+nasıl yazılıydı? Bu sorunun cevabını Taşkent nüshasından alamadık. Çünkü o nüsha Kuran'ın bazı
+bölümleri kaybolmuş bulunuyor.
+Matematiksel sistemin gerektirdiği bu düzeltmeyi eski nüshalarla karşılaştırma imkanına şahsen
+daha sahip olmadık. Mısır'da bulunan bazı nüshalarda başlangıç harfinin ن"NuN" biçiminde yazılı
+olduğunu işittikse de bu konuda "aynel yakin" bir bilgiye sahip değiliz. Bu konudaki tüm bilgimiz
+matematiksel sistemin kanıtlanmış duyarlılığı ve ona olan güven üzerine dayalı.
+Matematiksel sistemle anlam kazanan ifadeler
+Bu suredeki N'lerin sayısıyla ilgili ilginç bir tespitimizi sunalım. Bu surenin 48'nci ayetinde
+"Yunus" ismi anılmadan Yunus Peygamberden söz edilir.
+ن(Nun) harfine sahip YuNus
+peygamberin ismi, sadece bu surede ن"N" harfine sahip olmayan "Sahibil Hut" yani "Balık adamı"
+ifadesiyle geçer. Bu yorumumuzu başka bir ayet destekler. Yunus Peygamberi "Zan Nun" yani "N
+Harfine Sahip Kişi" diye tanımlayan 21:87 ayeti,
+ن(Nun) harfiyle başlayan surede YuNus
+Peygamberin "Nun"suz bir isimle anılmasına dikkatimizi çeker. Quran'ın sahibi, bu ilginç yöntemle,
+kendisinin her şeyden "mustağni" olduğu mesajını verir. Matematiksel mucizenin oluşturulması için
+herhangi bir kelimeye ihtiyaç duymadığını anlatır. Nitekim,
+ن"N" harfinin yoğun olarak
+kullanıldığı 68'nci surede,
+ن"N" harfi içeren Yunus ismini kullanmayarak bu gerçeği pratikte
+uygular.
+21:87 ayetindeki "Zan Nun" ifadesinin 68:1'deki
+ن"Nun" harfiyle yakından ilgili olduğunu
+bilmeyen geçmiş Kuran yorumcuları 21:87 ayetini "Nun" diye bir balık adı icat ederek anlamaya
+çalışmışlardı.
+
+--- Page 126 ---
+126
+133 = 19 x 7
+
+--- Page 127 ---
+127
+Diğer Başlangıç Harfleri
+Tüm başlangıç harflerinin ilgili surelerdeki geçiş sayısını bu kitapta veremiyoruz. Bunun iki nedeni
+var:
+Birincisi, her iddiamızı detayıyla belgelemek istiyoruz ve bunu gerçekleştirmek için sunacağımız
+sayım listeleri kitabın hacmini bir hayli kabartacaktı. Biz bu kitabı üç yüz sayfa civarında tutmak
+istiyoruz. Detayları, "Visual Presentation of the Miracle" adlı kitapta bulabilirsiniz.
+İkincisi, halkın Kuran tarihi ve Arap dili konusundaki yetersizliğinin mollalar tarafından sık sık
+istismar edildiğine tanık olduk. İnkarcı din adamlarının elif harfinin sayımında baş gösteren bazı
+problemleri bahane ederek güneş gibi apaçık olan bir matematiksel sistemi gizlemelerine katkıda
+bulunmak istemiyoruz.
+Y. S. (Ya, Sin) ﺲﯾ
+Kuran'ın 36'ncı suresi başında geçen iki harfle adlandırılır. Başlangıç harfli surelerin listesinde
+19'uncu sırada yer alan YaSin suresindeki "Y " ve "S" harflerinin toplam sayısı 237 + 48 = 285 olup
+19 x 15'tir.
+'A. S. Q. (Ayn, Sin, Qaf) ﻖﺴﻋ
+İlk ayeti "H. M."
+ﻢﺣharflerinden oluşan 42'nci surenin aynı harfleri taşıyan diğer altı sureyle
+birlikte yer aldığı olağanüstü sistemi bir önceki bölümde inceledik. Bu surenin ikinci ayetini
+oluşturan ﻖﺴﻋ"'A. S. Q." harflerinin sonuncusu olan Q (Qaf) harfinin matematiksel sistem içindeki
+rolünü de daha önce gördük. Peki, sadece bu surenin başında bulunan
+ﻖﺴﻋ'A. S. Q
+kombinasyonundan ne haber? Bu üç harfin 42'nci suredeki sayıları yine 19'un katıdır:
+ع('A)
+98
+س(S)
+54
+ق(Q)
+57
+Topla
+m
+209 (19 x 11)
+Güney Afrika'daki İslam Propaganda Merkezi'nin Başkanı Ahmed Deedat'ın Başlangıç harfleri
+üzerindeki bir itirafını alıntılayarak bu bölümü kapayalım:
+Başında "Başlangıç Harfleri" bulunan Kuran'ın her bölümü bu olağanüstü sistemi izler. Başlangıç
+harflerinin surelerdeki adetlerini sayınız ve onları 19'a bölünüz. Onların sürekli olarak 19 sayısının
+TAM KATI olduklarını göreceksiniz. İç içe geçmeli bu kompleks matematiksel sistemi dokumaya
+kimin gücü ve zamanı vardı? Elbette, tarihin en meşgul insanı olan Muhammed'in değil! Alaycılar
+hala Muhammed'in kum altında saklanmış bir bilgisayar yoluyla Kuran'ının 19 kodu üzerine
+
+--- Page 128 ---
+128
+programlamış olabileceğine bizi inandırmak isterlerse, ben kendi payıma, eti ve kemiğiyle her
+yönden insan olan Muhammed'in, kitabını tahriflerden korumak için böyle iç içe geçmeli
+matematiksel bir sistemi icat ettiği iddiası yerine bu "Bilgisayar Teorisi"ni hemen kabul ederdim
+(Al-Quran: The Ultimate Miracle, Islamic Propagation Centre, Durban, 1984, sa 62).
+
+--- Page 129 ---
+129
+Büyük Sayılar
+Kuran'da kaç değişik sayıdan söz edilir? Tekrarları saymazsak tam 30 sayı buluruz Kuran'da. Ne var
+ki, bu 30 sayıyı toplarsak sonucun 19'un tam katı olduğunu görürüz.
+Sayılarla ilgili ilginç ifadelere rastlarız. Örneğin, Örümcek Suresinin 14'ncü ayeti Nuh Peygamberin
+950 yıl yaşadığını 950 sayısını kullanmadan bildirir. Bunun yerine 1000 - 50 (Bin eksi Elli) gibi bir
+çıkarma işlemini kullanır.
+Nuh'u da halkına göndermiştik ve onların arasında bin seneden elli yıl eksik kaldı. Ancak
+zulmettikleri için onları tufan yakaladı. (29:14)
+Niçin? Bin sayısının çokluk ifade eden şöhretinden yararlanmak için mi? Belki. Nuh Peygamber'in
+yaklaşık 1000 yıl süren çabasına rağmen halkının inkarcılıkta inat ettiğini vurgular ayet. Bununla
+birlikte, biz bu farklı ifadeyi matematiksel sistemle de yakından ilgili buluyoruz. Buradaki ifade 950
+olsaydı, 50 sayısı yerine 950 işleme girecekti. Böylece tekrarsız sayıların toplamı 900 artarak 19
+koduna uymayacaktı. Nuh'un toplam yaşının 950, yani 19'un tam katı oluşu da bu ilişkiyi daha çok
+güçlendirir.
+Tekrarlarıyla birlikte Kuran'da 285 (19 x 15) sayı geçtiği ve toplamlarının da 174591 (19 x 9189)
+olduğu ileri sürülüyor. Bu iddiayı sınayamadığımız için geçerliliği konusunda şimdilik bir
+değerlendirmede bulunamıyoruz.
+Kuran'da Geçen Tüm Sayıların Tekrarsız Olarak Toplamı
+(Yıldızla işaretlenmiş olan sayılar birer kez geçer.)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+*11
+12
+*19
+*20
+30
+40
+*50
+*60
+70
+*80
+*99
+100
+
+--- Page 130 ---
+130
+200
+*300
+1000
+*2000
+*3000
+*5000
+*50000
+*100000
++ ---------------
+162146
+(19 x 8534)
+Kuran, bu 30 tam sayıya ek olarak 8 kesirli sayı içerir: 1/10, 1/8, 1/6, 1/5, 1/4, 1/3, 1/2, 2/3.
+Böylece, Kuran'da 38 (19x2) değişik sayı bulunur. Demek ki, 30 tanesi tam sayı ve 8 tanesi kesirli
+sayı olmak üzere Kuran'da 38 (19x2) adet farklı sayı bulunur.
+Üniversitesiz ve bilgisayarsız!
+Kuran'da en çok tekrarlanan kelime olan ALLAH isminin 2698 (19 x 142) kez geçtiğini gördük.
+şimdi dilerseniz Allah kelimesinin geçtiği tüm ayetlerin numaralarını toplayınız. (1+2+7+
+8+9+10+15+17+19+20+22+2+1+2). Sonuç 118123 olup 19'un tam 6217 katıdır.
+"Quran: The Final Testament" adlı Kuran çevirisi için Arizona'daki Tucson Mescidinde Dr. Reşad
+Halife'ye asistanlık ederken bu toplama işleminin ne kadar dikkat ve zaman gerektirdiğine bizzat
+tanık olduk. Bu deneyimi, sözünü ettiğimiz Kuran çevirisinin notlar bölümünde şöyle itiraf
+ediyoruz:
+"Allah" isminin Kuran'daki geçiş sayısını hesaplamak ve geçtiği ayetlerin numaralarını toplamak
+gibi bir basit işlem, grup halinde çalışan bizlere birçok zorluklar çıkarttı. Hepimiz üniversite eğitimi
+görmüştük ve kompüterlere sahiptik. Buna rağmen, sayarken, hesaplarken, yahut kaydederken
+birkaç kez hata işledik. Tüm sunduğumuz matematiksel kanıtlara rağmen hala Kuran'ın Muhammed
+tarafından oluşturulduğunu ileri sürmek mantıksızlıktır; o ne üniversite eğitimi görmüştü, ne de bir
+kompütere sahipti.
+Ayrıca, Muhammed Peygamber gibi tarihin en meşgul liderlerinden birini böyle bir iş için
+düşünmek alabildiğine safça bir senaryodur. Muhammed'in yaşadığı ortamdan, dost ve düşmanın
+takdirle andığı destansı mücadelesinden haberi olan biri böyle bir senaryoyu ciddiye alamaz. Kabile
+kavgalarıyla, taklitçilik mikrobuyla iyice hasta düşmüş ataperest bir toplumun sosyal, ekonomik ve
+politik kurumlarında radikal devrimler yapan, kişilerin bilinçlerinde ve davranışlarında inanılmaz
+reformlar oluşturan birinin böylesine harika bir matematiksel sistemin bir minyatürünü bile edebi
+bir metinle kaynaştıracak vakti ve zihinsel sükuneti bulması nasıl mümkün görülebilir? Onun,
+peygamberlik iddiasından önce Kuran'ı hazırlayıp bitirdiği tezine gelince... Bu tez, yıllar sonra
+gerçekleşen olaylarla ilgili detaylı ifadelerin yer aldığı ayetleri açıklamakta aciz kalır.
+Uzun Sayılar
+Her surenin toplam ayet sayısından sonra tek tek ayet numaralarını yazarsak 12692 basamaklı bir
+sayı elde ederiz. Nitekim yedi ayete sahip ilk sure 71234567 sayısıyla temsil edilecektir. İkinci sure
+
+--- Page 131 ---
+131
+için de 286 sayısından sonra 1'den 286'ya kadar olan sayılar yazılacaktır. Böylece 114 sure için
+oluşturulan 
+bu 
+uzun 
+sayının 
+başı 
+ve 
+sonu 
+şöyle 
+gözükecektir:
+(712345672861234567891011.............6123456). Kuran'ın her ayetinin numarasının yer aldığı bu
+uzun sayı 19'un tam katıdır. Dahası, bu sayıyı oluşturan rakamların sayısı olan 12692 de 19'un tam
+katıdır. Dileyenler bunu programlayıp sınasın.
+Elinizdeki kitabın sekiz sayfasını işgal edebilecek bu uzun sayı düzinelerce örnekten sadece biridir.
+
+--- Page 132 ---
+132
+Tek ve Çift Sayılar
+Şafak (el-Fecr) Suresinin ilk beş ayeti özgün bir anlatımla dikkatlerimizi ondalık ve binary (ikili)
+sayı sistemlerine çeker. Bu surenin üçüncü ayetindeki "Tek ve Çift"ten ilham alan Koroş Cemnişan
+adlı İranlı bir üniversite öğrencisi Kuran'ın sure ve ayetleri üzerinde ilginç gözlemlerde bulunur. Bu
+bölümü söz konusu gözleme ayırıyoruz.
+Kuran'daki 114 Sure ve içerdikleri ayetlerle ilgili olarak şu iki sayıyı daha önceden tanıyoruz:
+6234
+Kuran'daki toplam ayet sayısı
+6555
+Kuran'daki sure numaralarının toplamı
+(1+2+3+4+5 . . . . . . . . . . . . . . . +114)
+Kuran'daki her bir suredeki ayet sayısını o surenin sıra numarasıyla toplayalım. Örneğin, 1'nci
+sırada yer alan Anahtar (Fatiha) Suresi 7 ayet içerir. Böylece, Anahtar Suresi için 1 + 7 = 8 sayısını
+elde ederiz. Kuran'ın en son suresi olan Halk (Nas) Suresi için ise 114 + 6 = 120 sayısını elde
+ederiz. Sure numaralarıyla ayet sayılarının toplamından oluşan bu sayıları tek ve çift olarak
+ayıralım.
+Aşağıdaki tabloda göreceğiniz gibi 57 tane çift, 57 tane de tek sayı elde etmekteyiz. Çiftleri ve
+Tekleri ayrı ayrı topladığımızda sentezin birimlerine ayrıldığını göreceksiniz.
+Sure  Ayet  Toplam   Çift    Tek
+1
+7
+8
+ 8
+---
+2
+286
+288
+ 288
+---
+3
+200
+203
+---
+ 203
+4
+176
+180
+ 180
+---
+5
+120
+125
+---
+ 125
+6
+165
+171
+---
+ 171
+7
+206
+213
+---
+ 213
+8
+75
+83
+---
+ 83
+9
+127
+136
+ 136
+---
+10
+109
+119
+---
+ 119
+11
+123
+134
+ 134
+---
+12
+111
+123
+---
+ 123
+13
+43
+56
+ 56
+---
+14
+52
+66
+ 66
+---
+15
+99
+114
+ 114
+---
+16
+128
+144
+ 144
+---
+17
+111
+128
+ 128
+---
+
+--- Page 133 ---
+133
+18
+110
+128
+ 128
+---
+19
+98
+117
+---
+ 117
+20
+135
+155
+---
+ 155
+21
+112
+133
+---
+ 133
+22
+78
+100
+ 100
+---
+23
+118
+141
+---
+ 141
+24
+64
+88
+ 88
+---
+25
+77
+102
+ 102
+---
+26
+227
+253
+---
+ 253
+27
+93
+120
+ 120
+---
+28
+88
+116
+ 116
+---
+29
+69
+98
+ 98
+---
+30
+60
+90
+ 90
+---
+31
+34
+65
+---
+ 65
+32
+30
+62
+ 62
+---
+33
+73
+106
+ 106
+---
+34
+54
+88
+ 88
+---
+35
+45
+80
+ 80
+---
+36
+83
+119
+---
+ 119
+37
+182
+219
+---
+ 219
+38
+88
+126
+ 126
+---
+39
+75
+114
+ 114
+---
+40
+85
+125
+---
+ 125
+41
+54
+95
+---
+ 95
+42
+53
+95
+---
+ 95
+43
+89
+132
+ 132
+---
+44
+59
+103
+---
+ 103
+45
+37
+82
+ 82
+---
+46
+35
+81
+---
+ 81
+47
+38
+85
+---
+ 85
+48
+29
+77
+---
+ 77
+49
+18
+67
+---
+ 67
+50
+45
+95
+---
+ 95
+51
+60
+111
+---
+ 111
+52
+49
+101
+---
+ 101
+53
+62
+115
+---
+ 115
+54
+55
+109
+---
+ 109
+55
+78
+133
+---
+ 133
+56
+96
+152
+ 152
+---
+57
+29
+86
+ 86
+---
+58
+22
+80
+ 80
+---
+59
+24
+83
+---
+ 83
+60
+13
+73
+---
+ 73
+61
+14
+75
+---
+ 75
+62
+11
+73
+---
+ 73
+63
+11
+74
+ 74
+---
+64
+18
+82
+ 82
+---
+65
+12
+77
+---
+ 77
+
+--- Page 134 ---
+134
+66
+12
+78
+ 78
+---
+67
+30
+97
+---
+ 97
+68
+52
+120
+ 120
+---
+69
+52
+121
+---
+ 121
+70
+44
+114
+ 114
+---
+71
+28
+99
+---
+ 99
+72
+28
+100
+ 100
+---
+73
+20
+93
+---
+ 93
+74
+56
+130
+ 130
+---
+75
+40
+115
+---
+ 115
+76
+31
+107
+---
+ 107
+77
+50
+127
+---
+ 127
+78
+40
+118
+ 118
+---
+79
+46
+125
+---
+ 125
+80
+42
+122
+ 122
+---
+81
+29
+110
+ 110
+---
+82
+19
+101
+---
+ 101
+83
+36
+119
+---
+ 119
+84
+25
+109
+---
+ 109
+85
+22
+107
+---
+ 107
+86
+17
+103
+---
+ 103
+87
+19
+106
+ 106
+---
+88
+26
+114
+ 114
+---
+89
+30
+119
+---
+ 119
+90
+20
+110
+ 110
+---
+91
+15
+106
+ 106
+---
+92
+21
+113
+---
+ 113
+93
+11
+104
+ 104
+---
+94
+8
+102
+ 102
+---
+95
+8
+103
+---
+ 103
+96
+19
+115
+---
+ 115
+97
+5
+102
+ 102
+---
+98
+8
+106
+ 106
+---
+99
+8
+107
+---
+ 107
+100
+11
+111
+---
+ 111
+101
+11
+112
+ 112
+---
+102
+8
+110
+ 110
+---
+103
+3
+106
+ 106
+---
+104
+9
+113
+---
+ 113
+105
+5
+110
+ 110
+---
+106
+4
+110
+ 110
+---
+107
+7
+114
+ 114
+---
+108
+3
+111
+---
+ 111
+109
+6
+115
+---
+ 115
+110
+3
+113
+---
+ 113
+111
+5
+116
+ 116
+---
+112
+4
+116
+ 116
+---
+113
+5
+118
+ 118
+---
+
+--- Page 135 ---
+135
+114
+6
+120
+120
+---
+      6555    6234    6234    6555
+Sentez ve Analiz
+Kuran'daki 114 surenin sıra numarasıyla içerdiği ayet sayılarını ayrı ayrı ekledikten sonra bu
+toplamları tek ve çift oluşlarına göre iki bölüme ayırırsak yaptığımız bu ekleme işleminin iki ana
+elementine çözüldüğünü görüyoruz. Bir başka ifadeyle, 114 parça halinde kaynaştırdığımız ayet
+sayılarının toplamı (6234) ile sure numaralarının toplamı (6555), tek ve çift analiziyle ayrışıyorlar.
+
+--- Page 136 ---
+136
+Kuran'ın Eşsiz Koruma Sistemi
+(
+نﻮﻈﻓﺎﺤﻟ ﮫﻟ ﺎﻧاو ﺮﻛﺬﻟا ﺎﻨﻟﺰﻧ ﻦﺤﻧ ﺎﻧا
+)
+٩
+Zikri biz indirdik, elbette onu biz koruyacağız (15:9)
+Kuran, Allah'ın kullarına indirdiği son kitaptır. Onun kıyamete dek korunması için 15:9'da verilen
+ilahi sözün hikmeti budur. Kuran'ın Allah sözü olduğu ve kesinlikle korunduğunu kanıtlamak için
+Allah, Kuran'ı matematiksel bir sistemle kodlamıştır. Tucson Mescidi, Renaissance Institute ve
+Monotheist Publication tarafından yayımlanan kitaplarda açıkladığımız gibi bu matematiksel sistem
+insan gücünün çok ötesindedir. Allah'ın son kitabında en ufak bir tahrif bile kuşkusuz büyük bir
+fitneye yol açar. Kuran'ı koruyan sistem matematik olduğundan, 1 birimlik (1 sure, 1 ayet, 1 kelime,
+hatta 1 harf) sapma bile sistemi bozar.
+Nitekim
+1974 yılında Kuran'da fark ettiğimiz matematiksel sistem yeni bir fiziksel deliller çağı açmış ve
+Kuran'daki her birim o sistemde yer almıştır.
+Sonuçta, 9:128-129 nolu ayetlerin Kuran'dan olmadığı ortaya çıkarak:
+1. Kuran'ın matematiksel sisteminin asıl işlevini görme fırsatını bize vermiştir. Kuran'ın korunması,
+insanlar tarafından müzelerde korunan kitaplar gibi, yahut doğal olarak korunan taş yazıtlar gibi
+olmayıp hepsinden farklı olarak bizzat sahibi tarafından yerleştirilen kodlama sistemiyle olmuştur
+ki 15:9 ayeti bunu "beş adet vurgu" ile bildirir: "Biz, elbette Biz Zikri indirdik, ve onu mutlaka Biz
+koruyacağız."
+2. Bu açıdan olağanüstü bir mucize oluşturur.
+3. Atalarını taklit ettiklerinden dolayı Kuran'ı kabul edenlerle, Kuran'a bizzat Kuran'dan dolayı iman
+edenlerin arasında ayırım yapmıştır. Gerçek müminler, Kuran'ın tanıklığını atalarının tanıklığına
+tercih ederler.
+Sahte ayetlerin çevirisi şöyledir:
+Size içinizden sıkıntıya düşmeniz onun gücüne giden, size pek düşkün, mü'minlere
+şefkatli ve esirgeyici bir peygamber gelmiştir. Onlar yüz çevirirlerse, de ki: "Bana Allah
+yeter. O'ndan başka ilah yoktur. Ben O'na tevekkül ettim ve büyük arşın Rabbi O'dur."
+Fiziksel deliller
+1. Beraet (Ültimatom) Suresinin sonunda yer alan 9:128-129 "ayetleri" matematiksel kodun keşfi
+tarihi olan 1974'ten beri özellikle dikkatlerimizi çekmişti. "Rahim" kelimesinin Allah'tan başkasını
+tanımlamak için kullanıldığı tek yerdi. Kuran'da 114 (19x6) kez Allah için geçen "Rahim" ismi
+orada Muhammed Peygamber için kullanılıyordu. Kuran boyunca "Allah" kelimesinin tekrarlanma
+sayısının 2699 adet çıkması, 9:128-129 üzerinde kırmızı ışıkların yanmasına neden oldu. 2699
+sayısı 19'un katından 1 fazlaydı. "Allah isminin 2698 (19x142) kez geçmesi gerektiğini hatırlatan
+daha birçok parametre mevcuttu.
+
+--- Page 137 ---
+137
+
+"Allah" ismini bulunduran tüm ayetlerin numaraları toplamı 118123 (19x6217) dir. Beraet
+suresi sonunda yer alan Allah isminin bulunduğu ayet numarasını yani 129'u eklediğimizde
+bu sistem bozulur.
+
+"Allah" ismi, Kuran'ın başından 9. surenin sonuna dek 1273 kez geçer. 1273=19x67. Eğer
+9:129'daki eklenirse bu sayı 1274'e çıkar ve sistem bozulur.
+
+İlk başlangıç (2:1'deki A.L.M.) harflerinden son başlangıç (68:1'deki Nun) harfine dek
+geçen "Allah" isimleri, sahte ayetler hariç 2641'dir. 2641=19x139
+
+Beraet suresi başında harf bulunmayan bir suredir. Başlangıç harfi bulundurmayan 85 sureyi
+incelediğimizde 57 (19x3) tanesinin "Allah" ismini bulundurduğunu görürüz. "Allah" ismini
+bulunduran ayetlerin toplam sayısı da 1045 olup 19x55'tir. Oysa 9:128-129 eklense "Allah"
+ismini içeren ayetlerin sayısı 1 adet fazlalaşır.
+
+Kayıp Besmele'den (Sure:9) itibaren, ekstra Besmele'ye (Sure:27) kadar "Allah"
+kelimelerinin 513 ayette geçtiğini görürüz. 513=19x27
+
+Beraet suresinin sonunda yani 9:128-129' da geçen "ilah (tanrı)" kelimesi, bu "ayetler" hariç
+95 (19x5) kez geçer. Söz konusu sahte ayetlerle bu denklik bozulur.
+
+Tanrı için kullanılan "arş (yönetim)" kelimesi 9:128-129 hariç, Kuran'da 19 kez geçer.
+(12:100 ve 27:23 ayetlerindeki "arş" kelimesi "taht" için kullanılır.)
+
+Kuran, 6234 adet numaralanmış ayet ve 112 numarasız ayet (1:1 ve 27:30 hariç sure
+başlarındaki Besmeleler) içerir. Böylece Kuran ayetlerinin sayısı 6346 (19x334) olur. 6346
+sayısının rakamlarının mutlak değerlerinin toplamı da 6+3+4+6 = 19'dur. Bu iki
+matematiksel özellik, 9:128-129 eklendiğinde bozulmaktadır.
+
+Başlangıç harfleri içermeyen 85 surenin tüm ayetlerinin rakamlarının mutlak değerlerini tek
+tek topladığımızda sonuç 27075 (19x19x75) olur. Bu özellik 128 ve 129 rakamlarının
+eklenmesiyle 23 artarak bozulmaktadır.
+
+Her bir suredeki toplam ayet sayısını ve yanına tek tek ayet numaralarını (71234567.........
+612345) biçiminde yazarsak 12692 basamaklı bir sayı elde ederiz. Birkaç metre
+uzunluğundaki bu sayı 19'un tam katıdır. Bu muazzam sayının basamak sayısı da 19'un tam
+katıdır. 12692=19x668. Bu durum, Beraet'in sonundaki ilave iki ayet çıkarılınca
+gerçekleşmektedir.
+
+Kuran'ın başından 9. surenin sonuna kadar başında başlangıç harfi bulundurmayan surelerin
+toplam ayet sayılarını sure numaralarıyla birlikte topladığımızda 703 (19x37) sayısını elde
+ederiz. Bu da, 9. sure 127 ayet olduğu taktirde gerçekleşir.
+
+"N" harfi ile biten, yani en son ayetinin son harfi "N" olan surelerin numaralarının toplamı
+1919 (19x101) dur. Dokuzuncu surenin son ayetini 129 kabul ettiğinizde surenin son harfi
+"N" yerine "M" olur ve bu denklik bozulur.
+
+Son ayeti 9 rakamı ile biten 13 surenin ayet sayılarını topladığımızda 627 (19x33) sayısını
+elde ederiz. Bu durum, 9. sureyi 129 ayet kabul edince gerçekleşmez.
+
+--- Page 138 ---
+138
+
+Beraet suresinin numarası olan 9 rakamı ile son ayeti olan 127'nin rakamlarını
+topladığımızda, 9+1+2+7 = 19 olmakta ve bu özellik, son ayeti 129 kabul edince
+bozulmaktadır.
+
+Misakın elçisini müjdeleyen ayetten üç ayet önceki, 3:78 ayeti, Allah'ın kitabına sözler
+ekleyen ve o sözlerin Allah'ın ayetleri olduğunu ileri süren yalancıları kınar. Bu ayette geçen
+"Allah" kelimesinin Kuran'ın başından itibaren 361inci (19x19) ayet olması ilginçtir. Allah'a
+ayet yakıştıranlardan söz eden bu ayetle Beraet'in son ayeti olan 9:127 arasında "Allah" ismi
+912 (19x48) kez geçer.
+Bunlara benzer daha birçok örnek verebiliriz. Kısacası, Kuran, 9:128-129'un kendisine ait
+olmadığına, yabancı olduğuna tanıklık ediyor. Kuran'dan ve Allah'tan daha büyük tanık kim
+olabilir?
+Rivayetlerde Tüten Duman
+Muhammed Peygamber'in ölümünden yaklaşık yirmi yıl sonra Halife Osman bin Affan döneminde
+bir grup yazıcı, başka ülkelere gönderilmek üzere Kuran nüshalarını çoğaltmakla görevlendirildiler.
+Bu nüshalar, Muhammed'in eliyle yazılmış orijinal Kuran'dan kopya edilecekti. Yazıcılar
+komitesine Osman b. Affan, Ali b. Ebi Talip, Zeyd b. Sabit, Ubeyy b. Kab, Abdullah b. El-Zubeyr,
+Said ibnül As ve Abdurrahman b. El-Haris b. Hişam nezaret ediyorlardı. Peygamber, Kuran'ı iniş
+sırasına göre yazmış, her parçanın doğru yerine yerleştirilmesi için gerekli talimatı da bunlara
+eklemişti. Medine'de inen son sure 9. sure idi. Yalnızca, üç ayetli 110. sure 9. sureden sonra
+Mina'da inmişti.
+İlk kıvılcım
+Yazıcılar komitesi 9. sureye geldiklerinde onu da uygun yerine yerleştirdiler. Ancak Medinelilerden
+biri, Allah'ın iki ismini peygambere mal eden bir çift ayetin araya eklenmesini önerdi. Yazıcılar
+bunu önce reddettiler; ancak tartışmalar sonunda kabul ettiler. Ali b. Ebi Talib ve daha birçok
+inanan buna büyük bir tepki gösterdi. Nitekim Ali, peygamberin vefatından sonra Allah'ın son
+peygamberi tarafından yazılmış olan Kuran'a ekleme yapmak isteyenlerin varlığından duyduğu
+endişe yüzünden ilk halifenin seçildiği toplantıya bile katılmamıştı.
+Ali'nin bu protestosu birçok kitapta anılır. Burada, Celaleddin es-Suyuti tarafından yazılan El-Itkan
+fi Ulum-il Kuran isimli klasik bir kaynakta yer alan ve İkrime yoluyla nakledilen aşağıdaki rivayeti
+alıyorum:
+Ebu Bekir halife seçildikten sonra Ali b. Ebi Talib evine çekildi. Ebu Bekir'e, onun
+seçilişinden hoşlanmadığı için Ali'nin böyle bir tavır gösterdiği biçiminde yorumlar ulaştı.
+Bunun üzerine Ebu Bekir Ali'ye birini göndererek durumu soruşturdu: "Ebu Bekr'in seçimine
+mi karşı çıkıyorsun?" diye sorulunca Ali, "Yok vallahi" diye cevapladı. Ali'ye tekrar soruldu:
+"Neden evinden dışarı çıkmıyorsun?" Cevap verdi: "Görüyorum ki Kuran'a ekleme yapılıyor
+ve ben Kuran'ı derleyinceye kadar namaz dışında sokak kıyafetlerimi giymemeye yemin
+ettim." (El-Itkan Fi Ulum-il Kuran, El-Ezher yayınları, Kahire, Mısır, H.1318, C. 1, Sayfa 59)
+Aynı kitabın 28. sayfasında, Zevaidil Müsned ve İbni Merdiveyh'te yer alan ve Übeyy b.Kab
+yoluyla nakledilen aşağıdaki rivayette konuyu daha da aydınlatıyor:
+
+--- Page 139 ---
+139
+Ebu Bekr'in hilafeti zamanında Kuran derleniyordu. Yazım işlemiyle görevli sahabeler Beraet
+(Ültimatom) suresinin sonuna, 9:127 ayetine gelince, onun son ayet olduğunu sandılar.
+Bunun üzerine Ubey b. Kab kendilerine, "Peygamber bana iki ayet daha okudu" diyerek
+9:128,129 ayetlerini okumaya başladı ve, "Bu iki ayet, Kuran'ın en son inen ayetleridir" diye
+ekledi.
+Aşağıdaki sonuçlara baktığımızda bu suçun korkunç boyutları ortaya çıkmaktadır:
+1. Halife Osman öldürüldü ve Ali dördüncü halife seçildi.
+2. Ali taraftarları ile saltanat taraftarları arasında yıllar süren bir savaş çıktı. Kuran'ın tahrif
+edilmesiyle ilgili bir sürü söylenti Şiiler arasında abartılarak "takiyye" politikasıyla nesilden nesile
+gizlice aktarıldı.
+3. Ali şehit edildi.
+4. Muhammed Peygamber'in torunu Hüseyin yetmişin üzerinde inananla birlikte Kerbela'da şehit
+edildi.
+5. Emevi ve Abbasi sultanlarının çevrede estirdiği terörün sonucu olarak cizye ödemeye mahkum
+olduktan sonra, cizyeden kurtulmak amacıyla güya İslam'a girenler, hadisler rivayet ederek Kuran'a
+ortak koştular ve böylece peygamberin tebliğ ettiği İslam dinini tahrif ettiler.
+Sonuçta, tahrifçiler savaşı kazandı. Bugüne ulaşan "resmi" tarih, onların fikirlerini yansıtır. Allah
+düşmanlarının bu görünüşteki zaferi şüphesiz Allah'ın takdirine uygundu. Mekke'nin
+fethedilmesiyle yenilen müşrikler, peygamberin ölümünden iki yüzyıl geçmeden çok tanrıcılığa geri
+döndüler. Ne gariptir ki, bu seferki putları Peygamber Muhammed'in kendisiydi. Bu müşrikler,
+şüphesiz saf Kuran'ı istemezlerdi. Nitekim, Kuran'ı korumak isteyen gerçek müminler şerefli bir
+biçimde şehit edildiler. Müşrikler görünüşte zafer kazandılar.
+Orijinal Kuran Mervan tarafından yakılıyor
+Bu uzun ve yıkıcı savaştan sonraki barış döneminin ilk Halifesi Mervan b. Hakemdi (Ölümü: H
+65/M 684). Yaptığı ilk işlerden biri orijinal Kuran'ı yok etmek oldu. Peygamberin kendi eliyle ve
+özenle yazdığı Kuran'ı "yeni tartışmalara neden olacağından korktuğu" için yaktı. (Nüzülünden
+Günümüze Kuran-ı Kerim Bilgileri, Osman Keskioğlu, Türkiye Diyanet Vakfı yayınları, 1987,
+sa:140; Dr. Suphi es-Salih, Mebahis fi Ulumil Kuran, sa:83 ve Kuran tarihiyle ilgili tüm kitaplara
+bakılabilir.) Akıl sahibi bir kişi burada şu soruyu sormalı: "Muhammed'in orijinal Kuran'ı o sırada
+elden ele dolaşan nüshalarla aynı idiyse Mervan b. Hakem onu niye yok etsin??!!!"
+İki tanık gücündeki tek tanık!
+Eski rivayet kitaplarında, sonradan katılan 9:128-129'dan sürekli şüphelenildiğini öğreniyoruz.
+Örneğin Buhari'nin ünlü hadis kitabında ve Suyuti'nin El-Itkan'ında Kuran'ın her ayetinin en az iki
+tanıkla doğrulandığını okuyoruz: "Ancak 9. surenin 128. ve 129. ayetleri müstesna ki onlar yalnız
+Huzeyme b. Sabit el-Ensari'nin yanında bulunmuşlardı." Sünnilerin en güvenilir hadis kitabı olan
+Buhari, Suyuti'nin ünlü eseri El İtkan ve Kuran tarihiyle ilgili birçok kitap, Beraet (Ültimatom)
+suresinin 127. ayetine varıldığında, derleme ve yazım işlemiyle görevli tüm yazıcıların, o ayetin son
+ayet olduğuna karar verdiğini rivayet eder ve devamla şunları bildirirler:
+
+--- Page 140 ---
+140
+Sahabeler, Beraet Suresini 127. ayette noktaladıktan sonra Huzeyme b. Sabit El Ensari adındaki bir
+Medineli kendisinin yanında iki ayet daha bulunduğunu ileri sürdü. Bu iddiasına bir başka tanık
+daha getirmesi istendiğinde hiç kimseyi bulamadı. Fakat, arkadaşlarından biri bir hadis rivayet
+ederek Huzeyme'nin tanıklığının iki kişinin tanıklığına eşit olduğuna tanıklık etti. Bunun üzerine
+yazıcılar son iki ayeti, yani 9:128, 129 ayetlerini kabul edip 9. surenin sonuna eklediler.
+Ne gariptir ki, bu 9:128-129 eklemelerinin, Medine döneminin son günlerinde inmiş Medeni bir
+surede bulunan Mekki ayetler olduğu iddia edilir.
+Konuyla ilgili akla gelebilen birçok soru vardır. Örneğin: Bu Mekki ayetler, çok sonraları
+müslüman olmuş Medineli birinin yanında, sadece Huzeyme'nin yanında nasıl bulunabilir? Neden
+dört halife dahil, hiçbir sahabenin tanıklıkları tek başına kabul edilmezken sadece Huzeyme b. Sabit
+El Ensari
+ıklığı iki kişinin tanıklığına denk tutuldu? Huzeyme'nin iki tanığa eşit olduğunu
+rivayet eden kimdi? Onun bu rivayetine nasıl güvenildi? Yoksa onun da mı tanıklığı iki kişinin
+tanıklığına eşitti? Beraet Suresinin sonundaki 9:128,129 eklemelerinin, Beraet suresine 'sonundan
+başlayarak inen biricik sure' unvanını kazandırması ilginç değil mi?
+Ne var ki bütün bu tutarsızlıklara ve 9:128-129 ile ilgili birçok çelişkiye rağmen, Kerbela
+katliamından sonra kimse onların doğruluğunu açıktan sorgulamaya cesaret edemedi.
+Ne söyleyebiliriz?
+Her şeye gücü yeten Bilge Tanrı'nın bize sağladığı fiziksel deliller, mesajının doğruluğu ve
+korunmuşluğu konusunda kuşku bırakmıyor. Sonuç olarak:
+1. Orijinal Kuran'a herhangi bir tahrif giremez.
+2. Beraet: 128-129 Kuran'dan değildir.
+3. Kuran'daki her birim, insan gücünün ötesinde düzenlenmiş matematiksel bir yapı içinde yerini
+almıştır.
+Şimdi anlıyoruz ki, Yüce Tanrı, 9. sureye bu iki "ayetin" "eklenmesine" özellikle izin vererek:
+1. Kuran'ın kodu olan 19'un ana işlevini gösterir.
+2. Kuran'ın ekleme, çıkarma ve bozmalara karşı bir matematiksel zırhla korunduğunu kanıtlar.
+3. İnananlarla ikiyüzlüleri birbirinden ayıracağına dair verdiği sözü yerine getirir.
+Konuyla ilgili tartışmalar
+Almanya'daki bir dosta gönderdiğim mektubumun ilgili bölümünü alıntılamak istiyorum:
+Zikri biz, elbette biz indirdik ve onu yine biz koruyacağız. (15:9)
+Kuran'ın Allah'ın koruması altında olduğunu beş vurgu ile bildiren ayetin bu vurgulama ile bize
+neyi anlatmak istediğini düşünün. Dünyada, müzelerde insanların gayreti veya tabiat koşullarının
+etkisiyle binlerce yıldır korunan kitabeler, kitaplar mevcut... Kuran'ın korunması eğer böyle sıradan,
+normal bir biçimde olsaydı Alemlerin Rabbinin böyle bir korumayı bir övgü vesilesi yapması ve

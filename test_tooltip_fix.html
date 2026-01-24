@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tooltip Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+
+        .tooltip-trigger {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .tooltip-trigger:hover {
+            background: #2ecc71;
+        }
+
+        .tooltip-box {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 3px solid #27ae60;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 400px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 3px solid #3498db;
+            border-radius: 16px;
+            padding: 25px;
+            max-width: 500px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            z-index: 10001;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            float: right;
+            font-size: 24px;
+            color: #999;
+        }
+
+        .verse-item {
+            display: inline-block;
+            padding: 5px 10px;
+            background: rgba(39, 174, 96, 0.15);
+            border-radius: 4px;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .verse-item:hover {
+            background: rgba(39, 174, 96, 0.35);
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            border-left: 4px solid #f39c12;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🧪 Tooltip ve Modal Test</h1>
+
+    <div class="tooltip-trigger" onclick="showTooltip()">
+        📖 Tooltip'i Aç
+    </div>
+
+    <div id="tooltip" class="tooltip-box">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+            <div style="font-weight: bold; color: #27ae60;">Rahman Kelimesi (5)</div>
+            <span class="close-btn" onclick="closeTooltip()">×</span>
+        </div>
+        <div>
+            <div class="verse-item" onclick="openModal('2:5')">2:5</div>
+            <div class="verse-item" onclick="openModal('17:110')">17:110</div>
+            <div class="verse-item" onclick="openModal('55:1')">55:1</div>
+            <div class="verse-item" onclick="openModal('59:22')">59:22</div>
+            <div class="verse-item" onclick="openModal('78:38')">78:38</div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div style="margin-bottom: 15px;">
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <h3 id="modalTitle">Ayet Önizleme</h3>
+        </div>
+        <div id="modalContent" style="background: rgba(39, 174, 96, 0.05); padding: 15px; border-radius: 8px;">
+            Ayet içeriği buraya gelecek...
+        </div>
+        <div style="margin-top: 20px; text-align: center;">
+            <button onclick="closeModal()"
+                style="padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 8px; cursor: pointer;">Kapat</button>
+        </div>
+    </div>
+
+    <div class="status">
+        <h3>Test Senaryosu:</h3>
+        <ol>
+            <li>Yeşil butona tıklayıp tooltip'i açın</li>
+            <li>Tooltip içinden herhangi bir ayete (örn: 2:5) tıklayın</li>
+            <li><strong>BEKLENEN:</strong> Modal açılmalı ve tooltip KAPANMAMALI</li>
+            <li>Modalı kapatın (× veya Kapat butonu ile)</li>
+            <li><strong>BEKLENEN:</strong> Tooltip hala açık olmalı</li>
+        </ol>
+        <div id="log"
+            style="margin-top: 10px; padding: 10px; background: #ecf0f1; border-radius: 4px; font-family: monospace; font-size: 12px;">
+            Loglar burada görünecek...
+        </div>
+    </div>
+
+    <script>
+        let activeTooltipId = null;
+        const logDiv = document.getElementById('log');
+
+        function log(message) {
+            const time = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `<div>[${time}] ${message}</div>`;
+            console.log(message);
+        }
+
+        function showTooltip() {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.display = 'block';
+            activeTooltipId = 'tooltip';
+            log('✅ Tooltip açıldı');
+        }
+
+        function closeTooltip() {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.display = 'none';
+            activeTooltipId = null;
+            log('❌ Tooltip kapatıldı');
+        }
+
+        function openModal(verse) {
+            const modal = document.getElementById('modal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+
+            title.textContent = `📖 ${verse}`;
+            content.innerHTML = `
+                <div style="font-size: 24px; text-align: right; direction: rtl; margin-bottom: 15px;">
+                    ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+                </div>
+                <div>Rahman ve Rahim olan Allah'ın adıyla...</div>
+            `;
+
+            modal.style.display = 'block';
+            log(`📜 Modal açıldı: ${verse}`);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+            log('🚪 Modal kapatıldı');
+
+            // ÖNEMLİ: Modal kapatıldığında tooltip KAPATILMAMALI
+            // Bu satır olmamalı: closeTooltip();
+        }
+
+        // Tooltip dışına tıklandığında kapat - AMA modal açıkken KAPATMA
+        document.addEventListener('click', (e) => {
+            const tooltip = document.getElementById('tooltip');
+            const modal = document.getElementById('modal');
+
+            const isModalOpen = modal && modal.style.display === 'block';
+            const isClickInsideModal = modal && modal.contains(e.target);
+            const isClickInsideTooltip = tooltip && tooltip.contains(e.target);
+            const isClickOnTrigger = e.target.classList.contains('tooltip-trigger');
+
+            // Tooltip dışına tıklandıysa VE modal açık değilse VE modalın içine tıklanmadıysa
+            if (tooltip && tooltip.style.display === 'block') {
+                if (!isClickInsideTooltip && !isClickOnTrigger && !isModalOpen && !isClickInsideModal) {
+                    closeTooltip();
+                    log('🖱️ Tooltip dışına tıklandı, kapatıldı');
+                }
+            }
+        });
+
+        log('🎯 Test sayfası hazır');
+    </script>
+</body>
+
+</html>

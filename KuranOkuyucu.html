@@ -228,13 +228,30 @@
         .insight-item {
             padding: 10px 0;
             border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 220px 100px 1fr;
             align-items: center;
+            gap: 15px;
         }
 
         .insight-item:last-child {
             border-bottom: none;
+        }
+
+        .insight-label {
+            font-weight: 500;
+        }
+
+        .insight-count {
+            text-align: center;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .insight-match {
+            text-align: right;
+            color: var(--text-secondary);
+            font-size: 13px;
         }
 
         .miracle-badge {
@@ -278,12 +295,38 @@
             border-radius: 5px;
             box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
             /* Hafif glow efekti */
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Mukatta harf sıra numarası */
+        .mukatta-highlight::after {
+            content: attr(data-mukatta-index);
+            position: absolute;
+            top: -12px;
+            right: -8px;
+            font-size: 10px;
+            background: #e67e22;
+            color: white;
+            padding: 1px 5px;
+            border-radius: 10px;
+            line-height: 14px;
+            min-width: 14px;
+            text-align: center;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 10;
         }
 
         body.night-mode .mukatta-highlight {
             background-color: rgba(231, 76, 60, 0.5);
             border-color: #ff6b6b;
             box-shadow: 0 0 10px rgba(255, 107, 107, 0.6);
+        }
+
+        body.night-mode .mukatta-highlight::after {
+            background: #f39c12;
         }
 
         /* Kelime Sayacı Sayıları */
@@ -716,171 +759,155 @@
             <!-- 19 Mucizesi Bulguları (Merged) -->
             <ul id="nineteenInsightList" class="insight-list"
                 style="margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+
+                <!-- 1. Besmele Harf Sayısı -->
                 <li class="insight-item">
-                    <span>Besmele-i Şerife Harf Sayısı</span>
-                    <span>19 <span class="miracle-badge">✅ Doğrulandı</span></span>
-                </li>
-                <li class="insight-item">
-                    <span>Sure Sayısı</span>
-                    <span>114 <span class="miracle-badge">19 x 6</span></span>
-                </li>
-                <li class="insight-item">
-                    <span>Besmele-i Şerife Sayısı</span>
-                    <span>114 <span class="miracle-badge">19 x 6 ✅</span></span>
+                    <div class="insight-label">Besmele-i Şerife Harf Sayısı</div>
+                    <div class="insight-count">19</div>
+                    <div class="insight-match"><span class="miracle-badge">Doğrulandı ✅</span></div>
                 </li>
 
-                <li class="insight-item" style="position: relative;">
-                    <span>"Rahman" (رحمٰن) Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showRahmanTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        178 <span class="miracle-badge">64 + 114 = 178 (19 × 9 + 7) ✅</span> 🔍
-                    </span>
+                <!-- 2. Sure Sayısı -->
+                <li class="insight-item">
+                    <div class="insight-label">Sure Sayısı</div>
+                    <div class="insight-count">114</div>
+                    <div class="insight-match"><span class="miracle-badge">19 x 6</span></div>
                 </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Rahim" Lafzı (Tüm Kur'an)</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showRahimTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        229 <span class="miracle-badge">115 + 114 Besmele = 19 × 12 + 1 ✅</span> 🔍
-                    </span>
+
+                <!-- 3. Besmele Sayısı -->
+                <li class="insight-item">
+                    <div class="insight-label">Besmele-i Şerife Sayısı</div>
+                    <div class="insight-count">114</div>
+                    <div class="insight-match"><span class="miracle-badge">19 x 6 ✅</span></div>
                 </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Güneş" (Şems) Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showShamsTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        33 <span class="miracle-badge">🔍</span>
-                    </span>
+
+                <!-- 4. Rahman -->
+                <li class="insight-item">
+                    <div class="insight-label">"Rahman" (رحمٰن) Lafzı</div>
+                    <div class="insight-count" onclick="showRahmanTooltip(event)" style="cursor: pointer;">178 🔍</div>
+                    <div class="insight-match" style="font-size: 11px;">114 + 64 = 178 ✅</div>
                 </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Ay" (Kamer) Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showQamarTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        27 <span class="miracle-badge">Yörünge süresi: 27 gün 🔍</span>
-                    </span>
+
+                <!-- 5. Rahim -->
+                <li class="insight-item">
+                    <div class="insight-label">"Rahim" Lafzı</div>
+                    <div class="insight-count" onclick="showRahimTooltip(event)" style="cursor: pointer;">229 🔍</div>
+                    <div class="insight-match" style="font-size: 11px;">115 + 114 = 229 ✅</div>
                 </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Ay" (Şehr) Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showShehrTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        27 <span class="miracle-badge">Tekil: 20 + Çoğul: 7 🔍</span>
-                    </span>
-                </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Gün" (Yevm) Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showYevmTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        31 <span class="miracle-badge">1 Ay 🔍</span>
-                    </span>
-                    <div style="font-size: 10px; color: var(--text-secondary); margin-top: 5px; padding-left: 10px;">
-                        Sayılabilir gün ifadeleri: "bir gün", "altı gün", "üç gün" vb.
+
+                <!-- 6. Melek = Şeytan -->
+                <li class="insight-item">
+                    <div class="insight-label">"Melek" (ملئكة) Kelimesi</div>
+                    <div class="insight-count" onclick="showAngelTooltip(event)" style="cursor: pointer;">88 🔍</div>
+                    <div class="insight-match">
+                        = "Şeytan" (<span onclick="showSatanTooltip(event)"
+                            style="cursor: pointer; font-weight: bold; color: var(--accent);">88</span>) ✅
                     </div>
                 </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Kıyamet Günü" Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+
+                <!-- 7. Cennet = Cehennem -->
+                <li class="insight-item">
+                    <div class="insight-label">"Cennet" (جنة) Kelimesi</div>
+                    <div class="insight-count" onclick="showJannahTooltip(event)" style="cursor: pointer;">77 🔍</div>
+                    <div class="insight-match">
+                        = "Cehennem" (<span onclick="showJahannamTooltip(event)"
+                            style="cursor: pointer; font-weight: bold; color: var(--accent);">77</span>) ✅
+                    </div>
+                </li>
+
+                <!-- 8. Güneş = Gölge -->
+                <li class="insight-item">
+                    <div class="insight-label">"Güneş" (Şems) Lafzı</div>
+                    <div class="insight-count" onclick="showShamsTooltip(event)" style="cursor: pointer;">33 🔍</div>
+                    <div class="insight-match">
+                        = "Gölge" (<span onclick="showZilTooltip(event)"
+                            style="cursor: pointer; font-weight: bold; color: var(--accent);">33</span>) ✅
+                    </div>
+                </li>
+
+                <!-- 9. Adem = İsa -->
+                <li class="insight-item">
+                    <div class="insight-label">"Adem" (آدم) Kelimesi</div>
+                    <div class="insight-count" onclick="showAdemTooltip(event)" style="cursor: pointer;">25 🔍</div>
+                    <div class="insight-match">
+                        = "İsa" (<span onclick="showIsaTooltip(event)"
+                            style="cursor: pointer; font-weight: bold; color: var(--accent);">25</span>) ✅
+                    </div>
+                </li>
+
+                <!-- 10. Musa -->
+                <li class="insight-item">
+                    <div class="insight-label">"Musa" (موسى) Kelimesi</div>
+                    <div class="insight-count" onclick="showMusaTooltip(event)" style="cursor: pointer;">136 🔍</div>
+                    <div class="insight-match">-</div>
+                </li>
+
+                <!-- 11. Arı (Nahl) -->
+                <li class="insight-item">
+                    <div class="insight-label">"Arı" (Nahl) Kelimesi</div>
+                    <div class="insight-count" onclick="showNahlTooltip(event)" style="cursor: pointer;">1 🔍</div>
+                    <div class="insight-match" style="display: flex; gap: 5px; justify-content: flex-end;">
+                        <span class="miracle-badge" style="background: rgba(241, 196, 15, 0.2); color: #d35400;">Sure:
+                            16</span>
+                        <span class="miracle-badge"
+                            style="background: rgba(241, 196, 15, 0.2); color: #d35400;">Kromozom: 16 ✅</span>
+                    </div>
+                </li>
+
+                <!-- 12. Ay (Kamer) -->
+                <li class="insight-item">
+                    <div class="insight-label">"Ay" (Kamer) Lafzı</div>
+                    <div class="insight-count" onclick="showQamarTooltip(event)" style="cursor: pointer;">27 🔍</div>
+                    <div class="insight-match">Yörünge: 27 gün</div>
+                </li>
+
+                <!-- 13. Ay (Şehr) -->
+                <li class="insight-item">
+                    <div class="insight-label">"Ay" (Şehr) Lafzı</div>
+                    <div class="insight-count" onclick="showShehrTooltip(event)" style="cursor: pointer;">27 🔍</div>
+                    <div class="insight-match">Text: 20 + 7</div>
+                </li>
+
+                <!-- 14. Gün (Yevm) -->
+                <li class="insight-item">
+                    <div class="insight-label">"Gün" (Yevm) Lafzı</div>
+                    <div class="insight-count" onclick="showYevmTooltip(event)" style="cursor: pointer;">31 🔍</div>
+                    <div class="insight-match">1 Ay (Sayılabilir)</div>
+                </li>
+
+                <!-- 15. Kıyamet -->
+                <li class="insight-item">
+                    <div class="insight-label">"Kıyamet Günü" Lafzı</div>
+                    <div class="insight-count"
                         onclick="showGenericWordTooltip(event, 'qiyamaTooltip', 'Kıyamet Günü (يوم القيامة)', typeof qiyamaGunuData !== 'undefined' ? qiyamaGunuData : [], 'القيامة')"
-                        onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
+                        style="cursor: pointer;">
                         72 🔍
-                    </span>
+                    </div>
+                    <div class="insight-match">-</div>
                 </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Mahşer Günü" Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+
+                <!-- 16. Mahşer -->
+                <li class="insight-item">
+                    <div class="insight-label">"Mahşer Günü" Lafzı</div>
+                    <div class="insight-count"
                         onclick="showGenericWordTooltip(event, 'hashrTooltip', 'Mahşer Günü (الحشر)', typeof hashrGunuData !== 'undefined' ? hashrGunuData : [], 'الحشر')"
-                        onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
+                        style="cursor: pointer;">
                         42 🔍
-                    </span>
+                    </div>
+                    <div class="insight-match">-</div>
                 </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Hesap Günü" Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
+
+                <!-- 17. Hesap -->
+                <li class="insight-item">
+                    <div class="insight-label">"Hesap Günü" Lafzı</div>
+                    <div class="insight-count"
                         onclick="showGenericWordTooltip(event, 'hisabTooltip', 'Hesap Günü (الحساب)', typeof hisabGunuData !== 'undefined' ? hisabGunuData : [], 'الحساب')"
-                        onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
+                        style="cursor: pointer;">
                         37 🔍
-                    </span>
+                    </div>
+                    <div class="insight-match">-</div>
                 </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Din Günü" Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showGenericWordTooltip(event, 'dinTooltip', 'Din Günü (يوم الدين)', typeof dinGunuData !== 'undefined' ? dinGunuData : [], 'الدين')"
-                        onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        34 🔍
-                    </span>
-                </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Ayrım Günü" Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showGenericWordTooltip(event, 'faslTooltip', 'Ayrım Günü (يوم الفصل)', typeof faslGunuData !== 'undefined' ? faslGunuData : [], 'الفصل')"
-                        onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        11 🔍
-                    </span>
-                </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Cehennem" (Cehennem) Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showJahannamTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        77 🔍
-                    </span>
-                </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Cennet" (Cennet) Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showJannahTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        <script>document.write(typeof jannahData !== 'undefined' ? jannahData.length : '77')</script> 🔍
-                    </span>
-                </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Şeytan" (Şeytan) Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showSatanTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        88 🔍
-                    </span>
-                </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Melek" (Melek) Lafzı</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showAngelTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        88 🔍
-                    </span>
-                </li>
-                <li class="insight-item" style="position: relative;">
-                    <span>"Allah" (Lafza-i Celal)</span>
-                    <span
-                        style="cursor: pointer; border-bottom: 2px dotted var(--accent); padding: 2px 4px; border-radius: 4px; transition: all 0.2s;"
-                        onclick="showAllahTooltip(event)" onmouseover="this.style.background='rgba(39,174,96,0.1)'"
-                        onmouseout="this.style.background='transparent'">
-                        2698 <span class="miracle-badge">19x142 🔍</span>
-                    </span>
-                </li>
+
             </ul>
             <div
                 style="font-size: 11px; margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--border-color); color: var(--text-secondary); line-height: 1.5;">
@@ -1580,6 +1607,31 @@
             const t = document.getElementById('allahTooltip'); if (t) t.style.display = 'none';
         }
 
+        // Adem Tooltip
+        function showAdemTooltip(event) {
+            showGenericWordTooltip(event, 'ademTooltip', '👨 Adem (آدم) Kelimesi', typeof ademData !== 'undefined' ? ademData : [], 'آدم');
+        }
+
+        // İsa Tooltip
+        function showIsaTooltip(event) {
+            showGenericWordTooltip(event, 'isaTooltip', '✝️ İsa (عيسى) Kelimesi', typeof isaData !== 'undefined' ? isaData : [], 'عيسى');
+        }
+
+        // Musa Tooltip
+        function showMusaTooltip(event) {
+            showGenericWordTooltip(event, 'musaTooltip', '🌊 Musa (موسى) Kelimesi', typeof musaData !== 'undefined' ? musaData : [], 'موسى');
+        }
+
+        // Gölge Tooltip
+        function showZilTooltip(event) {
+            showGenericWordTooltip(event, 'zilTooltip', '☁️ Gölge (ظل) Kelimesi', typeof zilData !== 'undefined' ? zilData : [], 'ظل');
+        }
+
+        // Arı Tooltip
+        function showNahlTooltip(event) {
+            showGenericWordTooltip(event, 'nahlTooltip', '🐝 Arı (نحل) Kelimesi', typeof nahlData !== 'undefined' ? nahlData : [], 'نحل');
+        }
+
         // Load Surah avec la mise en évidence des lettres Mukatta
         async function loadSurahWithMukattaHighlight(surahNum, mukattaLetters) {
             // Close miracle panel first so user can see the loaded surah
@@ -1611,13 +1663,22 @@
                     return text.replace(diacritics, '');
                 }
 
+                // Create counters for each letter type
+                const letterCounters = {};
+                letters.forEach(letter => {
+                    const normalized = normalizeArabic(letter.trim());
+                    if (normalized) {
+                        letterCounters[normalized] = 0;
+                    }
+                });
+
                 // Get all Arabic lines
                 const arabicLines = document.querySelectorAll('.arabic-line');
 
                 arabicLines.forEach(line => {
                     let html = line.innerHTML;
 
-                    // For each Mukatta letter, highlight it
+                    // For each Mukatta letter, highlight it with counter
                     letters.forEach(letter => {
                         const normalizedLetter = normalizeArabic(letter.trim());
                         if (!normalizedLetter) return;
@@ -1635,18 +1696,24 @@
                         const regex = new RegExp(pattern, 'g');
                         html = html.replace(regex, (match) => {
                             // Don't highlight if already highlighted or inside a tag
-                            if (html.indexOf(`<span class="mukatta-highlight">${match}</span>`) !== -1) {
+                            if (html.indexOf(`<span class="mukatta-highlight"`) !== -1 &&
+                                html.indexOf(`>${match}</span>`) !== -1) {
                                 return match;
                             }
-                            return `<span class="mukatta-highlight">${match}</span>`;
+                            // Increment counter for this letter type
+                            letterCounters[normalizedLetter]++;
+                            const count = letterCounters[normalizedLetter];
+                            return `<span class="mukatta-highlight" data-mukatta-index="${count}" data-mukatta-letter="${normalizedLetter}">${match}</span>`;
                         });
                     });
 
                     line.innerHTML = html;
                 });
 
+                // Log final counts
                 console.log(`✨ Mukatta harfleri vurgulandı: ${letters.join(', ')}`);
                 console.log(`📊 Toplam ${arabicLines.length} satır işlendi`);
+                console.log(`📈 Harf sayıları:`, letterCounters);
             }, 1000); // Wait 1 second for surah to load
         }
 
@@ -1695,6 +1762,11 @@
     <script src="shams_qamar_yevm_shehr_data.js"></script>
     <script src="afterlife_days_data.js"></script>
     <script src="mukatta_data.js"></script>
+    <script src="adem_data.js"></script>
+    <script src="isa_musa_data.js"></script>
+    <script src="zil_data.js"></script>
+    <script src="nahl_data.js"></script>
+    <script src="afterlife_days_data.js"></script>
     <script>
         function toggleMukattaTable() {
             const area = document.getElementById('mukattaTableArea');
