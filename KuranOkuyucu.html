@@ -282,6 +282,37 @@
             background-color: rgba(39, 174, 96, 0.1);
         }
 
+        /* Kategori Başlıkları */
+        .category-header {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin: 20px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-header i {
+            color: var(--accent);
+        }
+
+        .category-block {
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        body.night-mode .category-block {
+            background: rgba(30, 30, 30, 0.5);
+        }
+
         /* Mukatta Letter Highlighting */
         .mukatta-highlight {
             background-color: rgba(231, 76, 60, 0.4);
@@ -757,158 +788,205 @@
             </div>
 
             <!-- 19 Mucizesi Bulguları (Merged) -->
-            <ul id="nineteenInsightList" class="insight-list"
-                style="margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+            <div style="margin-top: 20px;">
 
-                <!-- 1. Besmele Harf Sayısı -->
-                <li class="insight-item">
-                    <div class="insight-label">Besmele-i Şerife Harf Sayısı</div>
-                    <div class="insight-count">19</div>
-                    <div class="insight-match"><span class="miracle-badge">Doğrulandı ✅</span></div>
-                </li>
+                <!-- KATEGORİ 1: TEMEL 19 DENGESİ -->
+                <div class="category-header">🔹 Temel 19 Dengesi</div>
+                <div class="category-block">
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <div class="insight-label">Besmele-i Şerife Harf Sayısı</div>
+                            <div class="insight-count">19</div>
+                            <div class="insight-match"><span class="miracle-badge">Doğrulandı ✅</span></div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">Sure Sayısı</div>
+                            <div class="insight-count">114</div>
+                            <div class="insight-match"><span class="miracle-badge">19 x 6</span></div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">Besmele-i Şerife Sayısı</div>
+                            <div class="insight-count">114</div>
+                            <div class="insight-match"><span class="miracle-badge">19 x 6 ✅</span></div>
+                        </li>
+                    </ul>
+                </div>
 
-                <!-- 2. Sure Sayısı -->
-                <li class="insight-item">
-                    <div class="insight-label">Sure Sayısı</div>
-                    <div class="insight-count">114</div>
-                    <div class="insight-match"><span class="miracle-badge">19 x 6</span></div>
-                </li>
+                <!-- KATEGORİ 2: İLAHİ İSİMLER -->
+                <div class="category-header">✨ İlahi İsimler</div>
+                <div class="category-block">
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <div class="insight-label">"Allah" (Lafza-i Celal)</div>
+                            <div class="insight-count" onclick="showAllahTooltip(event)" style="cursor: pointer;">2698
+                                🔍</div>
+                            <div class="insight-match"><span class="miracle-badge">19x142 🔍</span></div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"Rahman" (رحمٰن) Lafzı</div>
+                            <div class="insight-count" onclick="showRahmanTooltip(event)" style="cursor: pointer;">178
+                                🔍</div>
+                            <div class="insight-match" style="font-size: 11px;">114 + 64 = 178 ✅</div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"Rahim" Lafzı</div>
+                            <div class="insight-count" onclick="showRahimTooltip(event)" style="cursor: pointer;">229 🔍
+                            </div>
+                            <div class="insight-match" style="font-size: 11px;">115 + 114 = 229 ✅</div>
+                        </li>
+                    </ul>
+                </div>
 
-                <!-- 3. Besmele Sayısı -->
-                <li class="insight-item">
-                    <div class="insight-label">Besmele-i Şerife Sayısı</div>
-                    <div class="insight-count">114</div>
-                    <div class="insight-match"><span class="miracle-badge">19 x 6 ✅</span></div>
-                </li>
+                <!-- KATEGORİ 3: ZITLARIN DENGESİ -->
+                <div class="category-header">⚖️ Zıtların Dengesi</div>
+                <div class="category-block">
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <div class="insight-label">"Melek" (ملئكة) Kelimesi</div>
+                            <div class="insight-count" onclick="showAngelTooltip(event)" style="cursor: pointer;">88 🔍
+                            </div>
+                            <div class="insight-match">
+                                = "Şeytan" (<span onclick="showSatanTooltip(event)"
+                                    style="cursor: pointer; font-weight: bold; color: var(--accent);">88</span>) ✅
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"Cennet" (جنة) Kelimesi</div>
+                            <div class="insight-count" onclick="showJannahTooltip(event)" style="cursor: pointer;">77 🔍
+                            </div>
+                            <div class="insight-match">
+                                = "Cehennem" (<span onclick="showJahannamTooltip(event)"
+                                    style="cursor: pointer; font-weight: bold; color: var(--accent);">77</span>) ✅
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"Güneş" (Şems) Lafzı</div>
+                            <div class="insight-count" onclick="showShamsTooltip(event)" style="cursor: pointer;">33 🔍
+                            </div>
+                            <div class="insight-match">
+                                = "Gölge" (<span onclick="showZilTooltip(event)"
+                                    style="cursor: pointer; font-weight: bold; color: var(--accent);">33</span>) ✅
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-                <!-- 4. Rahman -->
-                <li class="insight-item">
-                    <div class="insight-label">"Rahman" (رحمٰن) Lafzı</div>
-                    <div class="insight-count" onclick="showRahmanTooltip(event)" style="cursor: pointer;">178 🔍</div>
-                    <div class="insight-match" style="font-size: 11px;">114 + 64 = 178 ✅</div>
-                </li>
+                <!-- KATEGORİ 4: PEYGAMBERLER -->
+                <div class="category-header">📜 Peygamberler</div>
+                <div class="category-block">
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <div class="insight-label">"Adem" (آدم) Kelimesi</div>
+                            <div class="insight-count" onclick="showAdemTooltip(event)" style="cursor: pointer;">25 🔍
+                            </div>
+                            <div class="insight-match">
+                                = "İsa" (<span onclick="showIsaTooltip(event)"
+                                    style="cursor: pointer; font-weight: bold; color: var(--accent);">25</span>) ✅
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"Musa" (موسى) Kelimesi</div>
+                            <div class="insight-count" onclick="showMusaTooltip(event)" style="cursor: pointer;">136 🔍
+                            </div>
+                            <div class="insight-match">-</div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"İsa" (عيسى) Kelimesi</div>
+                            <div class="insight-count" onclick="showIsaTooltip(event)" style="cursor: pointer;">25 🔍
+                            </div>
+                            <div class="insight-match">Tekil Gösterim</div>
+                        </li>
+                    </ul>
+                </div>
 
-                <!-- 5. Rahim -->
-                <li class="insight-item">
-                    <div class="insight-label">"Rahim" Lafzı</div>
-                    <div class="insight-count" onclick="showRahimTooltip(event)" style="cursor: pointer;">229 🔍</div>
-                    <div class="insight-match" style="font-size: 11px;">115 + 114 = 229 ✅</div>
-                </li>
+                <!-- KATEGORİ 5: ZAMAN VE KOZMOS -->
+                <div class="category-header">🌍 Zaman ve Kozmos</div>
+                <div class="category-block">
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <div class="insight-label">"Arı" (Nahl) Kelimesi</div>
+                            <div class="insight-count" onclick="showNahlTooltip(event)" style="cursor: pointer;">1 🔍
+                            </div>
+                            <div class="insight-match" style="display: flex; gap: 5px; justify-content: flex-end;">
+                                <span class="miracle-badge"
+                                    style="background: rgba(241, 196, 15, 0.2); color: #d35400;">Sure: 16</span>
+                                <span class="miracle-badge"
+                                    style="background: rgba(241, 196, 15, 0.2); color: #d35400;">Kromozom: 16 ✅</span>
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"Ay" (Kamer) Lafzı</div>
+                            <div class="insight-count" onclick="showQamarTooltip(event)" style="cursor: pointer;">27 🔍
+                            </div>
+                            <div class="insight-match">Yörünge: 27 gün</div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"Ay" (Şehr) Lafzı</div>
+                            <div class="insight-count" onclick="showShehrTooltip(event)" style="cursor: pointer;">27 🔍
+                            </div>
+                            <div class="insight-match">Text: 20 + 7</div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"Gün" (Yevm) Lafzı</div>
+                            <div class="insight-count" onclick="showYevmTooltip(event)" style="cursor: pointer;">31 🔍
+                            </div>
+                            <div class="insight-match">1 Ay (Sayılabilir)</div>
+                        </li>
+                    </ul>
+                </div>
 
-                <!-- 6. Melek = Şeytan -->
-                <li class="insight-item">
-                    <div class="insight-label">"Melek" (ملئكة) Kelimesi</div>
-                    <div class="insight-count" onclick="showAngelTooltip(event)" style="cursor: pointer;">88 🔍</div>
-                    <div class="insight-match">
-                        = "Şeytan" (<span onclick="showSatanTooltip(event)"
-                            style="cursor: pointer; font-weight: bold; color: var(--accent);">88</span>) ✅
-                    </div>
-                </li>
-
-                <!-- 7. Cennet = Cehennem -->
-                <li class="insight-item">
-                    <div class="insight-label">"Cennet" (جنة) Kelimesi</div>
-                    <div class="insight-count" onclick="showJannahTooltip(event)" style="cursor: pointer;">77 🔍</div>
-                    <div class="insight-match">
-                        = "Cehennem" (<span onclick="showJahannamTooltip(event)"
-                            style="cursor: pointer; font-weight: bold; color: var(--accent);">77</span>) ✅
-                    </div>
-                </li>
-
-                <!-- 8. Güneş = Gölge -->
-                <li class="insight-item">
-                    <div class="insight-label">"Güneş" (Şems) Lafzı</div>
-                    <div class="insight-count" onclick="showShamsTooltip(event)" style="cursor: pointer;">33 🔍</div>
-                    <div class="insight-match">
-                        = "Gölge" (<span onclick="showZilTooltip(event)"
-                            style="cursor: pointer; font-weight: bold; color: var(--accent);">33</span>) ✅
-                    </div>
-                </li>
-
-                <!-- 9. Adem = İsa -->
-                <li class="insight-item">
-                    <div class="insight-label">"Adem" (آدم) Kelimesi</div>
-                    <div class="insight-count" onclick="showAdemTooltip(event)" style="cursor: pointer;">25 🔍</div>
-                    <div class="insight-match">
-                        = "İsa" (<span onclick="showIsaTooltip(event)"
-                            style="cursor: pointer; font-weight: bold; color: var(--accent);">25</span>) ✅
-                    </div>
-                </li>
-
-                <!-- 10. Musa -->
-                <li class="insight-item">
-                    <div class="insight-label">"Musa" (موسى) Kelimesi</div>
-                    <div class="insight-count" onclick="showMusaTooltip(event)" style="cursor: pointer;">136 🔍</div>
-                    <div class="insight-match">-</div>
-                </li>
-
-                <!-- 11. Arı (Nahl) -->
-                <li class="insight-item">
-                    <div class="insight-label">"Arı" (Nahl) Kelimesi</div>
-                    <div class="insight-count" onclick="showNahlTooltip(event)" style="cursor: pointer;">1 🔍</div>
-                    <div class="insight-match" style="display: flex; gap: 5px; justify-content: flex-end;">
-                        <span class="miracle-badge" style="background: rgba(241, 196, 15, 0.2); color: #d35400;">Sure:
-                            16</span>
-                        <span class="miracle-badge"
-                            style="background: rgba(241, 196, 15, 0.2); color: #d35400;">Kromozom: 16 ✅</span>
-                    </div>
-                </li>
-
-                <!-- 12. Ay (Kamer) -->
-                <li class="insight-item">
-                    <div class="insight-label">"Ay" (Kamer) Lafzı</div>
-                    <div class="insight-count" onclick="showQamarTooltip(event)" style="cursor: pointer;">27 🔍</div>
-                    <div class="insight-match">Yörünge: 27 gün</div>
-                </li>
-
-                <!-- 13. Ay (Şehr) -->
-                <li class="insight-item">
-                    <div class="insight-label">"Ay" (Şehr) Lafzı</div>
-                    <div class="insight-count" onclick="showShehrTooltip(event)" style="cursor: pointer;">27 🔍</div>
-                    <div class="insight-match">Text: 20 + 7</div>
-                </li>
-
-                <!-- 14. Gün (Yevm) -->
-                <li class="insight-item">
-                    <div class="insight-label">"Gün" (Yevm) Lafzı</div>
-                    <div class="insight-count" onclick="showYevmTooltip(event)" style="cursor: pointer;">31 🔍</div>
-                    <div class="insight-match">1 Ay (Sayılabilir)</div>
-                </li>
-
-                <!-- 15. Kıyamet -->
-                <li class="insight-item">
-                    <div class="insight-label">"Kıyamet Günü" Lafzı</div>
-                    <div class="insight-count"
-                        onclick="showGenericWordTooltip(event, 'qiyamaTooltip', 'Kıyamet Günü (يوم القيامة)', typeof qiyamaGunuData !== 'undefined' ? qiyamaGunuData : [], 'القيامة')"
-                        style="cursor: pointer;">
-                        72 🔍
-                    </div>
-                    <div class="insight-match">-</div>
-                </li>
-
-                <!-- 16. Mahşer -->
-                <li class="insight-item">
-                    <div class="insight-label">"Mahşer Günü" Lafzı</div>
-                    <div class="insight-count"
-                        onclick="showGenericWordTooltip(event, 'hashrTooltip', 'Mahşer Günü (الحشر)', typeof hashrGunuData !== 'undefined' ? hashrGunuData : [], 'الحشر')"
-                        style="cursor: pointer;">
-                        42 🔍
-                    </div>
-                    <div class="insight-match">-</div>
-                </li>
-
-                <!-- 17. Hesap -->
-                <li class="insight-item">
-                    <div class="insight-label">"Hesap Günü" Lafzı</div>
-                    <div class="insight-count"
-                        onclick="showGenericWordTooltip(event, 'hisabTooltip', 'Hesap Günü (الحساب)', typeof hisabGunuData !== 'undefined' ? hisabGunuData : [], 'الحساب')"
-                        style="cursor: pointer;">
-                        37 🔍
-                    </div>
-                    <div class="insight-match">-</div>
-                </li>
-
-            </ul>
+                <!-- KATEGORİ 6: AHİRET GÜNLERİ -->
+                <div class="category-header">⏳ Ahiret Günleri</div>
+                <div class="category-block">
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <div class="insight-label">"Kıyamet Günü"</div>
+                            <div class="insight-count"
+                                onclick="showGenericWordTooltip(event, 'qiyamaTooltip', 'Kıyamet Günü (يوم القيامة)', typeof qiyamaGunuData !== 'undefined' ? qiyamaGunuData : [], 'القيامة')"
+                                style="cursor: pointer;">
+                                72 🔍
+                            </div>
+                            <div class="insight-match">-</div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"Mahşer Günü"</div>
+                            <div class="insight-count"
+                                onclick="showGenericWordTooltip(event, 'hashrTooltip', 'Mahşer Günü (الحشر)', typeof hashrGunuData !== 'undefined' ? hashrGunuData : [], 'الحشر')"
+                                style="cursor: pointer;">
+                                42 🔍
+                            </div>
+                            <div class="insight-match">-</div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"Hesap Günü"</div>
+                            <div class="insight-count"
+                                onclick="showGenericWordTooltip(event, 'hisabTooltip', 'Hesap Günü (الحساب)', typeof hisabGunuData !== 'undefined' ? hisabGunuData : [], 'الحساب')"
+                                style="cursor: pointer;">
+                                37 🔍
+                            </div>
+                            <div class="insight-match">-</div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"Din Günü"</div>
+                            <div class="insight-count"
+                                onclick="showGenericWordTooltip(event, 'dinTooltip', 'Din Günü (يوم الدين)', typeof dinGunuData !== 'undefined' ? dinGunuData : [], 'الدين')"
+                                style="cursor: pointer;">
+                                34 🔍
+                            </div>
+                            <div class="insight-match">-</div>
+                        </li>
+                        <li class="insight-item">
+                            <div class="insight-label">"Ayrım Günü"</div>
+                            <div class="insight-count"
+                                onclick="showGenericWordTooltip(event, 'faslTooltip', 'Ayrım Günü (يوم الفصل)', typeof faslGunuData !== 'undefined' ? faslGunuData : [], 'الفصل')"
+                                style="cursor: pointer;">
+                                11 🔍
+                            </div>
+                            <div class="insight-match">-</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div
                 style="font-size: 11px; margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--border-color); color: var(--text-secondary); line-height: 1.5;">
                 <strong>Besmele Detayı:</strong> Kur'an'da toplam <strong>114 Besmele</strong> vardır:
