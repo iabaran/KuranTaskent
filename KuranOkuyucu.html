@@ -316,6 +316,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-direction: row-reverse;
+            /* Listeleme düz olsun diye sağdan başlasın */
         }
 
         .insight-count-badge {
@@ -1173,7 +1175,7 @@
                     <ul class="insight-list">
                         <li class="insight-item">
                             <span class="insight-label">"Adam" (رجل)</span>
-                            <div class="insight-value-container">
+                            <div class="insight-value-container" style="flex-direction: row !important;">
                                 <span class="insight-count-badge" style="background: #3498db;"
                                     onclick="showGenericWordTooltip(event, 'raculTooltip', 'Adam (Racül)', typeof genderData !== 'undefined' ? genderData.Racul.locations : [], 'رجل')">
                                     23 🔍
