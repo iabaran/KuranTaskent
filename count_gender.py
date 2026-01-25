@@ -89,9 +89,19 @@ def main():
                             # 7:155 - "Seb'ine raculen" -> 70 Adam. 
                             if surah_num == 7 and ayah_num == 155:
                                 continue
+                            
+                            # 38:42 - "Urkud bi riclike" -> Ayağınla vur. (Ricl = Ayak, Racul = Adam değil). 
+                            # Bu elenince sayı 23'e düşer.
+                            if surah_num == 38 and ayah_num == 42:
+                                continue
 
-                        # İmraah (Kadın) için de gerekirse filtre eklenebilir
-                        # İmraah ideal sayısı 24 olarak kabul edilir. (Mevcut sayım 24 çıkacak).
+                        # İmraah (Kadın) Filtresi
+                        if key == "Imraah":
+                            # 111:4 - Ebu Leheb'in karısı. (İman etmediği ve cehennemlik olduğu için
+                            # insan olma şerefinden mahrum kabul edilip sayıma dahil edilmez).
+                            # Bu elenince sayı 23'e düşer.
+                            if surah_num == 111 and ayah_num == 4:
+                                continue
 
                         results[key]["count"] += 1
                         results[key]["locations"].append({
