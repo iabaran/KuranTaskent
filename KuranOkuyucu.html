@@ -7,7 +7,9 @@
     <title>Kuran Okuyucu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="faith_groups_data.js"></script>
+    <script src="faith_groups_data.js"></script>
     <script src="gender_data.js"></script>
+    <script src="animals_data.js"></script>
     <style>
         :root {
             --bg-color: #f4f7f6;
@@ -1163,6 +1165,26 @@
                                     🔍
                                 </span>
                             </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- KART 9: HAYVANLAR -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <i class="fas fa-paw"></i> 🦁 Hayvanlar
+                    </div>
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <span class="insight-label">"Eşek" (Himar/Hamir)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #7f8c8d;"
+                                    onclick="showGenericWordTooltip(event, 'esekTooltip', 'Eşek (Himar/Hamir/Humur)', typeof animalsData !== 'undefined' ? animalsData.Esek.locations : [], 'حمار')">
+                                    <script>document.write(typeof animalsData !== 'undefined' ? animalsData.Esek.count : '...')</script>
+                                    🔍
+                                </span>
+                            </div>
+                            <div class="insight-note">*Müddessir 50 (Yaban Eşekleri) dahil</div>
                         </li>
                     </ul>
                 </div>
