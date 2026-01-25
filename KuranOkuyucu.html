@@ -280,6 +280,17 @@
             border-bottom: 1px solid var(--border-color);
             transition: background 0.2s;
             font-size: 14px;
+            flex-wrap: wrap;
+            /* İyileştirme: İçerik taşarsa veya not varsa alt satıra geçsin */
+        }
+
+        .insight-note {
+            width: 100%;
+            font-size: 11px;
+            color: #7f8c8d;
+            margin-top: 4px;
+            text-align: right;
+            font-style: italic;
         }
 
         .insight-item:last-child {
@@ -1174,8 +1185,7 @@
                                     23 🔍
                                 </span>
                             </div>
-                            <div style="font-size: 10px; color: #666; margin-top: 2px;">*Ebu Leheb'in karısı (111:4)
-                                hariç</div>
+                            <div class="insight-note">*Ebu Leheb'in karısı (111:4) hariç</div>
                         </li>
                         <li class="insight-item">
                             <span class="insight-label">"Kadınlar" (النساء)</span>
