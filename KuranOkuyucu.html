@@ -1192,8 +1192,12 @@
 
                 <!-- KART 10: DEMİR/MADENLER -->
                 <div class="category-card">
-                    <div class="category-header">
-                        <i class="fas fa-gem"></i> ⚙️ Demir / Madenler
+                    <div class="category-header" style="justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-gem"></i> ⚙️ Demir / Madenler
+                        </div>
+                        <i class="fas fa-info-circle" onclick="toggleIronModal()"
+                            style="cursor: pointer; color: var(--accent); font-size: 18px;" title="Detaylı Bilgi"></i>
                     </div>
                     <ul class="insight-list">
                         <li class="insight-item">
@@ -2215,6 +2219,89 @@
     </script>
     <script src="quran_arabic_js.js"></script>
     <script src="quran_tr_js.js"></script>
+
+    <!-- Demir Detay Modalı -->
+    <div id="ironModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="close-btn" onclick="toggleIronModal()">&times;</span>
+            <h2 class="analysis-title">⚙️ Demir (Hadid) Mucizeleri</h2>
+            <div style="line-height: 1.6; font-size: 15px;">
+                <p>Demir (<strong>Hadid</strong>) ile ilgili Kur'an'daki şaşırtıcı sayısal ve bilimsel uyumlar:</p>
+
+                <div class="category-block" style="padding: 15px;">
+                    <h3 style="color: var(--accent); margin-top: 0;">1. Ebced ve Atom Numarası Uyumu</h3>
+                    <ul>
+                        <li><strong>Hadid (حديد) Ebced Değeri: 26</strong>
+                            <br><em>Bilimsel Karşılık:</em> Demirin atom numarası <strong>26</strong>'dır.
+                        </li>
+                        <li><strong>el-Hadid (الحديد) Ebced Değeri: 57</strong>
+                            <br><em>Sayısal Karşılık:</em> Hadid Suresi, Kur'an-ı Kerim'in <strong>57.
+                                suresidir</strong>.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="category-block" style="padding: 15px;">
+                    <h3 style="color: var(--accent); margin-top: 0;">2. İzotop ve Sure Numarası Uyumu</h3>
+                    <ul>
+                        <li><strong>Demir-57 İzotopu:</strong> Demirin doğada bulunan 4 kararlı izotopundan biridir.
+                        </li>
+                        <li>Bu izotopun kütle numarası olan <strong>57</strong>, Hadid Suresi'nin Kur'an'daki
+                            <strong>sıra numarası (57)</strong> ile birebir örtüşür.</li>
+                    </ul>
+                    <div class="error-msg"
+                        style="background: rgba(39, 174, 96, 0.1); border-color: var(--accent); color: var(--text-main); font-size: 13px;">
+                        <strong>ÖNEMLİ:</strong> Hem surenin numarası, hem izotopun kütle numarası, hem de "el-Hadid"
+                        kelimesinin ebced değeri <strong>57</strong>'dir.
+                    </div>
+                </div>
+
+                <div class="category-block" style="padding: 15px;">
+                    <h3 style="color: var(--accent); margin-top: 0;">3. Bilimsel Mucize: Demirin "İndirilmesi"</h3>
+                    <p><strong>Ayet (57:25):</strong> "...Ve demiri de <strong>indirdik (enze'lnâ)</strong>..."</p>
+                    <p><strong>Bilimsel Gerçek:</strong> Demir, Dünya'da oluşamaz. Sadece devasa yıldızların (süpernova)
+                        patlamasıyla oluşur ve uzaydan meteorlar yoluyla Dünya'ya <strong>"indirilmiştir"</strong>.
+                        Kur'an bu geliş biçimini "indirdik" kelimesiyle 1400 yıl önceden haber vermiştir.</p>
+                </div>
+
+                <div class="category-block" style="padding: 15px;">
+                    <h3 style="color: var(--accent); margin-top: 0;">4. Kur'an'ın Merkezi</h3>
+                    <p>Kur'an'da toplam <strong>114</strong> sure vardır. Hadid Suresi (<strong>57</strong>), Kur'an'ın
+                        tam matematiksel <strong>merkezidir</strong> (114 / 2 = 57). Tıpkı demir elementinin Dünya'nın
+                        merkezinde yer alması gibi.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scriptleri en sona ekliyoruz -->
+    <script>
+        function toggleIronModal() {
+            const modal = document.getElementById('ironModal');
+            if (modal.style.display === 'block') {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'block';
+            }
+        }
+
+        // Modal dışına tıklayınca kapatma
+        window.onclick = function (event) {
+            const ironModal = document.getElementById('ironModal');
+            if (event.target == ironModal) {
+                ironModal.style.display = "none";
+            }
+            // Mevcut modal kapatma kodu (override etmemek için buraya ekliyoruz)
+            const modal = document.getElementById('ebcedModal');
+            if (modal && event.target == modal) {
+                modal.style.display = "none";
+            }
+            const verseModal = document.getElementById('versePreviewModal');
+            if (verseModal && event.target == verseModal) {
+                verseModal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>
