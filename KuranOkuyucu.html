@@ -11,6 +11,7 @@
     <script src="gender_data.js"></script>
     <script src="animals_data.js"></script>
     <script src="minerals_data.js"></script>
+    <script src="haram_helal_data.js"></script>
     <style>
         :root {
             --bg-color: #f4f7f6;
@@ -1240,6 +1241,41 @@
                     </div>
                 </div>
 
+                <!-- KART 11: HARAM / HELAL -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <i class="fas fa-balance-scale"></i> ⚖️ Haram ve Helal
+                    </div>
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <span class="insight-label">"Haram" (Yasak)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #c0392b;"
+                                    onclick="showGenericWordTooltip(event, 'haramTooltip', 'Haram (Yasak)', typeof haramHelalData !== 'undefined' ? haramHelalData.Haram.locations : [], 'حرام')">
+                                    <script>document.write(typeof haramHelalData !== 'undefined' ? haramHelalData.Haram.count : '...')</script>
+                                    🔍
+                                </span>
+                            </div>
+                            <div class="insight-note">Fiil türevleri dahil (Harrama vb.)</div>
+                        </li>
+                        <li class="insight-item">
+                            <span class="insight-label">"Helal" (Serbest)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #27ae60;"
+                                    onclick="showGenericWordTooltip(event, 'helalTooltip', 'Helal (Serbest)', typeof haramHelalData !== 'undefined' ? haramHelalData.Helal.locations : [], 'حلال')">
+                                    <script>document.write(typeof haramHelalData !== 'undefined' ? haramHelalData.Helal.count : '...')</script>
+                                    🔍
+                                </span>
+                            </div>
+                            <div class="insight-note">Fiil türevleri dahil (Ehalle vb.)</div>
+                        </li>
+                    </ul>
+                    <div
+                        style="font-size: 11px; padding: 10px 20px; color: var(--text-secondary); background: rgba(0,0,0,0.02); border-top: 1px solid var(--border-color);">
+                        Kutsal/Saygın anlamındaki kullanımlar hariç, doğrudan yasak ve serbest anlamındaki sayılardır.
+                    </div>
+                </div>
+
                 <!-- KART 8: İNSAN VE CİNSİYET -->
                 <div class="category-card">
                     <div class="category-header">
@@ -2247,7 +2283,8 @@
                         <li><strong>Demir-57 İzotopu:</strong> Demirin doğada bulunan 4 kararlı izotopundan biridir.
                         </li>
                         <li>Bu izotopun kütle numarası olan <strong>57</strong>, Hadid Suresi'nin Kur'an'daki
-                            <strong>sıra numarası (57)</strong> ile birebir örtüşür.</li>
+                            <strong>sıra numarası (57)</strong> ile birebir örtüşür.
+                        </li>
                     </ul>
                     <div class="error-msg"
                         style="background: rgba(39, 174, 96, 0.1); border-color: var(--accent); color: var(--text-main); font-size: 13px;">
