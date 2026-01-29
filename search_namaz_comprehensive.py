@@ -1,5 +1,4 @@
 import json
-import re
 import sys
 
 # UTF-8 encoding için
@@ -10,30 +9,16 @@ with open('quran_arabic.json', 'r', encoding='utf-8') as f:
     quran_data = json.load(f)
 
 print("=" * 80)
-print("NAMAZ (SALAT) İLE İLGİLİ AYETLER")
+print("NAMAZ (SALAT) İLE İLGİLİ TÜM AYETLER")
 print("=" * 80)
 print()
-
-# Namaz ile ilgili anahtar kelimeler (Arapça kökler)
-# الصَّلَوٰةَ - es-salat (namaz)
-# Bu Kuran'daki gerçek yazım şekli
-
-salat_patterns = [
-    'الصَّلَوٰةَ',  # es-salat (namaz) - en yaygın form
-    'الصَّلَوٰة',   # es-salat (namaz) - alternatif
-    'صَلَوٰة',      # salat
-    'صَلَوٰت',      # salavat (çoğul)
-    'صَلَّىٰ',      # salla (namaz kıldı)
-    'يُصَلِّ',     # yusalli (namaz kılıyor)
-    'صَلُّواْ',    # sallu (namaz kılın)
-    'تُصَلِّ',     # tusalli (namaz kılıyorsun)
-    'نُصَلِّ',     # nusalli (namaz kılıyoruz)
-    'مُصَلّٗى',     # musalla (namaz yeri)
-]
+print("NOT: Kuran'da namazın kaç rekat olduğuna dair DOĞRUDAN bir bilgi yoktur.")
+print("Rekat sayıları Hz. Muhammed'in (s.a.v.) uygulamasından (sünnet) gelir.")
+print()
 
 results = []
 
-# Her sure ve ayeti tara
+# Her sure ve ayeti tara - "صل" kökünü içeren tüm kelimeleri bul
 for surah in quran_data:
     surah_number = surah['id']
     surah_name = surah['name']
@@ -42,20 +27,16 @@ for surah in quran_data:
     for ayah in surah['verses']:
         ayah_number = ayah['id']
         ayah_text = ayah['text']
-        ayah_number_in_surah = ayah['id']
         
-        # Namaz kelimesini ara
-        for pattern in salat_patterns:
-            if pattern in ayah_text:
-                results.append({
-                    'surah_number': surah_number,
-                    'surah_name': surah_name,
-                    'surah_name_tr': surah_name_tr,
-                    'ayah_number': ayah_number_in_surah,
-                    'ayah_text': ayah_text,
-                    'matched_pattern': pattern
-                })
-                break  # Bir ayet için bir kez ekle
+        # "صل" kökünü içeren kelimeleri ara (namaz ile ilgili)
+        if 'صل' in ayah_text or 'صَل' in ayah_text or 'صَّل' in ayah_text:
+            results.append({
+                'surah_number': surah_number,
+                'surah_name': surah_name,
+                'surah_name_tr': surah_name_tr,
+                'ayah_number': ayah_number,
+                'ayah_text': ayah_text,
+            })
 
 # Sonuçları göster
 print(f"Toplam {len(results)} ayet bulundu\n")
@@ -83,3 +64,25 @@ for result in results:
 print("\nSure bazında namaz ayetleri:")
 for surah_name, count in sorted(surah_counts.items(), key=lambda x: x[1], reverse=True):
     print(f"  {surah_name}: {count} ayet")
+
+# Önemli bilgi
+print("\n" + "=" * 80)
+print("ÖNEMLİ BİLGİ:")
+print("=" * 80)
+print("""
+Kuran'da namazın:
+- FARZ olduğu açıkça belirtilmiştir
+- Vakitleri (sabah, öğle, ikindi, akşam, yatsı) işaret edilmiştir
+- Nasıl kılınacağı (rükû, secde) anlatılmıştır
+- Ancak KAÇ REKAT olduğu DOĞRUDAN belirtilmemiştir
+
+Rekat sayıları:
+- Hz. Muhammed'in (s.a.v.) uygulamasından (sünnet) gelir
+- Hadislerde detaylı olarak anlatılmıştır
+- İslam alimleri arasında icma (ittifak) vardır:
+  * Sabah: 2 rekat farz
+  * Öğle: 4 rekat farz
+  * İkindi: 4 rekat farz
+  * Akşam: 3 rekat farz
+  * Yatsı: 4 rekat farz
+""")
