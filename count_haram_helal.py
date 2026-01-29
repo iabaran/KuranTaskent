@@ -97,10 +97,11 @@ def analyze_haram_helal():
                          "w": word
                      })
 
-                # 4. Verb "Ahalla" (احل) -> Broaden to root H-L-L to see all
-                # Root H-L-L matches: Halal, Ahalla, Tahilla, Yuhillu...
-                if re.search(r'ح.*ل.*ل', clean_word):
-                    results["ahalla_verb"].append({
+                # 4. Broad H-L-L (Containing ح-ل-ل sequence OR stems like احل with shadda implied)
+                # Since Shadda is removed, Ahalla is 'احل'. This has only one L.
+                # Regex: H followed by L.
+                if re.search(r'ح.*ل', clean_word):
+                     results["ahalla_verb"].append({
                              "s": surah['id'],
                              "a": ayah['id'],
                              "w": word
@@ -123,31 +124,35 @@ def analyze_haram_helal():
     for w in sorted(haram_words):
         print(w)
 
-    print(f"Total 'Haram' (containing حرام, no Mescid): {len(results['haram_exact'])}")
-    print(f"Total 'Halal' (containing حلال): {len(results['halal_exact'])}")
-    
-    print("\n--- Haram Occurrences (Context Analysis) ---")
-    for item in results["haram_exact"]:
-        print(f"[{item['s']}:{item['a']}] Word: {item['w']}") 
-        # Ideally we would print the full verse here if we had access to the variable holding it
-        # Since 'item' only has metadata, let's find the verse text from 'quran' object
-        # This is slow O(N) lookup but fine for 11 items
+    print(f"Total 'Haram' Root (containing حرم anywhere): {len(results['harrama_verb'])}")
+    print(f"Total 'Halal' Root (containing ح..ل..ل): {len(results['ahalla_verb'])}")
+
+    print("\n--- H-R-M (Haram/Forbidden/Sacred) Root Occurrences ---")
+    for item in results["harrama_verb"]:
+        # print(f"[{item['s']}:{item['a']}] Word: {item['w']}")
+        # Find text
+        found_text = ""
         for s in quran:
             if s['id'] == item['s']:
                 for a in s['verses']:
                     if a['id'] == item['a']:
-                         print(f"Text: {a['text']}")
+                         found_text = a['text']
                          break
-    
-    print("\n--- Helal Occurrences (Context Analysis) ---")
-    for item in results["halal_exact"]:
-        print(f"[{item['s']}:{item['a']}] Word: {item['w']}")
+                break
+        print(f"[{item['s']}:{item['a']}] {item['w']} -> {found_text}")
+
+    print("\n--- H-L-L (Halal/Allowed/Untie/Descend) Root Occurrences ---")
+    for item in results["ahalla_verb"]:
+        found_text = ""
         for s in quran:
             if s['id'] == item['s']:
                 for a in s['verses']:
                     if a['id'] == item['a']:
-                         print(f"Text: {a['text']}")
+                         found_text = a['text']
                          break
+                break
+        print(f"[{item['s']}:{item['a']}] {item['w']} -> {found_text}")
+
 
     # Save to file
     with open('haram_helal_results.json', 'w', encoding='utf-8') as f:
