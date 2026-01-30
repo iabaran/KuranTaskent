@@ -2419,6 +2419,9 @@
             }
         }
 
+        let akilCurrentLimit = 10;
+        let namazCurrentLimit = 10;
+
         function populateAkilNamazPanel() {
             if (typeof akilData === 'undefined' || typeof namazData === 'undefined') return;
 
@@ -2426,7 +2429,7 @@
             const akilList = document.getElementById('akilVerseList');
             if (akilList && akilData.verses) {
                 akilList.innerHTML = '';
-                akilData.verses.slice(0, 10).forEach(v => {
+                akilData.verses.slice(0, akilCurrentLimit).forEach(v => {
                     const li = document.createElement('li');
                     li.className = 'insight-item';
                     li.style.cssText = "cursor: pointer; padding: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; transition: background 0.2s;";
@@ -2445,10 +2448,17 @@
                     li.onclick = () => showAkilNamazVersePreview(v);
                     akilList.appendChild(li);
                 });
-                if (akilData.verses.length > 10) {
+                if (akilData.verses.length > akilCurrentLimit) {
                     const more = document.createElement('li');
                     more.className = 'insight-item';
-                    more.innerHTML = `<span class="insight-label" style="color: var(--accent);">+ ${akilData.verses.length - 10} ayet daha...</span>`;
+                    more.style.cssText = "cursor: pointer; padding: 10px; text-align: center; color: var(--accent); font-weight: bold; border-top: 1px dashed var(--border-color); transition: background 0.2s;";
+                    more.innerHTML = `<span>+ ${akilData.verses.length - akilCurrentLimit} ayet daha... (Tümünü Göster)</span>`;
+                    more.onmouseover = () => more.style.background = 'rgba(155, 89, 182, 0.1)';
+                    more.onmouseout = () => more.style.background = 'transparent';
+                    more.onclick = function () {
+                        akilCurrentLimit = akilData.verses.length;
+                        populateAkilNamazPanel();
+                    };
                     akilList.appendChild(more);
                 }
             }
@@ -2457,7 +2467,7 @@
             const namazList = document.getElementById('namazVerseList');
             if (namazList && namazData.verses) {
                 namazList.innerHTML = '';
-                namazData.verses.slice(0, 10).forEach(v => {
+                namazData.verses.slice(0, namazCurrentLimit).forEach(v => {
                     const li = document.createElement('li');
                     li.className = 'insight-item';
                     li.style.cssText = "cursor: pointer; padding: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; transition: background 0.2s;";
@@ -2476,10 +2486,17 @@
                     li.onclick = () => showAkilNamazVersePreview(v);
                     namazList.appendChild(li);
                 });
-                if (namazData.verses.length > 10) {
+                if (namazData.verses.length > namazCurrentLimit) {
                     const more = document.createElement('li');
                     more.className = 'insight-item';
-                    more.innerHTML = `<span class="insight-label" style="color: var(--accent);">+ ${namazData.verses.length - 10} ayet daha...</span>`;
+                    more.style.cssText = "cursor: pointer; padding: 10px; text-align: center; color: var(--accent); font-weight: bold; border-top: 1px dashed var(--border-color); transition: background 0.2s;";
+                    more.innerHTML = `<span>+ ${namazData.verses.length - namazCurrentLimit} ayet daha... (Tümünü Göster)</span>`;
+                    more.onmouseover = () => more.style.background = 'rgba(155, 89, 182, 0.1)';
+                    more.onmouseout = () => more.style.background = 'transparent';
+                    more.onclick = function () {
+                        namazCurrentLimit = namazData.verses.length;
+                        populateAkilNamazPanel();
+                    };
                     namazList.appendChild(more);
                 }
             }
