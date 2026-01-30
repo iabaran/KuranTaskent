@@ -209,7 +209,7 @@ try:
         f.write('    description: "Kuran\'da namaz ile ilgili tüm bilgiler",\n')
         f.write('    icon: "🕌",\n')
         f.write(f'    totalCount: {len(namaz_verses)},\n')
-        f.write('    importantNote: "Kuran\'da namazın kaç rekat olduğu belirtilmez. Önemli olan huşu, samimiyet ve anlayarak kılmaktır.",\n')
+        f.write('    importantNote: "Kuran\'da namazın özü Allah\'ı anmak, O\'na yalvarmak ve doğru yola yönelmektir. Kuran, namazın ruhunu ve önemini vurgularken, aklı kullanmayı ve körü körüne taklitten kaçınmayı emreder.",\n')
         f.write('    categories: {\n')
         
         # Namaz Kategorileri
