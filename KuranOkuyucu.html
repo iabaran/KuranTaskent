@@ -2423,82 +2423,111 @@
         let namazCurrentLimit = 10;
 
         function populateAkilNamazPanel() {
-            if (typeof akilData === 'undefined' || typeof namazData === 'undefined') return;
+            console.log("populateAkilNamazPanel started");
 
-            // Akıl Ayetleri
+            // 1. Check if data is loaded
+            let missingData = [];
+            if (typeof akilData === 'undefined') missingData.push('akilData');
+            if (typeof namazData === 'undefined') missingData.push('namazData');
+
             const akilList = document.getElementById('akilVerseList');
-            if (akilList && akilData.verses) {
-                akilList.innerHTML = '';
-                akilData.verses.slice(0, akilCurrentLimit).forEach(v => {
-                    const li = document.createElement('li');
-                    li.className = 'insight-item';
-                    li.style.cssText = "cursor: pointer; padding: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; transition: background 0.2s;";
-                    li.onmouseover = () => li.style.background = 'rgba(155, 89, 182, 0.1)';
-                    li.onmouseout = () => li.style.background = 'transparent';
-                    li.innerHTML = `
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <i class="fas fa-brain" style="color: #9b59b6; font-size: 0.9em;"></i>
-                            <span class="insight-label">${v.surah}:${v.ayah} - ${v.surahNameTr}</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span class="insight-count-badge" style="font-size: 0.8em;">${v.keyword}</span>
-                            <i class="fas fa-chevron-right" style="color: var(--text-secondary); font-size: 0.8em;"></i>
-                        </div>
-                    `;
-                    li.onclick = () => showAkilNamazVersePreview(v);
-                    akilList.appendChild(li);
-                });
-                if (akilData.verses.length > akilCurrentLimit) {
-                    const more = document.createElement('li');
-                    more.className = 'insight-item';
-                    more.style.cssText = "cursor: pointer; padding: 10px; text-align: center; color: var(--accent); font-weight: bold; border-top: 1px dashed var(--border-color); transition: background 0.2s;";
-                    more.innerHTML = `<span>+ ${akilData.verses.length - akilCurrentLimit} ayet daha... (Tümünü Göster)</span>`;
-                    more.onmouseover = () => more.style.background = 'rgba(155, 89, 182, 0.1)';
-                    more.onmouseout = () => more.style.background = 'transparent';
-                    more.onclick = function () {
-                        akilCurrentLimit = akilData.verses.length;
-                        populateAkilNamazPanel();
-                    };
-                    akilList.appendChild(more);
-                }
+            const namazList = document.getElementById('namazVerseList');
+
+            if (missingData.length > 0) {
+                console.error("Data missing:", missingData.join(', '));
+                const errorMsg = `<li class="insight-item" style="color:red; justify-content:center; text-align:center; padding:10px;">
+                    ❌ Veri yüklenemedi (${missingData.join(', ')})<br>
+                    <span style="font-size:0.9em; color:var(--text-secondary);">Sayfayı yenilemeyi deneyin.</span>
+                </li>`;
+                if (akilList) akilList.innerHTML = errorMsg;
+                if (namazList) namazList.innerHTML = errorMsg;
+                return;
             }
 
-            // Namaz Ayetleri
-            const namazList = document.getElementById('namazVerseList');
-            if (namazList && namazData.verses) {
-                namazList.innerHTML = '';
-                namazData.verses.slice(0, namazCurrentLimit).forEach(v => {
-                    const li = document.createElement('li');
-                    li.className = 'insight-item';
-                    li.style.cssText = "cursor: pointer; padding: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; transition: background 0.2s;";
-                    li.onmouseover = () => li.style.background = 'rgba(155, 89, 182, 0.1)';
-                    li.onmouseout = () => li.style.background = 'transparent';
-                    li.innerHTML = `
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <i class="fas fa-book-open" style="color: #9b59b6; font-size: 0.9em;"></i>
-                            <span class="insight-label">${v.surah}:${v.ayah} - ${v.surahNameTr}</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span class="insight-count-badge" style="font-size: 0.8em;">${v.keyword}</span>
-                            <i class="fas fa-chevron-right" style="color: var(--text-secondary); font-size: 0.8em;"></i>
-                        </div>
-                    `;
-                    li.onclick = () => showAkilNamazVersePreview(v);
-                    namazList.appendChild(li);
-                });
-                if (namazData.verses.length > namazCurrentLimit) {
-                    const more = document.createElement('li');
-                    more.className = 'insight-item';
-                    more.style.cssText = "cursor: pointer; padding: 10px; text-align: center; color: var(--accent); font-weight: bold; border-top: 1px dashed var(--border-color); transition: background 0.2s;";
-                    more.innerHTML = `<span>+ ${namazData.verses.length - namazCurrentLimit} ayet daha... (Tümünü Göster)</span>`;
-                    more.onmouseover = () => more.style.background = 'rgba(155, 89, 182, 0.1)';
-                    more.onmouseout = () => more.style.background = 'transparent';
-                    more.onclick = function () {
-                        namazCurrentLimit = namazData.verses.length;
-                        populateAkilNamazPanel();
-                    };
-                    namazList.appendChild(more);
+            console.log("Data loaded. Akil:", akilData.verses ? akilData.verses.length : 0, "Namaz:", namazData.verses ? namazData.verses.length : 0);
+
+            try {
+                // Akıl Ayetleri
+                if (akilList && akilData.verses) {
+                    akilList.innerHTML = '';
+                    akilData.verses.slice(0, akilCurrentLimit).forEach(v => {
+                        const li = document.createElement('li');
+                        li.className = 'insight-item';
+                        li.style.cssText = "cursor: pointer; padding: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; transition: background 0.2s;";
+                        li.onmouseover = () => li.style.background = 'rgba(155, 89, 182, 0.1)';
+                        li.onmouseout = () => li.style.background = 'transparent';
+                        li.innerHTML = `
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-brain" style="color: #9b59b6; font-size: 0.9em;"></i>
+                                <span class="insight-label">${v.surah}:${v.ayah} - ${v.surahNameTr}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="insight-count-badge" style="font-size: 0.8em;">${v.keyword}</span>
+                                <i class="fas fa-chevron-right" style="color: var(--text-secondary); font-size: 0.8em;"></i>
+                            </div>
+                        `;
+                        li.onclick = () => showAkilNamazVersePreview(v);
+                        akilList.appendChild(li);
+                    });
+
+                    // Show More Button (Akıl)
+                    if (akilData.verses.length > akilCurrentLimit) {
+                        const more = document.createElement('li');
+                        more.className = 'insight-item';
+                        more.style.cssText = "cursor: pointer; padding: 10px; text-align: center; color: var(--accent); font-weight: bold; border-top: 1px dashed var(--border-color); transition: background 0.2s;";
+                        more.innerHTML = `<span>+ ${akilData.verses.length - akilCurrentLimit} ayet daha... (Tümünü Göster)</span>`;
+                        more.onmouseover = () => more.style.background = 'rgba(155, 89, 182, 0.1)';
+                        more.onmouseout = () => more.style.background = 'transparent';
+                        more.onclick = function () {
+                            akilCurrentLimit = akilData.verses.length;
+                            populateAkilNamazPanel();
+                        };
+                        akilList.appendChild(more);
+                    }
                 }
+
+                // Namaz Ayetleri
+                if (namazList && namazData.verses) {
+                    namazList.innerHTML = '';
+                    namazData.verses.slice(0, namazCurrentLimit).forEach(v => {
+                        const li = document.createElement('li');
+                        li.className = 'insight-item';
+                        li.style.cssText = "cursor: pointer; padding: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; transition: background 0.2s;";
+                        li.onmouseover = () => li.style.background = 'rgba(155, 89, 182, 0.1)';
+                        li.onmouseout = () => li.style.background = 'transparent';
+                        li.innerHTML = `
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-book-open" style="color: #9b59b6; font-size: 0.9em;"></i>
+                                <span class="insight-label">${v.surah}:${v.ayah} - ${v.surahNameTr}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="insight-count-badge" style="font-size: 0.8em;">${v.keyword}</span>
+                                <i class="fas fa-chevron-right" style="color: var(--text-secondary); font-size: 0.8em;"></i>
+                            </div>
+                        `;
+                        li.onclick = () => showAkilNamazVersePreview(v);
+                        namazList.appendChild(li);
+                    });
+
+                    // Show More Button (Namaz)
+                    if (namazData.verses.length > namazCurrentLimit) {
+                        const more = document.createElement('li');
+                        more.className = 'insight-item';
+                        more.style.cssText = "cursor: pointer; padding: 10px; text-align: center; color: var(--accent); font-weight: bold; border-top: 1px dashed var(--border-color); transition: background 0.2s;";
+                        more.innerHTML = `<span>+ ${namazData.verses.length - namazCurrentLimit} ayet daha... (Tümünü Göster)</span>`;
+                        more.onmouseover = () => more.style.background = 'rgba(155, 89, 182, 0.1)';
+                        more.onmouseout = () => more.style.background = 'transparent';
+                        more.onclick = function () {
+                            namazCurrentLimit = namazData.verses.length;
+                            populateAkilNamazPanel();
+                        };
+                        namazList.appendChild(more);
+                    }
+                }
+            } catch (e) {
+                console.error("Error in populateAkilNamazPanel:", e);
+                if (akilList) akilList.innerHTML = `<li class="insight-item" style="color:red;">Hata: ${e.message}</li>`;
+                if (namazList) namazList.innerHTML = `<li class="insight-item" style="color:red;">Hata: ${e.message}</li>`;
             }
         }
 

@@ -28,7 +28,7 @@
 
 # Arayüz Düzenlemesi ve Senkronizasyon
 
-- [x] Mucizeler panelini (insight-item) CSS Grid ile hizalı hale getir <!-- id: 16 -->
+- [x] Mucizeler Panelini CSS Grid ile hizalı hale getir <!-- id: 16 -->
 - [x] Listeyi mantıklı bir sıraya (Sayısal, Kelime, Kozmolojik) göre yeniden düzenle <!-- id: 17 -->
 - [x] Tüm değişiklikleri ve yeni scriptleri Git'e commit et <!-- id: 18 -->
 
@@ -43,3 +43,8 @@
 - [x] **YENİ:** Cinsiyet (Kadın/Erkek) analizi yap ve eklentiyi kur (23-23 Kromozom dengesi) <!-- id: 26 -->
 - [x] Arayüz tasarımsal bozukluklarını gider (Flex-wrap ve Not stili) <!-- id: 27 -->
 - [x] Değişiklikleri GitHub ile senkronize et (Push) <!-- id: 28 -->
+
+# Namaz Loading Debugging
+
+- [x] Add error handling and logging to `populateAkilNamazPanel` in `KuranOkuyucu.html` <!-- id: 29 -->
+- [ ] Verify if data files are loading correctly in live environment <!-- id: 30 -->
