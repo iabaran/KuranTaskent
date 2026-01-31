@@ -48,3 +48,9 @@
 
 - [x] Add error handling and logging to `populateAkilNamazPanel` in `KuranOkuyucu.html` <!-- id: 29 -->
 - [ ] Verify if data files are loading correctly in live environment <!-- id: 30 -->
+
+# Site İndeksi ve Navigasyon
+
+- [x] Create Index Modal HTML structure in `KuranOkuyucu.html` <!-- id: 31 -->
+- [x] Add 'İçindekiler' button to Header <!-- id: 32 -->
+- [x] Implement `toggleIndexModal` and navigation logic <!-- id: 33 -->

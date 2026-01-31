@@ -757,6 +757,62 @@
         #verseSelect {
             width: 100%;
         }
+
+        /* Index Modal Styles */
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .index-category {
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .index-category h3 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .index-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .index-item {
+            padding: 8px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .index-item:hover {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--accent);
+        }
+
+        .index-item i {
+            width: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
     </style>
 </head>
 
@@ -775,6 +831,11 @@
             style="background: var(--card-bg); border: 2px solid #9b59b6; color: #9b59b6; padding: 8px 15px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: bold; transition: all 0.3s; margin-left: 10px;">
             <span>🧠</span>
             <span>Akıl ve Namaz</span>
+        </button>
+        <button id="indexToggle" onclick="toggleIndexModal()"
+            style="background: var(--card-bg); border: 2px solid #3498db; color: #3498db; padding: 8px 15px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: bold; transition: all 0.3s; margin-left: 10px;">
+            <span>📋</span>
+            <span>İçindekiler</span>
         </button>
         <h1>Kuran-ı Kerim Okuyucu</h1>
     </div>
@@ -2561,6 +2622,174 @@
             </div>
         </div>
     </div>
+    <!-- Index Modal -->
+    <div id="indexModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="close-btn" onclick="toggleIndexModal()">&times;</span>
+            <div class="verse-preview-header">
+                <span class="verse-preview-title">📚 Site İçindekiler / Hızlı Erişim</span>
+            </div>
+
+            <div class="index-grid">
+                <!-- Temel Bölümler -->
+                <div class="index-category">
+                    <h3><i class="fas fa-book-quran"></i> Temel Bölümler</h3>
+                    <ul class="index-list">
+                        <li class="index-item" onclick="navigateFromIndex('top')">
+                            <i class="fas fa-home"></i> Ana Sayfa / Kuran Okuma
+                        </li>
+                        <li class="index-item" onclick="navigateFromIndex('search')">
+                            <i class="fas fa-search"></i> Sure ve Ayet Arama
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mucizeler ve Analizler -->
+                <div class="index-category">
+                    <h3><i class="fas fa-star"></i> Mucizeler ve Analizler</h3>
+                    <ul class="index-list">
+                        <li class="index-item" onclick="navigateFromIndex('miracles')">
+                            <i class="fas fa-calculator"></i> 19 Sistemi ve Ebced
+                        </li>
+                        <li class="index-item" onclick="navigateFromIndex('huruf')">
+                            <i class="fas fa-key"></i> Huruf-u Mukatta (Şifreli Harfler)
+                        </li>
+                        <li class="index-item" onclick="navigateFromIndex('kelime')">
+                            <i class="fas fa-spell-check"></i> Kelime Tekrarları (Adem, İsa, Günler)
+                        </li>
+                        <li class="index-item" onclick="navigateFromIndex('science')">
+                            <i class="fas fa-flask"></i> Bilimsel İşaretler (Arı, Demir)
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Konulu İndeks -->
+                <div class="index-category">
+                    <h3><i class="fas fa-list-ul"></i> Konulu İndeks</h3>
+                    <ul class="index-list">
+                        <li class="index-item" onclick="navigateFromIndex('akil')">
+                            <i class="fas fa-brain"></i> Akıl ve Düşünce Ayetleri
+                        </li>
+                        <li class="index-item" onclick="navigateFromIndex('namaz')">
+                            <i class="fas fa-pray"></i> Namaz Ayetleri
+                        </li>
+                        <li class="index-item" onclick="navigateFromIndex('haram')">
+                            <i class="fas fa-hand-paper"></i> Haram ve Helaller
+                        </li>
+                        <li class="index-item" onclick="navigateFromIndex('inanc')">
+                            <i class="fas fa-users"></i> İnanç Grupları (Mümin, Kafir...)
+                        </li>
+                        <li class="index-item" onclick="navigateFromIndex('cinsiyet')">
+                            <i class="fas fa-venus-mars"></i> Cinsiyet Dengesi
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleIndexModal() {
+            const modal = document.getElementById('indexModal');
+            const btn = document.getElementById('indexToggle');
+            if (modal.style.display === 'block') {
+                modal.style.display = 'none';
+                btn.style.background = 'var(--card-bg)';
+                btn.style.color = '#3498db';
+            } else {
+                modal.style.display = 'block';
+                btn.style.background = '#3498db';
+                btn.style.color = 'white';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function (event) {
+            const modals = [
+                document.getElementById('versePreviewModal'),
+                document.getElementById('indexModal')
+            ];
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    // Reset buttons style if needed
+                    if (modal.id === 'indexModal') {
+                        const btn = document.getElementById('indexToggle');
+                        if (btn) {
+                            btn.style.background = 'var(--card-bg)';
+                            btn.style.color = '#3498db';
+                        }
+                    }
+                }
+            });
+        }
+
+        function navigateFromIndex(target) {
+            toggleIndexModal(); // Close modal first
+
+            // Helper to open panel if closed
+            const ensureMiraclePanelOpen = () => {
+                const panel = document.getElementById('analysisContainer');
+                if (!panel || panel.style.display === 'none') {
+                    toggleMiraclePanel();
+                }
+            };
+
+            const ensureAkilPanelOpen = () => {
+                const panel = document.getElementById('akilNamazPanel');
+                if (!panel || panel.style.display === 'none' || panel.style.display === '') {
+                    toggleAkilNamazPanel();
+                }
+            };
+
+            switch (target) {
+                case 'top':
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    break;
+                case 'search':
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    document.getElementById('surahSearch').focus();
+                    break;
+                case 'miracles':
+                    ensureMiraclePanelOpen();
+                    const mPanel = document.getElementById('miraclePanel');
+                    if (mPanel) mPanel.scrollIntoView({ behavior: 'smooth' });
+                    break;
+                case 'huruf':
+                    ensureMiraclePanelOpen();
+                    // Scroll specifically to mukatta section if identified, otherwise to top of miracles
+                    const hPanel = document.getElementById('miraclePanel');
+                    if (hPanel) hPanel.scrollIntoView({ behavior: 'smooth' });
+                    break;
+                case 'kelime':
+                    ensureMiraclePanelOpen();
+                    // Ideally scroll to word count section
+                    const kPanel = document.getElementById('miraclePanel');
+                    if (kPanel) kPanel.scrollIntoView({ behavior: 'smooth' });
+                    break;
+                case 'science':
+                    ensureMiraclePanelOpen();
+                    const sPanel = document.getElementById('miraclePanel');
+                    if (sPanel) sPanel.scrollIntoView({ behavior: 'smooth' });
+                    break;
+                case 'akil':
+                case 'namaz':
+                    ensureAkilPanelOpen();
+                    const aPanel = document.getElementById('akilNamazPanel');
+                    if (aPanel) aPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    break;
+                case 'haram':
+                case 'inanc':
+                case 'cinsiyet':
+                    ensureMiraclePanelOpen(); // These are currently under miracle/analysis panel in task list logic? 
+                    // Wait, task list says "Mucizeler Panelini 6 ana kategoriye ayır".
+                    // If they are in miracle panel, open that.
+                    const gPanel = document.getElementById('miraclePanel');
+                    if (gPanel) gPanel.scrollIntoView({ behavior: 'smooth' });
+                    break;
+            }
+        }
+    </script>
 </body>
 
 </html>
