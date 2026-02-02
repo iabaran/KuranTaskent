@@ -57,3 +57,9 @@
 
 # Mobil Bağlantı Sorunu Giderimi (Connection Reset)
 - [x] Create `serve.py` to bind to 0.0.0.0 and print LAN IP <!-- id: 34 -->
+
+# Rahman ve Rahim Analizi (Esirgeyen/Bağışlayan)
+- [/] Rahman kelimesinin (Esirgeyen) 57 adet olduğunu doğrula (19'un katı) <!-- id: 35 -->
+- [/] Rahim kelimesinin (Bağışlayan) 114 adet olduğunu doğrula (19'un katı) <!-- id: 36 -->
+- [ ] Arayüze Rahman/Rahim mucize dengesini ekle <!-- id: 37 -->
+- [ ] Site İndeksine bu analizi dahil et <!-- id: 38 -->
