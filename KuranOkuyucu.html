@@ -1417,6 +1417,42 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- KART 12: RAHMAN VE RAHİM -->
+                <div class="category-card" id="rahmanRahimCard" style="border-left: 5px solid #e67e22;">
+                    <div class="category-header" style="background: rgba(230, 126, 34, 0.1); color: #e67e22;">
+                        <i class="fas fa-heart"></i> ❤️ Rahman ve Rahim Dengesi
+                    </div>
+                    <ul class="insight-list">
+                        <li class="insight-item">
+                            <span class="insight-label">"Rahman" (Esirgeyen)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #e67e22;"
+                                    onclick="showRahmanTooltip(event)">
+                                    <script>document.write(typeof rahmanData !== 'undefined' ? rahmanData.counts.verses : '57')</script>
+                                    🔍
+                                </span>
+                                <span class="miracle-badge" title="19 x 3">19x3</span>
+                            </div>
+                        </li>
+                        <li class="insight-item">
+                            <span class="insight-label">"Rahim" (Bağışlayan)</span>
+                            <div class="insight-value-container">
+                                <span class="insight-count-badge" style="background: #d35400;"
+                                    onclick="showRahimTooltip(event)">
+                                    <script>document.write(typeof rahimData !== 'undefined' ? rahimData.counts.verses : '114')</script>
+                                    🔍
+                                </span>
+                                <span class="miracle-badge" title="19 x 6">19x6</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div
+                        style="font-size: 11px; padding: 10px 20px; color: var(--text-secondary); background: rgba(0,0,0,0.02); border-top: 1px solid var(--border-color);">
+                        Toplam Rahman: <strong>171</strong> (19x9) | Toplam Rahim: <strong>228</strong> (19x12)
+                        <br>*Ayetlerdeki öz isimler ve 114 Besmele toplamıdır.
+                    </div>
+                </div>
             </div>
             <div
                 style="font-size: 11px; margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--border-color); color: var(--text-secondary); line-height: 1.5;">
@@ -1984,10 +2020,10 @@
         function showAllahTooltip(event) { showGenericWordTooltip(event, 'allahTooltip', '☪️ Allah', typeof allahData !== 'undefined' ? allahData : [], 'الله'); }
         function hideAllahTooltip() { const t = document.getElementById('allahTooltip'); if (t) t.style.display = 'none'; }
 
-        function showRahmanTooltip(event) { showGenericWordTooltip(event, 'rahmanTooltip', '📖 Rahman Kelimesi', typeof rahmanData !== 'undefined' ? rahmanData : [], 'رحمٰن'); }
+        function showRahmanTooltip(event) { showGenericWordTooltip(event, 'rahmanTooltip', '📖 Rahman Kelimesi', typeof rahmanData !== 'undefined' ? rahmanData.verses : [], 'الرحمن'); }
         function hideRahmanTooltip() { const t = document.getElementById('rahmanTooltip'); if (t) t.style.display = 'none'; }
 
-        function showRahimTooltip(event) { showGenericWordTooltip(event, 'rahimTooltip', '📖 Rahim Kelimesi', typeof rahimData !== 'undefined' ? rahimData : [], 'رحيم'); }
+        function showRahimTooltip(event) { showGenericWordTooltip(event, 'rahimTooltip', '📖 Rahim Kelimesi', typeof rahimData !== 'undefined' ? rahimData.verses : [], 'الرحيم'); }
         function hideRahimTooltip() { const t = document.getElementById('rahimTooltip'); if (t) t.style.display = 'none'; }
 
         function showJannahTooltip(event) { showGenericWordTooltip(event, 'jannahTooltip', '🏞️ Cennet Kelimesi', typeof jannahData !== 'undefined' ? jannahData : [], 'جنة'); }
@@ -2660,6 +2696,9 @@
                         <li class="index-item" onclick="navigateFromIndex('science')">
                             <i class="fas fa-flask"></i> Bilimsel İşaretler (Arı, Demir)
                         </li>
+                        <li class="index-item" onclick="navigateFromIndex('rahman')">
+                            <i class="fas fa-heart"></i> Rahman ve Rahim Dengesi
+                        </li>
                     </ul>
                 </div>
 
@@ -2777,6 +2816,11 @@
                     ensureAkilPanelOpen();
                     const aPanel = document.getElementById('akilNamazPanel');
                     if (aPanel) aPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    break;
+                case 'rahman':
+                    ensureMiraclePanelOpen();
+                    const rPanel = document.getElementById('rahmanRahimCard');
+                    if (rPanel) rPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     break;
                 case 'haram':
                 case 'inanc':
