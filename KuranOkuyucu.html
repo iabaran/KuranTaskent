@@ -1462,8 +1462,9 @@
                     <li class="insight-item">
                         <span class="insight-label">Sakar & Bilgisayar (19)</span>
                         <div class="insight-value-container">
-                            <span class="insight-count-badge" style="background: #34495e;">1974</span>
-                            <span class="miracle-badge">1406 H. (19x74)</span>
+                            <span class="insight-count-badge" style="background: #34495e;"
+                                onclick="showSakarTooltip(event)">1974 🔍</span>
+                            <span class="miracle-badge" onclick="showSakarTooltip(event)">1406 H. (19x74)</span>
                         </div>
                         <div style="font-size: 10px; color: #7f8c8d; margin-top: 2px;">19 sistemi 1974'te (H. 1406)
                             bilgisayarla bulundu. 1406 = 19 x 74 (Müddessir). "Sakar" (Bilgisayar?)</div>
@@ -2063,6 +2064,18 @@
 
         function showSatanTooltip(event) { showGenericWordTooltip(event, 'satanTooltip', '😈 Şeytan Kelimesi', typeof satanData !== 'undefined' ? satanData : [], 'شيطان'); }
         function hideSatanTooltip() { const t = document.getElementById('satanTooltip'); if (t) t.style.display = 'none'; }
+
+        // MÜDDESSİR SAKAR Tooltip (Custom List)
+        function showSakarTooltip(event) {
+            const sakarVerses = [
+                { s: 74, a: 26, w: 'سقر' },
+                { s: 74, a: 27, w: 'سقر' },
+                { s: 74, a: 28, w: '' },
+                { s: 74, a: 29, w: 'لواحة' },
+                { s: 74, a: 30, w: 'تسعة عشر' }
+            ];
+            showGenericWordTooltip(event, 'sakarTooltip', '🔥 Sakar & 19 (Müddessir 26-30)', sakarVerses, 'سقر');
+        }
 
         // Core Navigation Function
         async function navigateToVerse(surahNum, verseNum, highlightWord = '', isHeader = false) {
