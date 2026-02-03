@@ -2865,6 +2865,118 @@
             }
         }
     </script>
+
+    <!-- Fixed Word Translation Box -->
+    <div id="wordTranslationBox" class="word-translation-box">
+        <div class="wt-header">Kelime Detayı</div>
+        <div class="wt-content">
+            <div id="wtArabic" class="wt-arabic">...</div>
+            <div id="wtTrans" class="wt-trans">...</div>
+            <div id="wtMeaning" class="wt-meaning">Kelimenin üzerine gelin</div>
+        </div>
+    </div>
+
+    <style>
+        .word-translation-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 200px;
+            background: var(--card-bg);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            overflow: hidden;
+            font-family: 'Segoe UI', sans-serif;
+            transition: all 0.3s ease;
+            opacity: 0.95;
+            display: none;
+            /* Hidden by default until hover */
+        }
+
+        body.night-mode .word-translation-box {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .wt-header {
+            background: var(--accent);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .wt-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .wt-arabic {
+            font-family: 'Amiri', 'Traditional Arabic', serif;
+            font-size: 28px;
+            color: var(--arabic-color);
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .wt-trans {
+            font-size: 13px;
+            color: var(--accent);
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .wt-meaning {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+            border-top: 1px solid var(--border-color);
+            padding-top: 8px;
+        }
+    </style>
+
+    <script>
+        // Translation Box Logic
+        let hideTimeout;
+        document.addEventListener('mouseover', function (e) {
+            const target = e.target.closest('.arabic-word');
+            const box = document.getElementById('wordTranslationBox');
+
+            if (target) {
+                clearTimeout(hideTimeout);
+
+                // Find tooltip data inside the arabic-word span
+                const tooltipTrans = target.querySelector('.tooltip-transcription');
+                const tooltipTurkish = target.querySelector('.tooltip-turkish');
+
+                // Get the arabic word text (excluding child elements like index/tooltip)
+                let arabicText = "";
+                target.childNodes.forEach(node => {
+                    if (node.nodeType === 3) arabicText += node.nodeValue.trim();
+                });
+
+                if (tooltipTrans && tooltipTurkish) {
+                    document.getElementById('wtArabic').textContent = arabicText || target.textContent.replace(/\d+/, '').trim(); // Fallback
+                    document.getElementById('wtTrans').textContent = tooltipTrans.textContent;
+                    document.getElementById('wtMeaning').textContent = tooltipTurkish.textContent;
+
+                    box.style.display = 'block';
+                }
+            }
+        });
+
+        document.addEventListener('mouseout', function (e) {
+            const target = e.target.closest('.arabic-word');
+            if (target) {
+                hideTimeout = setTimeout(() => {
+                    const box = document.getElementById('wordTranslationBox');
+                    box.style.display = 'none';
+                }, 2000); // 2 seconds delay to disappear
+            }
+        });
+    </script>
 </body>
 
 </html>
