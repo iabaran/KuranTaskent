@@ -837,8 +837,38 @@
             <span>📋</span>
             <span>İçindekiler</span>
         </button>
+        <button id="miracleToggle" onclick="toggleMiraclePanel()"
+            style="background: var(--card-bg); border: 2px solid #f39c12; color: #f39c12; padding: 8px 15px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: bold; transition: all 0.3s; margin-left: 10px;">
+            <span>✨</span>
+            <span>Mucizeler</span>
+        </button>
         <h1>Kuran-ı Kerim Okuyucu</h1>
     </div>
+
+    <script>
+        // Miracle Panel Toggle Function
+        function toggleMiraclePanel() {
+            const panel = document.getElementById('miraclePanel');
+            const btn = document.getElementById('miracleToggle');
+            if (!panel) return;
+
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+                if (btn) {
+                    btn.style.background = 'var(--card-bg)';
+                    btn.style.color = '#f39c12';
+                }
+            } else {
+                panel.style.display = 'block';
+                if (btn) {
+                    btn.style.background = '#f39c12';
+                    btn.style.color = 'white';
+                }
+                // Scroll the panel into view
+                panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    </script>
 
     <div class="controls">
         <div style="display: flex; flex-direction: column; width: 100%; gap: 15px;">
@@ -2891,8 +2921,8 @@
             font-family: 'Segoe UI', sans-serif;
             transition: all 0.3s ease;
             opacity: 0.95;
-            display: none;
-            /* Hidden by default until hover */
+            display: block;
+            /* Visible by default, hover updates content */
         }
 
         body.night-mode .word-translation-box {
