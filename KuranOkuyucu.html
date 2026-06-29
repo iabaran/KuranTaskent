@@ -873,8 +873,8 @@
     <div class="controls">
         <div style="display: flex; flex-direction: column; width: 100%; gap: 15px;">
             <div class="search-container">
-                <input type="text" id="surahSearch" placeholder="🔍 Sure Ara veya Seç..."
-                    onclick="this.select(); toggleSuggestions(true)" oninput="filterSuggestions(this.value)"
+                <input type="text" id="surahSearch" placeholder="🔍 Sure, Ayet veya Kelime Ara (Enter'a bas)..."
+                    onclick="this.select(); toggleSuggestions(true)" oninput="filterSuggestions(this.value)" onkeypress="handleSearchKeyPress(event)"
                     class="search-input" autocomplete="off">
                 <div id="surahSuggestions" class="suggestions-list">
                     <!-- JS ile dolacak -->
@@ -1644,6 +1644,208 @@
 
         // Initialize suggestions on load
         populateSuggestions();
+
+        // --- DEEP SEARCH LOGIC ---
+        const searchAliases = {
+            "kulhu allahu ehad": [{ surah: 112, ayah: 1, type: "alias", note: "İhlas Suresi 1. Ayet" }],
+            "kulhuvallahu ehad": [{ surah: 112, ayah: 1, type: "alias", note: "İhlas Suresi 1. Ayet" }],
+            "ayetel kürsi": [{ surah: 2, ayah: 255, type: "alias", note: "Ayetel Kürsi" }],
+            "amenerrasulu": [{ surah: 2, ayah: 285, type: "alias", note: "Amenerrasulü" }, { surah: 2, ayah: 286, type: "alias", note: "Amenerrasulü" }],
+            "amenerrasulü": [{ surah: 2, ayah: 285, type: "alias", note: "Amenerrasulü" }, { surah: 2, ayah: 286, type: "alias", note: "Amenerrasulü" }]
+        };
+
+        function normalizeSearchQuery(text) {
+            return text.toLocaleLowerCase('tr-TR')
+                .replace(/suresi/g, '')
+                .replace(/sures/g, '')
+                .replace(/sure/g, '')
+                .trim();
+        }
+
+        function handleSearchKeyPress(event) {
+            if (event.key === 'Enter') {
+                const query = event.target.value.trim();
+                if (query.length > 2) {
+                    toggleSuggestions(false);
+                    performDeepSearch(query);
+                }
+            }
+        }
+
+        function performDeepSearch(query) {
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `<div style="text-align:center; padding:40px;"><div id="loadingSpinner" style="display:block; margin:auto;"></div><p style="margin-top:15px; color:var(--text-secondary);">"${query}" aranıyor...</p></div>`;
+            
+            // Wait a small tick to allow UI to update loading spinner
+            setTimeout(() => {
+                const results = [];
+                const lowerQuery = query.toLocaleLowerCase('tr-TR').trim();
+                const normalizedQuery = normalizeSearchQuery(query);
+
+                // 1. Check Aliases
+                if (searchAliases[lowerQuery]) {
+                    searchAliases[lowerQuery].forEach(alias => {
+                        const trSurah = GLOBAL_QURAN_TR[alias.surah] || GLOBAL_QURAN_TR[alias.surah.toString()];
+                        const arabicSurah = GLOBAL_QURAN_ARABIC.find(s => s.id == alias.surah);
+                        
+                        if (trSurah && arabicSurah) {
+                            const trVerse = trSurah.ayahs[alias.ayah] || trSurah.ayahs[alias.ayah.toString()];
+                            const arVerse = arabicSurah.verses.find(v => v.id == alias.ayah);
+                            if (trVerse && arVerse) {
+                                results.push({
+                                    surah: alias.surah,
+                                    ayah: alias.ayah,
+                                    surahName: trSurah.name || surahNames[alias.surah-1],
+                                    arabic: arVerse.text,
+                                    turkish: trVerse,
+                                    matchType: 'alias',
+                                    note: alias.note
+                                });
+                            }
+                        }
+                    });
+                }
+
+                // 2. Check Surah Names
+                surahNames.forEach((name, index) => {
+                    if (name.toLocaleLowerCase('tr-TR').includes(normalizedQuery)) {
+                        results.push({ surah: index + 1, surahName: name, matchType: 'surah_name' });
+                    }
+                });
+
+                // Helper for Arabic normalization
+                function normalizeArabicSearch(text) {
+                    if (!text) return "";
+                    return text.replace(/[\u064B-\u065F\u0670\u06D6-\u06ED\u0640\u0653-\u0655]/g, '')
+                               .replace(/[أإآا]/g, 'ا')
+                               .replace(/ة/g, 'ه');
+                }
+                const arQueryNorm = normalizeArabicSearch(query);
+
+                // 3. Search in Ayahs (TR & AR)
+                if (typeof GLOBAL_QURAN_TR !== 'undefined' && typeof GLOBAL_QURAN_ARABIC !== 'undefined') {
+                    for (let sNum = 1; sNum <= 114; sNum++) {
+                        const trSurah = GLOBAL_QURAN_TR[sNum] || GLOBAL_QURAN_TR[sNum.toString()];
+                        const arSurah = GLOBAL_QURAN_ARABIC.find(s => s.id == sNum);
+                        
+                        if (!trSurah || !arSurah) continue;
+
+                        const numAyahs = Object.keys(trSurah.ayahs || {}).length;
+                        
+                        for (let aNum = 1; aNum <= numAyahs; aNum++) {
+                            const trVerse = trSurah.ayahs[aNum] || trSurah.ayahs[aNum.toString()];
+                            const arVerseObj = arSurah.verses.find(v => v.id == aNum);
+                            const arVerse = arVerseObj ? arVerseObj.text : "";
+                            
+                            let isMatch = false;
+                            let matchType = '';
+
+                            if (trVerse && trVerse.toLocaleLowerCase('tr-TR').includes(lowerQuery)) {
+                                isMatch = true;
+                                matchType = 'turkish';
+                            } else if (arVerse && normalizeArabicSearch(arVerse).includes(arQueryNorm)) {
+                                isMatch = true;
+                                matchType = 'arabic';
+                            }
+
+                            if (isMatch) {
+                                // Avoid duplicate if alias already matched it
+                                if (!results.some(r => r.surah === sNum && r.ayah === aNum && r.matchType === 'alias')) {
+                                    results.push({
+                                        surah: sNum,
+                                        ayah: aNum,
+                                        surahName: surahNames[sNum-1],
+                                        arabic: arVerse,
+                                        turkish: trVerse,
+                                        matchType: matchType
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+
+                renderSearchResults(results, query);
+            }, 50);
+        }
+
+        function renderSearchResults(results, query) {
+            const contentArea = document.getElementById('contentArea');
+            if (!results || results.length === 0) {
+                contentArea.innerHTML = `
+                    <div style="background: var(--card-bg); padding: 30px; border-radius: var(--border-radius); text-align: center; box-shadow: var(--shadow);">
+                        <i class="fas fa-search" style="font-size: 40px; color: var(--border-color); margin-bottom: 15px;"></i>
+                        <h3 style="color: var(--primary);">Sonuç Bulunamadı</h3>
+                        <p style="color: var(--text-secondary);">"${query}" için bir eşleşme bulamadık.</p>
+                    </div>`;
+                return;
+            }
+
+            // Group by Surah matches vs Ayah matches
+            const surahMatches = results.filter(r => r.matchType === 'surah_name');
+            const ayahMatches = results.filter(r => r.matchType !== 'surah_name');
+
+            let html = `
+                <div style="background: var(--card-bg); padding: 20px; border-radius: var(--border-radius); border-bottom: 3px solid var(--accent); margin-bottom: 20px; box-shadow: var(--shadow);">
+                    <h2 style="margin:0; color: var(--primary); font-size:18px;">
+                        <i class="fas fa-search" style="color: var(--accent);"></i> "${query}" Arama Sonuçları
+                    </h2>
+                    <div style="margin-top:10px; font-size:14px; color:var(--text-secondary);">
+                        Toplam <strong>${results.length}</strong> sonuç bulundu.
+                    </div>
+                </div>
+            `;
+
+            // Render Surah Matches
+            if (surahMatches.length > 0) {
+                html += `<h3 style="color:var(--text-main); margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:5px;">Sure Eşleşmeleri</h3>`;
+                html += `<div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:15px; margin-bottom:30px;">`;
+                surahMatches.forEach(r => {
+                    html += `
+                        <div onclick="loadSurah(${r.surah})" style="cursor:pointer; background:var(--card-bg); padding:15px; border-radius:8px; border:1px solid var(--border-color); text-align:center; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border-color)'">
+                            <div style="font-size:24px; color:var(--accent); font-weight:bold;">${r.surah}</div>
+                            <div style="font-weight:bold; color:var(--text-main); margin-top:5px;">${r.surahName} Suresi</div>
+                            <div style="font-size:12px; color:var(--text-secondary); margin-top:5px;">Tıkla ve Oku</div>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+
+            // Render Ayah Matches
+            if (ayahMatches.length > 0) {
+                // Limit to 100 results to prevent browser freezing
+                const displayLimit = 100;
+                const displayMatches = ayahMatches.slice(0, displayLimit);
+
+                html += `<h3 style="color:var(--text-main); margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:5px;">Ayet Eşleşmeleri ${ayahMatches.length > displayLimit ? \`(İlk \${displayLimit} sonuç gösteriliyor)\` : ''}</h3>`;
+                
+                displayMatches.forEach(r => {
+                    // Highlight the matched query in Turkish text
+                    let displayTr = r.turkish;
+                    if (r.matchType === 'turkish' || r.matchType === 'alias') {
+                        const regex = new RegExp(query, 'gi');
+                        displayTr = displayTr.replace(regex, match => \`<span style="background:rgba(39, 174, 96, 0.3); font-weight:bold; padding:0 3px; border-radius:3px;">\${match}</span>\`);
+                    }
+
+                    html += \`
+                        <div class="verse-card" style="margin-bottom: 15px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 15px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
+                                <div style="font-weight:bold; color:var(--accent); cursor:pointer;" onclick="loadSurah(\${r.surah})">
+                                    <i class="fas fa-book-open"></i> \${r.surahName} Suresi - \${r.surah}:\${r.ayah}
+                                </div>
+                                \${r.note ? \`<div style="font-size:12px; background:var(--panel-border); color:#000; padding:2px 8px; border-radius:10px; font-weight:bold;">\${r.note}</div>\` : ''}
+                            </div>
+                            <div class="arabic-line">\${r.arabic}</div>
+                            <div class="turkish-line">\${displayTr}</div>
+                        </div>
+                    \`;
+                });
+            }
+
+            contentArea.innerHTML = html;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         async function fetchAyah(surah, ayah, isHeader = false) {
             console.log(`fetchAyah called: ${surah}:${ayah}, isHeader: ${isHeader}`);
