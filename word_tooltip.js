@@ -84,7 +84,7 @@ function createWordTooltip(arabicWord, transcription, turkish, currentIndex) {
     const ts = transcription || '---';
     const tr = (turkish === "") ? "-" : (turkish || '[Meal Bekleniyor]');
 
-    return `<span class="arabic-word" data-literal="${(turkish || '').toLowerCase()}" onmouseover="highlightTrWords(this)" onmouseout="removeHighlightTrWords(this)">
+    return `<span class="arabic-word" data-literal="${(turkish || '').toLocaleLowerCase('tr-TR')}" onmouseover="highlightTrWords(this)" onmouseout="removeHighlightTrWords(this)">
                 ${arabicWord}
                 <span class="word-index">${currentIndex}</span>
                 <span class="word-tooltip">

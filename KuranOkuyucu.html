@@ -1595,7 +1595,7 @@
     <div id="contentArea"></div>
 
     <script src="zil_data.js"></script>
-    <script src="word_tooltip.js"></script>
+    <script src="word_tooltip.js?v=3"></script>
     <script>
         const surahNames = [
             "Fâtiha", "Bakara", "Âl-i İmrân", "Nisâ", "Mâide", "En'âm", "A'râf", "Enfâl", "Tevbe", "Yûnus", "Hûd", "Yûsuf", "Ra'd", "İbrâhîm", "Hicr", "Nahl", "İsrâ", "Kehf", "Meryem", "Tâhâ", "Enbiyâ", "Hac", "Mü'minûn", "Nûr", "Furkân", "Şuarâ", "Neml", "Kasas", "Ankebût", "Rûm", "Lokmân", "Secde", "Ahzâb", "Sebe'", "Fâtır", "Yâsîn", "Sâffât", "Sâd", "Zümer", "Mü'min", "Fussilet", "Şûrâ", "Zuhruf", "Duhân", "Câsiye", "Ahkaf", "Muhammed", "Fetih", "Hucurât", "Kâf", "Zâriyât", "Tûr", "Necm", "Kamer", "Rahmân", "Vâkıa", "Hadîd", "Mücâdele", "Haşr", "Mümtehine", "Saf", "Cuma", "Münâfikûn", "Tegâbün", "Talâk", "Tahrîm", "Mülk", "Kalem", "Hâkka", "Meâric", "Nûh", "Cin", "Müzzemmil", "Müddessir", "Kıyâme", "İnsân", "Mürselât", "Nebe'", "Nâziât", "Abese", "Tekvîr", "İnfitâr", "Mutaffifîn", "İnşikâk", "Burûc", "Târık", "A'lâ", "Gâşiye", "Fecr", "Beled", "Şems", "Leyl", "Duhâ", "İnşirâh", "Tîn", "Alak", "Kadir", "Beyyine", "Zilzâl", "Âdiyât", "Kāria", "Tekâsür", "Asr", "Hümeze", "Fîl", "Kureyş", "Mâûn", "Kevser", "Kâfirûn", "Nasr", "Tebbet", "İhlâs", "Felak", "Nâs"
@@ -2107,7 +2107,7 @@
                     
                     // Wrap Turkish words
                     const wrappedTurkish = data.turkish.split(/\s+/).map(w => {
-                        const cleanWord = w.replace(/[.,;!?'"()]/g, '').toLowerCase();
+                        const cleanWord = w.replace(/[.,;!?'"()]/g, '').toLocaleLowerCase('tr-TR');
                         if (cleanWord.length < 3) return w; // Don't wrap small words to prevent false positives
                         return `<span class="tr-word" data-clean="${cleanWord}" onmouseover="highlightArWords(this)" onmouseout="removeHighlightArWords(this)" style="transition: all 0.2s; padding: 0 2px; border-radius: 3px;">${w}</span>`;
                     }).join(' ');
