@@ -84,7 +84,7 @@ function createWordTooltip(arabicWord, transcription, turkish, currentIndex) {
     const ts = transcription || '---';
     const tr = (turkish === "") ? "-" : (turkish || '[Meal Bekleniyor]');
 
-    return `<span class="arabic-word">
+    return `<span class="arabic-word" data-literal="${(turkish || '').toLowerCase()}" onmouseover="highlightTrWords(this)" onmouseout="removeHighlightTrWords(this)">
                 ${arabicWord}
                 <span class="word-index">${currentIndex}</span>
                 <span class="word-tooltip">
@@ -144,7 +144,7 @@ function processVerseWithTooltips(arabicText, surahNumber, verseNumber, startCou
                     counter
                 );
             } else {
-                result += `<span class="arabic-word">${arabicWord}<span class="word-index">${counter}</span></span>`;
+                result += `<span class="arabic-word" onmouseover="highlightTrWords(this)" onmouseout="removeHighlightTrWords(this)">${arabicWord}<span class="word-index">${counter}</span></span>`;
             }
 
             dataIndex++; // Sadece gerçek kelime bulduğumuzda veri endeksini artır

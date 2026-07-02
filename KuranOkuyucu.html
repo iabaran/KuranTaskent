@@ -813,6 +813,11 @@
             font-size: 12px;
             color: var(--text-secondary);
         }
+        .highlight-match-ar {
+            color: var(--accent) !important;
+            background-color: rgba(39, 174, 96, 0.15) !important;
+            border-radius: 4px;
+        }
     </style>
 </head>
 
@@ -2099,6 +2104,14 @@
                     const card = document.createElement('div');
                     card.className = 'verse-card';
                     const existingNote = getNote(surahNum, i);
+                    
+                    // Wrap Turkish words
+                    const wrappedTurkish = data.turkish.split(/\s+/).map(w => {
+                        const cleanWord = w.replace(/[.,;!?'"()]/g, '').toLowerCase();
+                        if (cleanWord.length < 3) return w; // Don't wrap small words to prevent false positives
+                        return `<span class="tr-word" data-clean="${cleanWord}" onmouseover="highlightArWords(this)" onmouseout="removeHighlightArWords(this)" style="transition: all 0.2s; padding: 0 2px; border-radius: 3px;">${w}</span>`;
+                    }).join(' ');
+
                     card.innerHTML = `
                         <div class="arabic-line" data-ayah="${i}">${arabicDisplay}</div>
                         <div class="turkish-line">
@@ -2109,7 +2122,7 @@
                                     <i class="far fa-bookmark bookmark-icon" id="bookmark-${surahNum}-${i}" onclick="toggleBookmark(${surahNum}, ${i})" style="cursor: pointer; color: var(--text-secondary); transition: color 0.2s; font-size: 16px;" title="Kaldığım Yeri İşaretle"></i>
                                 </div>
                             </div>
-                            ${data.turkish}
+                            ${wrappedTurkish}
                         </div>
                         <div id="note-container-${surahNum}-${i}" style="margin-top: 15px; display: ${existingNote ? 'block' : 'none'};">
                             <div id="note-display-${surahNum}-${i}" style="background: rgba(243, 156, 18, 0.1); border-left: 3px solid var(--accent); padding: 10px; font-size: 13px; color: var(--text-main); white-space: pre-wrap; display: ${existingNote ? 'block' : 'none'};">
@@ -2208,6 +2221,98 @@
             
             editor.style.display = 'none';
         }
+
+        // --- WORD MATCHING HIGHLIGHT LOGIC ---
+        function isSimilar(w1, w2) {
+            if (!w1 || !w2) return false;
+            if (w1 === w2) return true;
+            
+            const len1 = w1.length;
+            const len2 = w2.length;
+            
+            if (len1 > 4 && len2 > 4) {
+                if (w1.substring(0, 5) === w2.substring(0, 5)) return true;
+            } else if (len1 > 3 && len2 > 3) {
+                if (w1.substring(0, 4) === w2.substring(0, 4)) return true;
+            }
+            
+            return false;
+        }
+
+        window.highlightTrWords = function(arSpan) {
+            arSpan.classList.add('highlight-match-ar'); // Force color for arabic word too
+            
+            const literal = arSpan.getAttribute('data-literal');
+            if (!literal || literal === '-' || literal === '[meal bekleniyor]') return;
+            
+            const literalWords = literal.replace(/[.,;!?'"()]/g, '').split(/\s+/);
+            const card = arSpan.closest('.verse-card');
+            if (!card) return;
+            
+            const trWords = card.querySelectorAll('.tr-word');
+            trWords.forEach(trSpan => {
+                const cleanTr = trSpan.getAttribute('data-clean');
+                for (let lw of literalWords) {
+                    if (isSimilar(cleanTr, lw)) {
+                        trSpan.style.backgroundColor = 'rgba(39, 174, 96, 0.3)';
+                        trSpan.style.color = 'var(--accent)';
+                        trSpan.classList.add('highlight-match');
+                        break;
+                    }
+                }
+            });
+        };
+
+        window.removeHighlightTrWords = function(arSpan) {
+            arSpan.classList.remove('highlight-match-ar');
+            const card = arSpan.closest('.verse-card');
+            if (!card) return;
+            
+            const trWords = card.querySelectorAll('.highlight-match');
+            trWords.forEach(trSpan => {
+                trSpan.style.backgroundColor = 'transparent';
+                trSpan.style.color = 'inherit';
+                trSpan.classList.remove('highlight-match');
+            });
+        };
+
+        window.highlightArWords = function(trSpan) {
+            trSpan.style.backgroundColor = 'rgba(39, 174, 96, 0.3)';
+            trSpan.style.color = 'var(--accent)';
+            
+            const cleanTr = trSpan.getAttribute('data-clean');
+            if (!cleanTr || cleanTr.length < 3) return;
+            
+            const card = trSpan.closest('.verse-card');
+            if (!card) return;
+            
+            const arWords = card.querySelectorAll('.arabic-word');
+            arWords.forEach(arSpan => {
+                const literal = arSpan.getAttribute('data-literal');
+                if (!literal) return;
+                const literalWords = literal.replace(/[.,;!?'"()]/g, '').split(/\s+/);
+                
+                for (let lw of literalWords) {
+                    if (isSimilar(cleanTr, lw)) {
+                        arSpan.classList.add('highlight-match-ar');
+                        break;
+                    }
+                }
+            });
+        };
+
+        window.removeHighlightArWords = function(trSpan) {
+            trSpan.style.backgroundColor = 'transparent';
+            trSpan.style.color = 'inherit';
+            
+            const card = trSpan.closest('.verse-card');
+            if (!card) return;
+            
+            const arWords = card.querySelectorAll('.highlight-match-ar');
+            arWords.forEach(arSpan => {
+                arSpan.classList.remove('highlight-match-ar');
+            });
+        };
 
         function toggleBookmark(surah, ayah) {
             const currentBookmark = JSON.parse(localStorage.getItem('kuran_bookmark') || 'null');
