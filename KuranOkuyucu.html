@@ -886,7 +886,10 @@
                 </div>
             </div>
 
-            <div style="display: flex; justify-content: center; gap: 20px;">
+            <div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
+                <button id="resumeBookmarkBtn" onclick="resumeBookmark()" style="display: none; background: var(--accent); color: white; border: none; padding: 5px 12px; border-radius: 15px; cursor: pointer; font-size: 13px; font-weight: bold; transition: all 0.2s;">
+                    <i class="fas fa-bookmark"></i> Kaldığım Yer
+                </button>
                 <label
                     style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; color: var(--text-secondary);">
                     <input type="checkbox" id="countToggle" onchange="toggleWordCounts()"
@@ -2082,7 +2085,10 @@
                     card.innerHTML = `
                         <div class="arabic-line" data-ayah="${i}">${arabicDisplay}</div>
                         <div class="turkish-line">
-                            <span class="verse-number">${surahNum}:${i}</span>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                <span class="verse-number">${surahNum}:${i}</span>
+                                <i class="far fa-bookmark bookmark-icon" id="bookmark-${surahNum}-${i}" onclick="toggleBookmark(${surahNum}, ${i})" style="cursor: pointer; color: var(--text-secondary); transition: color 0.2s; font-size: 16px;" title="Kaldığım Yeri İşaretle"></i>
+                            </div>
                             ${data.turkish}
                         </div>
                     `;
@@ -2091,6 +2097,9 @@
 
                 // Tüm ayetler yüklendikten sonra tooltip'leri başlat
                 if (window.initWordTooltips) await initWordTooltips(surahNum);
+                
+                // Yer imi simgelerini güncelle
+                updateBookmarkUI();
 
             } catch (err) {
                 content.innerHTML = `<div class="error-msg">Sure yüklenirken bir hata oluştu: ${err.message}</div>`;
@@ -2098,6 +2107,64 @@
                 spinner.style.display = 'none';
             }
         }
+
+        // --- BOOKMARK LOGIC ---
+        function toggleBookmark(surah, ayah) {
+            const currentBookmark = JSON.parse(localStorage.getItem('kuran_bookmark') || 'null');
+            if (currentBookmark && currentBookmark.surah === surah && currentBookmark.ayah === ayah) {
+                // Remove bookmark
+                localStorage.removeItem('kuran_bookmark');
+            } else {
+                // Set new bookmark
+                localStorage.setItem('kuran_bookmark', JSON.stringify({ surah, ayah }));
+            }
+            updateBookmarkUI();
+        }
+
+        function resumeBookmark() {
+            const currentBookmark = JSON.parse(localStorage.getItem('kuran_bookmark') || 'null');
+            if (currentBookmark) {
+                // Load surah and then scroll to ayah
+                loadSurah(currentBookmark.surah).then(() => {
+                    const verseSelect = document.getElementById('verseSelect');
+                    if (verseSelect) {
+                        verseSelect.value = currentBookmark.ayah;
+                        scrollToVerse();
+                    }
+                });
+            }
+        }
+
+        function updateBookmarkUI() {
+            const currentBookmark = JSON.parse(localStorage.getItem('kuran_bookmark') || 'null');
+            const resumeBtn = document.getElementById('resumeBookmarkBtn');
+            
+            if (resumeBtn) {
+                if (currentBookmark) {
+                    resumeBtn.style.display = 'block';
+                    resumeBtn.innerHTML = `<i class="fas fa-bookmark"></i> Kaldığım Yer (${currentBookmark.surah}:${currentBookmark.ayah})`;
+                } else {
+                    resumeBtn.style.display = 'none';
+                }
+            }
+
+            // Update all bookmark icons on screen
+            document.querySelectorAll('.bookmark-icon').forEach(icon => {
+                icon.className = 'far fa-bookmark bookmark-icon'; // Reset to empty
+                icon.style.color = 'var(--text-secondary)';
+            });
+
+            if (currentBookmark) {
+                const activeIcon = document.getElementById(`bookmark-${currentBookmark.surah}-${currentBookmark.ayah}`);
+                if (activeIcon) {
+                    activeIcon.className = 'fas fa-bookmark bookmark-icon';
+                    activeIcon.style.color = 'var(--accent)';
+                }
+            }
+        }
+
+        // Call updateBookmarkUI on load
+        window.addEventListener('load', updateBookmarkUI);
 
         // Tema değiştirme
         function toggleTheme() {
