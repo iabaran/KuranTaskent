@@ -82,7 +82,7 @@ function getVerseWords(surahNumber, verseNumber) {
 // Create tooltip HTML for a word with cumulative index
 function createWordTooltip(arabicWord, transcription, turkish, currentIndex) {
     const ts = transcription || '---';
-    const tr = turkish || '[Meal Bekleniyor]';
+    const tr = (turkish === "") ? "-" : (turkish || '[Meal Bekleniyor]');
 
     return `<span class="arabic-word">
                 ${arabicWord}

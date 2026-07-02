@@ -1831,16 +1831,32 @@
                         displayTr = displayTr.replace(regex, match => `<span style="background:rgba(39, 174, 96, 0.3); font-weight:bold; padding:0 3px; border-radius:3px;">${match}</span>`);
                     }
 
+                    const existingNote = getNote(r.surah, r.ayah);
                     html += `
                         <div class="verse-card" style="margin-bottom: 15px;">
                             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 15px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
                                 <div style="font-weight:bold; color:var(--accent); cursor:pointer;" onclick="loadSurah(${r.surah})">
                                     <i class="fas fa-book-open"></i> ${r.surahName} Suresi - ${r.surah}:${r.ayah}
                                 </div>
-                                ${r.note ? `<div style="font-size:12px; background:var(--panel-border); color:#000; padding:2px 8px; border-radius:10px; font-weight:bold;">${r.note}</div>` : ''}
+                                <div style="display: flex; gap: 10px; align-items: center;">
+                                    <i class="fas fa-pen note-icon" onclick="toggleNoteEditor(${r.surah}, ${r.ayah})" style="cursor: pointer; color: ${existingNote ? 'var(--accent)' : 'var(--text-secondary)'}; transition: color 0.2s; font-size: 14px;" title="Not Al"></i>
+                                    ${r.note ? `<div style="font-size:12px; background:var(--panel-border); color:#000; padding:2px 8px; border-radius:10px; font-weight:bold;">${r.note}</div>` : ''}
+                                </div>
                             </div>
                             <div class="arabic-line">${r.arabic}</div>
                             <div class="turkish-line">${displayTr}</div>
+                            <div id="note-container-${r.surah}-${r.ayah}" style="margin-top: 15px; display: ${existingNote ? 'block' : 'none'};">
+                                <div id="note-display-${r.surah}-${r.ayah}" style="background: rgba(243, 156, 18, 0.1); border-left: 3px solid var(--accent); padding: 10px; font-size: 13px; color: var(--text-main); white-space: pre-wrap; display: ${existingNote ? 'block' : 'none'};">
+                                    <div style="font-weight:bold; color:var(--accent); margin-bottom:3px; font-size:11px;">Notunuz:</div><span id="note-text-${r.surah}-${r.ayah}">${existingNote || ''}</span>
+                                </div>
+                                <div id="note-editor-${r.surah}-${r.ayah}" style="display: none; margin-top: 10px;">
+                                    <textarea id="note-input-${r.surah}-${r.ayah}" style="width: 100%; min-height: 60px; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-color); color: var(--text-main); font-family: inherit; font-size: 13px; resize: vertical;" placeholder="Bu ayet için notunuzu buraya yazın...">${existingNote || ''}</textarea>
+                                    <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 5px;">
+                                        <button onclick="toggleNoteEditor(${r.surah}, ${r.ayah})" style="background: transparent; border: 1px solid var(--text-secondary); color: var(--text-secondary); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">İptal</button>
+                                        <button onclick="saveNote(${r.surah}, ${r.ayah})" style="background: var(--accent); border: none; color: white; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">Kaydet</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     `;
                 });
@@ -2082,14 +2098,30 @@
 
                     const card = document.createElement('div');
                     card.className = 'verse-card';
+                    const existingNote = getNote(surahNum, i);
                     card.innerHTML = `
                         <div class="arabic-line" data-ayah="${i}">${arabicDisplay}</div>
                         <div class="turkish-line">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
                                 <span class="verse-number">${surahNum}:${i}</span>
-                                <i class="far fa-bookmark bookmark-icon" id="bookmark-${surahNum}-${i}" onclick="toggleBookmark(${surahNum}, ${i})" style="cursor: pointer; color: var(--text-secondary); transition: color 0.2s; font-size: 16px;" title="Kaldığım Yeri İşaretle"></i>
+                                <div>
+                                    <i class="fas fa-pen note-icon" onclick="toggleNoteEditor(${surahNum}, ${i})" style="cursor: pointer; color: ${existingNote ? 'var(--accent)' : 'var(--text-secondary)'}; transition: color 0.2s; font-size: 14px; margin-right: 15px;" title="Not Al"></i>
+                                    <i class="far fa-bookmark bookmark-icon" id="bookmark-${surahNum}-${i}" onclick="toggleBookmark(${surahNum}, ${i})" style="cursor: pointer; color: var(--text-secondary); transition: color 0.2s; font-size: 16px;" title="Kaldığım Yeri İşaretle"></i>
+                                </div>
                             </div>
                             ${data.turkish}
+                        </div>
+                        <div id="note-container-${surahNum}-${i}" style="margin-top: 15px; display: ${existingNote ? 'block' : 'none'};">
+                            <div id="note-display-${surahNum}-${i}" style="background: rgba(243, 156, 18, 0.1); border-left: 3px solid var(--accent); padding: 10px; font-size: 13px; color: var(--text-main); white-space: pre-wrap; display: ${existingNote ? 'block' : 'none'};">
+                                <div style="font-weight:bold; color:var(--accent); margin-bottom:3px; font-size:11px;">Notunuz:</div><span id="note-text-${surahNum}-${i}">${existingNote || ''}</span>
+                            </div>
+                            <div id="note-editor-${surahNum}-${i}" style="display: none; margin-top: 10px;">
+                                <textarea id="note-input-${surahNum}-${i}" style="width: 100%; min-height: 60px; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-color); color: var(--text-main); font-family: inherit; font-size: 13px; resize: vertical;" placeholder="Bu ayet için notunuzu buraya yazın...">${existingNote || ''}</textarea>
+                                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 5px;">
+                                    <button onclick="toggleNoteEditor(${surahNum}, ${i})" style="background: transparent; border: 1px solid var(--text-secondary); color: var(--text-secondary); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">İptal</button>
+                                    <button onclick="saveNote(${surahNum}, ${i})" style="background: var(--accent); border: none; color: white; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;">Kaydet</button>
+                                </div>
+                            </div>
                         </div>
                     `;
                     content.appendChild(card);
@@ -2108,7 +2140,75 @@
             }
         }
 
-        // --- BOOKMARK LOGIC ---
+        // --- BOOKMARK & NOTE LOGIC ---
+        function getNote(surah, ayah) {
+            const notes = JSON.parse(localStorage.getItem('kuran_notes') || '{}');
+            return notes[`${surah}:${ayah}`] || "";
+        }
+
+        function toggleNoteEditor(surah, ayah) {
+            const container = document.getElementById(`note-container-${surah}-${ayah}`);
+            const display = document.getElementById(`note-display-${surah}-${ayah}`);
+            const editor = document.getElementById(`note-editor-${surah}-${ayah}`);
+            
+            container.style.display = 'block';
+            
+            if (editor.style.display === 'none' || !editor.style.display) {
+                // Show editor
+                display.style.display = 'none';
+                editor.style.display = 'block';
+                // Focus on textarea
+                document.getElementById(`note-input-${surah}-${ayah}`).focus();
+            } else {
+                // Hide editor
+                const existingNote = getNote(surah, ayah);
+                if (!existingNote) {
+                    container.style.display = 'none';
+                } else {
+                    display.style.display = 'block';
+                }
+                editor.style.display = 'none';
+            }
+        }
+
+        function saveNote(surah, ayah) {
+            const notes = JSON.parse(localStorage.getItem('kuran_notes') || '{}');
+            const input = document.getElementById(`note-input-${surah}-${ayah}`).value.trim();
+            const key = `${surah}:${ayah}`;
+            
+            if (input) {
+                notes[key] = input;
+            } else {
+                delete notes[key];
+            }
+            
+            localStorage.setItem('kuran_notes', JSON.stringify(notes));
+            
+            // Update UI
+            const display = document.getElementById(`note-display-${surah}-${ayah}`);
+            const textSpan = document.getElementById(`note-text-${surah}-${ayah}`);
+            const editor = document.getElementById(`note-editor-${surah}-${ayah}`);
+            const container = document.getElementById(`note-container-${surah}-${ayah}`);
+            
+            // Note icon color update
+            const noteIconContainer = container.parentElement.querySelector('.note-icon');
+            if (noteIconContainer) {
+                noteIconContainer.style.color = input ? 'var(--accent)' : 'var(--text-secondary)';
+            }
+            
+            if (input) {
+                textSpan.textContent = input;
+                display.style.display = 'block';
+                container.style.display = 'block';
+            } else {
+                textSpan.textContent = '';
+                display.style.display = 'none';
+                container.style.display = 'none';
+            }
+            
+            editor.style.display = 'none';
+        }
+
         function toggleBookmark(surah, ayah) {
             const currentBookmark = JSON.parse(localStorage.getItem('kuran_bookmark') || 'null');
             if (currentBookmark && currentBookmark.surah === surah && currentBookmark.ayah === ayah) {
